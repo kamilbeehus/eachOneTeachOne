@@ -4,12 +4,14 @@ Each one, Teach one is a social web platform that allows users to exchange knowl
 
 ## Table of Contents
 
-- [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Setup](#setup)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Each One Teach One](#each-one-teach-one)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Installation
 
@@ -60,7 +62,7 @@ Ensure you have the following installed on your local machine :
 6. Start the frontend development server:
    ```sh
    cd client
-   npm start
+   npm run dev 
    ```
 
 ## Usage
