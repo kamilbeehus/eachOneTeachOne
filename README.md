@@ -19,8 +19,8 @@ Each one, Teach one is a social web platform that allows users to exchange knowl
 
 Ensure you have the following installed on your local machine :
 
-- Node.js (version X.X.X)
-- npm (version X.X.X) or yarn (version X.X.X)
+- Node.js (version 22.4.1 or above)
+- npm (version 10.8.2 or above) or yarn (version X.X.X)
 - MongoDB (version X.X.X)
 
 ### Setup
@@ -62,7 +62,7 @@ Ensure you have the following installed on your local machine :
 6. Start the frontend development server:
    ```sh
    cd client
-   npm run dev 
+   npm run dev
    ```
 
 ## Usage
