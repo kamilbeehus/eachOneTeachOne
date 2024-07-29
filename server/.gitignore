@@ -1,2 +1,18 @@
 
-node_modules
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Logs
+logs/
+*.log
+
+# Local environment variables
+.env
