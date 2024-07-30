@@ -63,7 +63,7 @@ Ensure you have the following installed on your local machine :
 
    ```sh
    cd server
-   node server.js
+   node --watch server.js
    ```
 
 6. Start the frontend development server:
