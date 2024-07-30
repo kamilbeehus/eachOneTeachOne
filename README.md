@@ -1,6 +1,6 @@
 # Each One Teach One
 
-Each one, Teach one is a social web platform that allows users to exchange knowledge based on their skills and interests. Each individual becomes both the teacher and the student.
+Each one Teach one is a social web platform that allows users to exchange knowledge based on their skills and interests. Each individual becomes both the teacher and the student.
 
 ## Table of Contents
 
@@ -57,6 +57,13 @@ Ensure you have the following installed on your local machine :
    ```sh
    cd server
    npm start
+   ```
+
+   or
+
+   ```sh
+   cd server
+   node server.js
    ```
 
 6. Start the frontend development server:
