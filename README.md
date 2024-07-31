@@ -10,6 +10,7 @@ Each one Teach one is a social web platform that allows users to exchange knowle
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
   - [Usage](#usage)
+  - [Configuration](#configuration)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -76,6 +77,27 @@ Ensure you have the following installed on your local machine :
 
 \*\*For future instructions on how to use the project. This could include how to run tests, any specific commands that need to be executed, or usage examples.
 
+## Configuration
+
+### Setting Up `config.env`
+
+1. Create a file named `config.env` in the server directory of your project.
+
+2. Add your MongoDB Atlas connection string and the Port for connection to the `config.env` file in the following format:
+
+   ```env
+   MONGO_URI=your_mongodb_atlas_connection_string
+   PORT=5050
+   ```
+
+   Replace `your_mongodb_atlas_connection_string` with your actual MongoDB Atlas connection string.
+
+3. Ensure that the `config.env` file is included in your `.gitignore` file to prevent it from being committed to your repository:
+
+   ```sh
+   echo "config.env" >> .gitignore
+   ```
+
 ## Contributing
 
 \*\*Guidelines for contributing to the project in case we decide to make it open source in the future.
@@ -83,3 +105,7 @@ Ensure you have the following installed on your local machine :
 ## License
 
 \*\*We should include a license as soon as we make the repository public.
+
+```
+
+```
