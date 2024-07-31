@@ -1,15 +1,18 @@
 # Each One Teach One
 
-Each one, Teach one is a social web platform that allows users to exchange knowledge based on their skills and interests. Each individual becomes both the teacher and the student.
+Each one Teach one is a social web platform that allows users to exchange knowledge based on their skills and interests. Each individual becomes both the teacher and the student.
 
 ## Table of Contents
 
-- [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Setup](#setup)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Each One Teach One](#each-one-teach-one)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+  - [Usage](#usage)
+  - [Configuration](#configuration)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Installation
 
@@ -17,8 +20,8 @@ Each one, Teach one is a social web platform that allows users to exchange knowl
 
 Ensure you have the following installed on your local machine :
 
-- Node.js (version X.X.X)
-- npm (version X.X.X) or yarn (version X.X.X)
+- Node.js (version 22.4.1 or above)
+- npm (version 10.8.2 or above) or yarn (version X.X.X)
 - MongoDB (version X.X.X)
 
 ### Setup
@@ -57,15 +60,43 @@ Ensure you have the following installed on your local machine :
    npm start
    ```
 
+   or
+
+   ```sh
+   cd server
+   node --watch server.js
+   ```
+
 6. Start the frontend development server:
    ```sh
    cd client
-   npm start
+   npm run dev
    ```
 
 ## Usage
 
 \*\*For future instructions on how to use the project. This could include how to run tests, any specific commands that need to be executed, or usage examples.
+
+## Configuration
+
+### Setting Up `config.env`
+
+1. Create a file named `config.env` in the server directory of your project.
+
+2. Add your MongoDB Atlas connection string and the Port for connection to the `config.env` file in the following format:
+
+   ```env
+   MONGO_URI=your_mongodb_atlas_connection_string
+   PORT=5050
+   ```
+
+   Replace `your_mongodb_atlas_connection_string` with your actual MongoDB Atlas connection string.
+
+3. Ensure that the `config.env` file is included in your `.gitignore` file to prevent it from being committed to your repository:
+
+   ```sh
+   echo "config.env" >> .gitignore
+   ```
 
 ## Contributing
 
@@ -74,3 +105,7 @@ Ensure you have the following installed on your local machine :
 ## License
 
 \*\*We should include a license as soon as we make the repository public.
+
+```
+
+```

@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Production build output
+build/
+
+# Runtime data
+*.log
+
+# Generated files
+*.map
+
+dist
+dist-ssr
+*.local
+
