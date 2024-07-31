@@ -16,3 +16,4 @@ logs/
 
 # Local environment variables
 .env
+config.env
