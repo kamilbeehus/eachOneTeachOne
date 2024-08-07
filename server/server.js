@@ -16,6 +16,9 @@ connectDB();
 app.use(express.json());
 
 // Middleware to allow cross-origin requests
+app.use(cors());
+
+// Use the imported routes
 app.use('/', routes);
 
 app.listen(PORT, () => {
