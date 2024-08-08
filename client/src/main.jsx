@@ -7,6 +7,7 @@ import {
 import App from "./App";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
+import SignupPage from "./pages/Signup";  // Import SignupPage
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Dashboard />,
+      },
+      {
+        path: "signup",  // Route for the SignupPage
+        element: <SignupPage />,
       },
     ],
   },
