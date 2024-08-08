@@ -1,42 +1,55 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
+import { loginFields } from "../constants/formFields";
+import FormAction from "./FormAction";
+import FormExtra from "./FormExtra";
+import Input from "./Input";
 
-export default function Login() {
-    return (
-        <>
-            <div className="hero bg-base-200 min-h-screen">
-                <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Login now!</h1>
-                        <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
-                        </p>
-                    </div>
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                        <form className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input type="email" placeholder="email" className="input input-bordered" required />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input type="password" placeholder="password" className="input input-bordered" required />
-                                <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label>
-                            </div>
-                            <div className="form-control mt-6">
-                                <button className="btn btn-primary">Login</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </>
+const fields=loginFields;
+let fieldsState = {};
+fields.forEach(field=>fieldsState[field.id]='');
+
+export default function Login(){
+    const [loginState,setLoginState]=useState(fieldsState);
+
+    const handleChange=(e)=>{
+        setLoginState({...loginState,[e.target.id]:e.target.value})
+    }
+
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        authenticateUser();
+    }
+
+    //Handle Login API Integration here
+    const authenticateUser = () =>{
+
+    }
+
+    return(
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <div className="-space-y-px">
+            {
+                fields.map(field=>
+                        <Input
+                            key={field.id}
+                            handleChange={handleChange}
+                            value={loginState[field.id]}
+                            labelText={field.labelText}
+                            labelFor={field.labelFor}
+                            id={field.id}
+                            name={field.name}
+                            type={field.type}
+                            isRequired={field.isRequired}
+                            placeholder={field.placeholder}
+                    />
+                
+                )
+            }
+        </div>
+
+        <FormExtra/>
+        <FormAction handleSubmit={handleSubmit} text="Login"/>
+
+      </form>
     )
 }
