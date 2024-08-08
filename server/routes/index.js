@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 const router = express.Router();
 
 // Route for the Landing page 
-router.get('/', (request, response) => {
-    return response.status(200).send("<h1>Welcome to Each One Teach One</h1>")
+router.get('/', (req, res) => {
+    return res.status(200).send("<h1>Server Running...</h1>")
 })
 
 // Add a route to test database operation
@@ -21,8 +21,8 @@ router.get('/test-db', async (req, res) => {
   });
 
   // Route for handling unvalid requests
-router.get('/*', (request, response) => {
-    return response.status(404).send("Page Not Found")
+router.get('/*', (req, res) => {
+    return res.status(404).send("Page Not Found")
 })
 
 export default router;
