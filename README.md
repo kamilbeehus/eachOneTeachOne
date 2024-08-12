@@ -11,6 +11,8 @@ Each one Teach one is a social web platform that allows users to exchange knowle
     - [Setup](#setup)
   - [Usage](#usage)
   - [Configuration](#configuration)
+    - [Use Prettier ESlint in the client folder](#use-prettier-eslint-in-the-client-folder)
+    - [Setting Up `config.env`](#setting-up-configenv)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -78,6 +80,16 @@ Ensure you have the following installed on your local machine :
 \*\*For future instructions on how to use the project. This could include how to run tests, any specific commands that need to be executed, or usage examples.
 
 ## Configuration
+
+### Use Prettier ESlint in the client folder
+1. Open up a terminal 
+2. Type in `pwd` (print working directory) to make sure you're in the `best_project` folder
+3. Type in `git pull` to make sure you're on the latest commit
+3. Type in `cd .vscode`
+4. Type in `cp settings.example.json settings.json` this will make a copy of settings.example.json and rename it to settings.json
+5. If you don't already have the recommended vscode extensions installed, open the extensions tab in the left panel (1), then type `@recommended` (2) and finally click on the install buttons (3)
+
+![PNG showing how to install the recommended VSCode Extensions](images/installRecommendedExtensions.png "Install instructions for recommended VSCode Extensions")
 
 ### Setting Up `config.env`
 
