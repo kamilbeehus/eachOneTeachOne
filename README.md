@@ -93,21 +93,21 @@ Ensure you have the following installed on your local machine :
 
 ### Setting Up `config.env`
 
-1. Create a file named `config.env` in the server directory of your project.
+1. Create a file named `.env` in the server directory of your project.
 
-2. Add your MongoDB Atlas connection string and the Port for connection to the `config.env` file in the following format:
+2. Add your MongoDB Atlas connection string and the Port for connection to the `.env` file in the following format:
 
    ```env
-   MONGO_URI=your_mongodb_atlas_connection_string
    PORT=5050
+   MONGO_URI=your_mongodb_atlas_connection_string
    ```
 
    Replace `your_mongodb_atlas_connection_string` with your actual MongoDB Atlas connection string.
 
-3. Ensure that the `config.env` file is included in your `.gitignore` file to prevent it from being committed to your repository:
+3. Ensure that the `.env` file is included in your `.gitignore` file to prevent it from being committed to your repository:
 
    ```sh
-   echo "config.env" >> .gitignore
+   echo ".env" >> .gitignore
    ```
 
 ## Contributing
