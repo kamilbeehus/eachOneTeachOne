@@ -23,8 +23,8 @@ Each one Teach one is a social web platform that allows users to exchange knowle
 Ensure you have the following installed on your local machine :
 
 - Node.js (version 22.4.1 or above)
-- npm (version 10.8.2 or above) or yarn (version X.X.X)
-- MongoDB (version X.X.X)
+- npm (version 10.8.2 or above) 
+- MongoDB Atlas Account
 
 ### Setup
 
@@ -45,15 +45,31 @@ Ensure you have the following installed on your local machine :
 3. Install dependencies for the frontend:
 
    ```sh
-   cd client
+   cd ../client
    npm install
    ```
 
-4. Start MongoDB:
+4. Configure environment variables:
+
+- **Backend**: Create a `.env` file in the server directory and add your MongoDB Atlas connection string :
+
+   ```env
+   PORT=3000
+   MONGO_URI=your_mongodb_atlas_connection_string
+   ```
+
+- Replace your_mongodb_atlas_connection_string with your actual connection string from MongoDB Atlas, formatted like this:
+
+   ```env
+   MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/your_database?retryWrites=true&w=majority
+   ```
+   
+- Ensure the .env file is included in your .gitignore to prevent it from being committed:
 
    ```sh
-   mongod
+   echo ".env" >> .gitignore
    ```
+
 
 5. Start the backend server:
 
@@ -62,7 +78,7 @@ Ensure you have the following installed on your local machine :
    npm start
    ```
 
-   or
+   or, for development with auto-reloading:
 
    ```sh
    cd server
@@ -71,7 +87,7 @@ Ensure you have the following installed on your local machine :
 
 6. Start the frontend development server:
    ```sh
-   cd client
+   cd ../client
    npm run dev
    ```
 
@@ -91,25 +107,6 @@ Ensure you have the following installed on your local machine :
 
 ![PNG showing how to install the recommended VSCode Extensions](images/installRecommendedExtensions.png "Install instructions for recommended VSCode Extensions")
 
-### Setting Up `config.env`
-
-1. Create a file named `.env` in the server directory of your project.
-
-2. Add your MongoDB Atlas connection string and the Port for connection to the `.env` file in the following format:
-
-   ```env
-   PORT=5050
-   MONGO_URI=your_mongodb_atlas_connection_string
-   ```
-
-   Replace `your_mongodb_atlas_connection_string` with your actual MongoDB Atlas connection string.
-
-3. Ensure that the `.env` file is included in your `.gitignore` file to prevent it from being committed to your repository:
-
-   ```sh
-   echo ".env" >> .gitignore
-   ```
-
 ## Contributing
 
 \*\*Guidelines for contributing to the project in case we decide to make it open source in the future.
@@ -118,6 +115,3 @@ Ensure you have the following installed on your local machine :
 
 \*\*We should include a license as soon as we make the repository public.
 
-```
-
-```

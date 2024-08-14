@@ -36,14 +36,6 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    createdCourses: {
-        type: [String], // TODO: Change later to an array of ObjectIds from the Course model
-        default: []
-    },
-    enrolledCourses: {
-        type: [String], 
-        default: []
-    },
     createdAt: {
         type: Date,
         default: Date.now

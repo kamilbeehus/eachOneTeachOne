@@ -1,7 +1,7 @@
 const loginFields=[
     {
         labelText:"Email address",
-        labelFor:"email-address",
+        labelFor:"email-address", 
         id:"email-address",
         name:"email",
         type:"email",
@@ -24,19 +24,19 @@ const loginFields=[
 const signupFields=[
     {
         labelText:"First Name",
-        labelFor:"firstname",
-        id:"firstname",
-        name:"firstname",
+        labelFor:"firstName", // Must match the backend field from the User schema
+        id:"firstName", // Must match the backend field from the User schema
+        name:"firstName", // Must match the backend field from the User schema
         type:"text",
         autoComplete:"firstname",
         isRequired:true,
-        placeholder:"First Name"   
+        placeholder:"First Name" 
     },
     {
         labelText:"Last Name",
-        labelFor:"lastname",
-        id:"lastname",
-        name:"lastname",
+        labelFor:"lastName",
+        id:"lastName",
+        name:"lastName", 
         type:"text",
         autoComplete:"lastname",
         isRequired:true,
@@ -44,8 +44,8 @@ const signupFields=[
     },
     {
         labelText:"Email address",
-        labelFor:"email-address",
-        id:"email-address",
+        labelFor:"email",
+        id:"email",
         name:"email",
         type:"email",
         autoComplete:"email",
@@ -54,19 +54,19 @@ const signupFields=[
     },
     {
         labelText:"Password",
-        labelFor:"password",
-        id:"password",
-        name:"password",
+        labelFor:"passwordHash", // TODO: We'll need to hash this before sending it to the database
+        id:"passwordHash", 
+        name:"passwordHash",
         type:"password",
-        autoComplete:"current-password",
+        autoComplete:"new-password",
         isRequired:true,
         placeholder:"Password"   
     },
     {
         labelText:"Confirm Password",
-        labelFor:"confirm-password",
-        id:"confirm-password",
-        name:"confirm-password",
+        labelFor:"confirm-password", // Used for validation only
+        id:"confirm-password", // Not sent to the backend
+        name:"confirm-password", // Not sent to the backend
         type:"password",
         autoComplete:"confirm-password",
         isRequired:true,
