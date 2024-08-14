@@ -42,7 +42,7 @@ export default function Signup(){
       const response = await axios.post('http://localhost:3000/api/users/signup', payload);
       console.log('User created successfully :', response.data);
       // Redirect to login page after successful signup
-      setTimeout(() => navigate('/'), 2000); // TODO: Redirect to /login endpoint
+      setTimeout(() => navigate('/'), 2000); // TODO: Redirect to the `/login` endpoint
     } catch (error) {
       console.error('Signup failed:', error.response ? error.response.data : error.message);
       // Handle signup failure here
