@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signupFields } from "../constants/formFields"
 import FormAction from "./FormAction";
 import Input from "./Input";
@@ -11,6 +12,7 @@ fields.forEach(field => fieldsState[field.id]='');
 
 export default function Signup(){
   const [signupState,setSignupState]=useState(fieldsState);
+  const navigate = useNavigate();
 
   const handleChange=(e)=>setSignupState({...signupState,[e.target.id]:e.target.value});
 
@@ -39,7 +41,8 @@ export default function Signup(){
     try {
       const response = await axios.post('http://localhost:3000/api/users/signup', payload);
       console.log('User created successfully :', response.data);
-      // Redirect or update UI as needed after successful signup
+      // Redirect to login page after successful signup
+      setTimeout(() => navigate('/'), 2000); // TODO: Redirect to /login endpoint
     } catch (error) {
       console.error('Signup failed:', error.response ? error.response.data : error.message);
       // Handle signup failure here
