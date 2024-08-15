@@ -1,13 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
-import SignupPage from "./pages/Signup";  // Import SignupPage
+import SignupPage from "./pages/Signup"; // Import SignupPage
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -20,7 +17,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "signup",  // Route for the SignupPage
+        path: "signup", // Route for the SignupPage
         element: <SignupPage />,
       },
     ],
@@ -40,5 +37,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
