@@ -1,17 +1,23 @@
-import { Routes, Route } from "react-router-dom";
-import SignupPage from "./pages/Signup";
-import LoginPage from "./pages/Login";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-    <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-        </Routes>
+    <BrowserRouter>
+      <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full space-y-8">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/home" element={<HomePage />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

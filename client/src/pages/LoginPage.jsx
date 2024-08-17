@@ -8,7 +8,7 @@ export default function LoginPage() {
         heading="Login to your Each One Teach One Account"
         paragraph="Don't have an account yet? "
         linkName="Sign Up"
-        linkUrl="./signup"
+        linkUrl="/signup"
       />
       <Login />
     </>
