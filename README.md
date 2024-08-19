@@ -12,7 +12,6 @@ Each one Teach one is a social web platform that allows users to exchange knowle
   - [Usage](#usage)
   - [Configuration](#configuration)
     - [Use Prettier ESlint in the client folder](#use-prettier-eslint-in-the-client-folder)
-    - [Setting Up `config.env`](#setting-up-configenv)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -99,7 +98,7 @@ Ensure you have the following installed on your local machine :
 
 ### Use Prettier ESlint in the client folder
 1. Open up a terminal 
-2. Type in `pwd` (print working directory) to make sure you're in the `best_project` folder
+2. Type in `pwd` (print working directory) to make sure you're in the `eachOneTeachOne` folder
 3. Type in `git pull` to make sure you're on the latest commit
 3. Type in `cd .vscode`
 4. Type in `cp settings.example.json settings.json` this will make a copy of settings.example.json and rename it to settings.json
