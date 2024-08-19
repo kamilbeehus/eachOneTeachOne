@@ -37,11 +37,11 @@ export default function Signup() {
     createAccount(payload);
   };
 
-  //handle Signup API Integration here
+  //handle Signup API Integration
   const createAccount = async (payload) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/users/signup",
+        "http://localhost:3000/api/auth/signup",
         payload,
       );
       console.log("User created successfully :", response.data);
