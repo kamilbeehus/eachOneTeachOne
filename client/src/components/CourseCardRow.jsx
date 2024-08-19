@@ -1,6 +1,6 @@
 import CourseCard from "./CourseCard";
 
-export default function CourseCardColumn() {
+export default function CourseCardRow() {
   return (
     <>
       <div className="card grid sm:grid-cols-4 grid-cols-2 gap-6">

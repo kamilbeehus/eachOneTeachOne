@@ -1,6 +1,6 @@
 import raccoonLogo from "../assets/Raccoon.svg";
 
-export default function SkillCard({ courseName, courseDescription }) {
+export default function CourseCard({ courseName, courseDescription }) {
   return (
     <>
       <div className="card  bg-base-100 shadow-xl lg:card-side">
