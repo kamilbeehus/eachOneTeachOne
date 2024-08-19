@@ -22,6 +22,7 @@ export default function Navbar() {
             className="btn btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
+              {/* Todo: insert teachers profile photo */}
               <img alt="Tailwind CSS Navbar component" src={AvatarLogo} />
             </div>
           </div>
@@ -29,15 +30,15 @@ export default function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li>
+            {/* Todo: add these options once, they are needed */}
+            {/* <li>
               <a className="justify-between">
                 Profile
-                <span className="badge">New</span>
               </a>
             </li>
             <li>
               <a>Settings</a>
-            </li>
+            </li> */}
             <li>
               <Link to="/">logout</Link>
             </li>

@@ -3,6 +3,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
+import Error404Page from "./pages/Error404Page";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="*" element={<Error404Page />} />
       </Routes>
     </BrowserRouter>
   );

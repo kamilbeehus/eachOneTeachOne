@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
-import SkillCardColumn from "../components/SkillCardColumn";
+import CourseCardColumn from "../components/CourseCardColumn";
 import Navbar from "../components/Navbar";
 export default function HomePage() {
   return (
     <>
       <Navbar />
       <div className="h-12"></div>
-      <SkillCardColumn />
+      <CourseCardColumn />
     </>
   );
 }
