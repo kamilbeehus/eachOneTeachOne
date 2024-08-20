@@ -33,7 +33,7 @@ export default function Signup() {
       passwordHash: signupState.passwordHash,
     };
 
-    console.log(signupState);
+    console.log("Attempting to create account for:", payload.email);
     createAccount(payload);
   };
 
@@ -44,7 +44,7 @@ export default function Signup() {
         "http://localhost:3000/api/auth/signup",
         payload,
       );
-      console.log("User created successfully :", response.data);
+      console.log("User registered successfully :", response.data);
       // Redirect to login page after successful signup
       setTimeout(() => navigate("/"), 2000); // TODO: Redirect to the `/login` endpoint
     } catch (error) {
