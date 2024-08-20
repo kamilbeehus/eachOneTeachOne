@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import { generateToken } from "../utils/SecretToken.js";
 
 export const signup = async (req, res) => {
   try {
@@ -15,12 +16,15 @@ export const signup = async (req, res) => {
       firstName,
       lastName,
       email,
-      passwordHash, // This will be encrypted before saving
+      passwordHash, // Password hashing is handled by the pre-save hook in the User model
     });
 
     await newUser.save();
 
-    // Return the user information, excluding the passwordHash
+    // Generate a JWT token using the user's information
+    const token = generateToken(newUser);
+
+    // Return the user information and token
     const userResponse = {
       _id: newUser._id,
       firstName: newUser.firstName,
@@ -32,9 +36,11 @@ export const signup = async (req, res) => {
       createdAt: newUser.createdAt,
     };
 
-    return res
-      .status(201)
-      .json({ message: "User registered successfully", user: userResponse });
+    return res.status(201).json({
+      message: "User registered successfully",
+      user: userResponse,
+      token, // Include the token in the response
+    });
   } catch (error) {
     console.error("Error during user registration:", error);
 
