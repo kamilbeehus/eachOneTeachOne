@@ -46,7 +46,7 @@ export default function Signup() {
       );
       console.log("User registered successfully :", response.data);
       // Redirect to login page after successful signup
-      setTimeout(() => navigate("/"), 2000); // TODO: Redirect to the `/login` endpoint
+      setTimeout(() => navigate("/login"), 2000); // TODO: Redirect to the `/login` endpoint
     } catch (error) {
       console.error(
         "Signup failed:",
