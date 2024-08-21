@@ -21,7 +21,7 @@ export default function Signup() {
     e.preventDefault();
 
     // Validate if passwords match when registering
-    if (signupState.passwordHash !== signupState["confirm-password"]) {
+    if (signupState.password !== signupState["confirm-password"]) {
       console.error("Passwords do not match");
       return;
     }
@@ -30,7 +30,7 @@ export default function Signup() {
       firstName: signupState.firstName,
       lastName: signupState.lastName,
       email: signupState.email,
-      passwordHash: signupState.passwordHash,
+      password: signupState.password,
     };
 
     console.log("Attempting to create account for:", payload.email);

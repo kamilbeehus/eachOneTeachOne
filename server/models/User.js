@@ -20,8 +20,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
   },
-  passwordHash: {
+  password: {
     type: String,
     required: true,
   },
@@ -45,18 +46,23 @@ const userSchema = new mongoose.Schema({
 
 // Pre-save hook to encrypt the password before saving it to the database
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("passwordHash")) {
+  if (!this.isModified("password")) {
     return next();
   }
 
   try {
     const salt = await bcrypt.genSalt(10);
-    this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
+    this.password = await bcrypt.hash(this.password, salt);
     return next();
   } catch (error) {
     return next(error);
   }
 });
+
+// Compares input plain-text password with hashed password
+userSchema.methods.comparePassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 // This will automatically create a collection called 'users' in the MongoDB database
 const User = mongoose.model("User", userSchema);

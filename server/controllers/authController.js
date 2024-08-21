@@ -1,56 +1,89 @@
-import User from "../models/User.js";
-import { generateToken } from "../utils/SecretToken.js";
+import { signup, login } from "../services/authService.js";
+import {
+  EmailAlreadyInUseError,
+  AuthenticationError,
+  ValidationError,
+} from "../errors/customErrors.js";
 
-export const signup = async (req, res) => {
+export const signupController = async (req, res) => {
   try {
-    const { firstName, lastName, email, passwordHash } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
-    // Check if the user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "Email already in use." });
+    if (!firstName || !lastName || !email || !password) {
+      throw new ValidationError("All required fields must be provided.");
     }
 
-    // Create a new User with the plain-text password
-    const newUser = new User({
+    // Call the signup service to create a new user and generate a token
+    const { user, token } = await signup({
       firstName,
       lastName,
       email,
-      passwordHash, // Password hashing is handled by the pre-save hook in the User model
+      password,
     });
 
-    await newUser.save();
-
-    // Generate a JWT token using the user's information
-    const token = generateToken(newUser);
-
-    // Return the user information and token
-    const userResponse = {
-      _id: newUser._id,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      email: newUser.email,
-      bio: newUser.bio,
-      profilePicture: newUser.profilePicture,
-      credits: newUser.credits,
-      createdAt: newUser.createdAt,
-    };
+    // Set the token in a cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, // TODO: Set to true once we use HTTPS
+      sameSite: "lax",
+      withCredentials: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    });
 
     return res.status(201).json({
       message: "User registered successfully",
-      user: userResponse,
+      user,
       token, // Include the token in the response
     });
   } catch (error) {
-    console.error("Error during user registration:", error);
-
-    if (error.name === "ValidationError") {
-      return res
-        .status(400)
-        .json({ message: "Validation error", error: error.message });
+    if (error instanceof EmailAlreadyInUseError) {
+      return res.status(400).json({ message: error.message });
     }
-    return res
-      .status(500)
-      .json({ message: "Server error", error: error.message });
+
+    if (error instanceof ValidationError) {
+      return res.status(400).json({ message: error.message });
+    }
+
+    console.error("Signup error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const loginController = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      throw new ValidationError("All required fields must be provided.");
+    }
+
+    // Call the login service to authenticate the user and generate a token
+    const { user, token } = await login({ email, password });
+
+    // Set the token in a cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, // TODO: Set to true once we use HTTPS
+      sameSite: "lax",
+      withCredentials: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    });
+
+    return res.status(200).json({
+      message: "User logged in successfully",
+      user,
+      redirectUrl: "/home", // Redirect to the home page after login
+    });
+  } catch (error) {
+    if (error instanceof AuthenticationError) {
+      return res.status(401).json({ message: error.message });
+    }
+
+    if (error instanceof ValidationError) {
+      return res.status(400).json({ message: error.message });
+    }
+
+    console.error("Login error:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
