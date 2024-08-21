@@ -21,6 +21,15 @@ export const signupController = async (req, res) => {
       password,
     });
 
+    // Set the token in a cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, // TODO: Set to true once we use HTTPS
+      sameSite: "lax",
+      withCredentials: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    });
+
     return res.status(201).json({
       message: "User registered successfully",
       user,
@@ -51,10 +60,19 @@ export const loginController = async (req, res) => {
     // Call the login service to authenticate the user and generate a token
     const { user, token } = await login({ email, password });
 
+    // Set the token in a cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, // TODO: Set to true once we use HTTPS
+      sameSite: "lax",
+      withCredentials: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    });
+
     return res.status(200).json({
       message: "User logged in successfully",
       user,
-      token,
+      redirectUrl: "/home", // Redirect to the home page after login
     });
   } catch (error) {
     if (error instanceof AuthenticationError) {
