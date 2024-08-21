@@ -54,9 +54,9 @@ const signupFields = [
   },
   {
     labelText: "Password",
-    labelFor: "passwordHash",
-    id: "passwordHash",
-    name: "passwordHash",
+    labelFor: "password",
+    id: "password",
+    name: "password",
     type: "password",
     autoComplete: "new-password",
     isRequired: true,
