@@ -54,7 +54,7 @@ const signupFields = [
   },
   {
     labelText: "Password",
-    labelFor: "passwordHash", // TODO: We'll need to hash this before sending it to the database
+    labelFor: "passwordHash",
     id: "passwordHash",
     name: "passwordHash",
     type: "password",

@@ -33,18 +33,18 @@ export default function Signup() {
       passwordHash: signupState.passwordHash,
     };
 
-    console.log(signupState);
+    console.log("Attempting to create account for:", payload.email);
     createAccount(payload);
   };
 
-  //handle Signup API Integration here
+  //handle Signup API Integration
   const createAccount = async (payload) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/users/signup",
+        "http://localhost:3000/api/auth/signup",
         payload,
       );
-      console.log("User created successfully :", response.data);
+      console.log("User registered successfully :", response.data);
       // Redirect to login page after successful signup
       setTimeout(() => navigate("/login"), 2000); // TODO: Redirect to the `/login` endpoint
     } catch (error) {

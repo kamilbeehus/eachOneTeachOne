@@ -50,11 +50,12 @@ Ensure you have the following installed on your local machine :
 
 4. Configure environment variables:
 
-- **Backend**: Create a `.env` file in the server directory and add your MongoDB Atlas connection string :
+- **Backend**: Create a `.env` file in the server directory and add the following credentials :
 
    ```env
    PORT=3000
    MONGO_URI=your_mongodb_atlas_connection_string
+   JWT_SECRET=your_generated_jwt_secret_key
    ```
 
 - Replace your_mongodb_atlas_connection_string with your actual connection string from MongoDB Atlas, formatted like this:

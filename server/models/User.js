@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -40,6 +41,21 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+});
+
+// Pre-save hook to encrypt the password before saving it to the database
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("passwordHash")) {
+    return next();
+  }
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
 });
 
 // This will automatically create a collection called 'users' in the MongoDB database
