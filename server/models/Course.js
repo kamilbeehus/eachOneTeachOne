@@ -27,6 +27,7 @@ const courseSchema = new mongoose.Schema({
   },
   creditsCost: {
     type: Number,
+    min: 1,
     default: 1,
   },
   schedule: {
@@ -41,6 +42,7 @@ const courseSchema = new mongoose.Schema({
   },
   maxStudents: {
     type: Number,
+    min: 1,
     default: 1,
   },
   enrolledStudents: {
