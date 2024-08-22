@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { skillsEnum } from "../enums/skillsEnum.js";
 
 const courseSchema = new mongoose.Schema({
   title: {
@@ -19,9 +20,9 @@ const courseSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  skillId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Skill",
+  skill: {
+    type: String,
+    enum: skillsEnum,
     required: true,
   },
   creditsCost: {
@@ -54,7 +55,6 @@ const courseSchema = new mongoose.Schema({
 });
 
 // Indexes to optimize queries
-courseSchema.index({ skillId: 1 });
 courseSchema.index({ instructorId: 1 });
 
 const Course = mongoose.model("Course", courseSchema);
