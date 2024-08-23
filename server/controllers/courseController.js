@@ -1,5 +1,29 @@
 import { validationResult } from "express-validator";
-import { createCourse, getAllCourses } from "../services/courseService.js";
+import {
+  createCourse,
+  getAllCourses,
+  getCourseById,
+} from "../services/courseService.js";
+import { CourseNotFoundError } from "../errors/customErrors.js";
+
+export const getCourseByIdController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const course = await getCourseById(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Course fetched successfully",
+      course,
+    });
+  } catch (error) {
+    if (error instanceof CourseNotFoundError) {
+      return res.status(error.statusCode).json({ message: error.message });
+    }
+    next(error);
+  }
+};
 
 export const getAllCoursesController = async (req, res, next) => {
   try {
