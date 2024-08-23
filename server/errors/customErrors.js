@@ -1,3 +1,4 @@
+// Custom errors for Client Api
 export class EmailAlreadyInUseError extends Error {
   constructor(message = "Email already in use.") {
     super(message);
@@ -19,5 +20,22 @@ export class ValidationError extends Error {
     super(message);
     this.name = "ValidationError";
     this.statusCode = 400;
+  }
+}
+
+// Custom errors for Course Api
+export class SkillNotValidError extends Error {
+  constructor(message = "The provided skill is not valid.") {
+    super(message);
+    this.name = "SkillNotValidError";
+    this.statusCode = 400;
+  }
+}
+
+export class InstructorNotFoundError extends Error {
+  constructor(message = "Instructor not found.") {
+    super(message);
+    this.name = "InstructorNotFoundError";
+    this.statusCode = 404;
   }
 }

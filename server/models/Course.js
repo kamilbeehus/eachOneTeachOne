@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { skillsEnum } from "../enums/skillsEnum.js";
 
 const courseSchema = new mongoose.Schema({
   title: {
@@ -19,13 +20,14 @@ const courseSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  skillId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Skill",
+  skill: {
+    type: String,
+    enum: skillsEnum,
     required: true,
   },
   creditsCost: {
     type: Number,
+    min: 1,
     default: 1,
   },
   schedule: {
@@ -40,13 +42,16 @@ const courseSchema = new mongoose.Schema({
   },
   maxStudents: {
     type: Number,
+    min: 1,
     default: 1,
   },
-  enrolledStudents: {
-    type: [mongoose.Schema.Types.ObjectId], // Array of User IDs
-    ref: "User",
-    default: [],
-  },
+  enrolledStudents: [
+    {
+      type: mongoose.Schema.Types.ObjectId, // Array of User IDs
+      ref: "User",
+      default: [],
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
@@ -54,8 +59,15 @@ const courseSchema = new mongoose.Schema({
 });
 
 // Indexes to optimize queries
-courseSchema.index({ skillId: 1 });
 courseSchema.index({ instructorId: 1 });
+
+// Ensure the endDate is after startDate
+courseSchema.pre("save", function (next) {
+  if (this.schedule.endDate <= this.schedule.startDate) {
+    return next(new Error("End date must be after the start date."));
+  }
+  next();
+});
 
 const Course = mongoose.model("Course", courseSchema);
 
