@@ -45,11 +45,13 @@ const courseSchema = new mongoose.Schema({
     min: 1,
     default: 1,
   },
-  enrolledStudents: {
-    type: [mongoose.Schema.Types.ObjectId], // Array of User IDs
-    ref: "User",
-    default: [],
-  },
+  enrolledStudents: [
+    {
+      type: mongoose.Schema.Types.ObjectId, // Array of User IDs
+      ref: "User",
+      default: [],
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
@@ -58,6 +60,14 @@ const courseSchema = new mongoose.Schema({
 
 // Indexes to optimize queries
 courseSchema.index({ instructorId: 1 });
+
+// Ensure the endDate is after startDate
+courseSchema.pre("save", function (next) {
+  if (this.schedule.endDate <= this.schedule.startDate) {
+    return next(new Error("End date must be after the start date."));
+  }
+  next();
+});
 
 const Course = mongoose.model("Course", courseSchema);
 
