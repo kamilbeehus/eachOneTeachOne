@@ -4,8 +4,28 @@ import { skillsEnum } from "../enums/skillsEnum.js";
 import {
   SkillNotValidError,
   InstructorNotFoundError,
+  CourseNotFoundError,
 } from "../errors/customErrors.js";
 import { formatCourseResponse } from "../utils/courseUtils.js";
+
+export const getCourseById = async (id) => {
+  try {
+    // Fetch an individual course by its ID and populate instructor details (firstName and lastName)
+    const course = await Course.findById(id).populate(
+      "instructorId",
+      "firstName lastName"
+    );
+
+    if (!course) {
+      throw new CourseNotFoundError();
+    }
+
+    return formatCourseResponse(course);
+  } catch (error) {
+    console.error("Error fetching course by ID:", error);
+    throw error;
+  }
+};
 
 export const getAllCourses = async () => {
   try {

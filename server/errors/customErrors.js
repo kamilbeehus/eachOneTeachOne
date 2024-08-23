@@ -39,3 +39,11 @@ export class InstructorNotFoundError extends Error {
     this.statusCode = 404;
   }
 }
+
+export class CourseNotFoundError extends Error {
+  constructor(message = "Course not found.") {
+    super(message);
+    this.name = "CourseNotFoundError";
+    this.statusCode = 404;
+  }
+}
