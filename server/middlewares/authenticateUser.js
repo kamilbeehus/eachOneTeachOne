@@ -16,12 +16,13 @@ export const authenticateUser = async (req, res, next) => {
 
     // Fetch the user from the database
     const user = await User.findById(decoded.id);
+
     if (!user) {
       return res.status(401).json({ message: "Unauthorized: User not found." });
     }
 
     // Attach user to request object
-    req.user = decoded;
+    req.user = user;
     next();
   } catch (error) {
     return res.status(401).json({ message: "Unauthorized: Invalid token." });
