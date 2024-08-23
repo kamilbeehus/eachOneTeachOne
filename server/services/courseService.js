@@ -5,6 +5,22 @@ import {
   SkillNotValidError,
   InstructorNotFoundError,
 } from "../errors/customErrors.js";
+import { formatCourseResponse } from "../utils/courseUtils.js";
+
+export const getAllCourses = async () => {
+  try {
+    // Fetch courses and populate instructor details (firstName and lastName)
+    const courses = await Course.find().populate(
+      "instructorId",
+      "firstName lastName"
+    );
+
+    return courses.map(formatCourseResponse);
+  } catch (error) {
+    console.error("Error fetching courses:", error);
+    throw new Error("Error fetching courses.");
+  }
+};
 
 export const createCourse = async (courseData) => {
   try {
@@ -26,16 +42,3 @@ export const createCourse = async (courseData) => {
     throw new Error("Error creating course.");
   }
 };
-
-const formatCourseResponse = (course) => ({
-  _id: course._id,
-  title: course.title,
-  description: course.description,
-  instructorId: course.instructorId,
-  skill: course.skill,
-  creditsCost: course.creditsCost,
-  schedule: course.schedule,
-  maxStudents: course.maxStudents,
-  enrolledStudents: course.enrolledStudents,
-  createdAt: course.createdAt,
-});
