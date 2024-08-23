@@ -1,5 +1,18 @@
 import { validationResult } from "express-validator";
-import { createCourse } from "../services/courseService.js";
+import { createCourse, getAllCourses } from "../services/courseService.js";
+
+export const getAllCoursesController = async (req, res, next) => {
+  try {
+    const courses = await getAllCourses();
+    return res.status(200).json({
+      success: true,
+      message: "Courses fetched successfully",
+      courses,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const createCourseController = async (req, res, next) => {
   try {
