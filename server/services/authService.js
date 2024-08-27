@@ -5,6 +5,7 @@ import {
   AuthenticationError,
   ValidationError,
 } from "../errors/customErrors.js";
+import { formatUserResponse } from "../utils/userUtils.js";
 
 export const signup = async ({ firstName, lastName, email, password }) => {
   if (!firstName || !lastName || !email || !password) {
@@ -52,15 +53,3 @@ export const login = async ({ email, password }) => {
 
   return { user: formatUserResponse(user), token };
 };
-
-// Utility function to format user response
-const formatUserResponse = (user) => ({
-  _id: user._id,
-  firstName: user.firstName,
-  lastName: user.lastName,
-  email: user.email,
-  bio: user.bio,
-  profilePicture: user.profilePicture,
-  credits: user.credits,
-  createdAt: user.createdAt,
-});

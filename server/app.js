@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import routes from "./routes/index.js";
 import authRoutes from "./routes/authRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
@@ -24,7 +23,6 @@ app.use(
 );
 
 // Use the imported routes
-app.use("/", routes);
 app.use("/api/auth", authRoutes);
 app.use("/api/courses", courseRoutes);
 
