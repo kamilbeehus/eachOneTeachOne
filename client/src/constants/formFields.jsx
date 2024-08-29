@@ -1,9 +1,9 @@
 const loginFields = [
   {
     labelText: "Email address",
-    labelFor: "email-address",
-    id: "email-address",
-    name: "email",
+    labelFor: "email", // Must match the backend field from the User schema
+    id: "email", // Must match the backend field from the User schema
+    name: "email", // Must match the backend field from the User schema
     type: "email",
     autoComplete: "email",
     isRequired: true,
@@ -24,9 +24,9 @@ const loginFields = [
 const signupFields = [
   {
     labelText: "First Name",
-    labelFor: "firstName", // Must match the backend field from the User schema
-    id: "firstName", // Must match the backend field from the User schema
-    name: "firstName", // Must match the backend field from the User schema
+    labelFor: "firstName",
+    id: "firstName",
+    name: "firstName",
     type: "text",
     autoComplete: "firstname",
     isRequired: true,
