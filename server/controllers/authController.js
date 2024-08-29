@@ -9,10 +9,6 @@ export const signupController = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
 
-    if (!firstName || !lastName || !email || !password) {
-      throw new ValidationError("All required fields must be provided.");
-    }
-
     // Call the signup service to create a new user and generate a token
     const { user, token } = await signup({
       firstName,
@@ -52,10 +48,6 @@ export const signupController = async (req, res) => {
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    if (!email || !password) {
-      throw new ValidationError("All required fields must be provided.");
-    }
 
     // Call the login service to authenticate the user and generate a token
     const { user, token } = await login({ email, password });
