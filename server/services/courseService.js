@@ -8,6 +8,7 @@ import {
   CourseNotFoundError,
 } from "../errors/customErrors.js";
 import { formatCourseResponse } from "../utils/courseUtils.js";
+import { createTransaction } from "../services/transactionService.js";
 
 export const getCourseById = async (id) => {
   try {
@@ -61,18 +62,12 @@ export const createCourse = async (courseData) => {
     const earnedCredits = course.creditsCost;
 
     // Create a transaction for the User who created the course
-    const transaction = new Transaction({
+    await createTransaction({
       userId: courseData.instructorId,
       type: "earned",
       amount: earnedCredits,
       courseId: course._id,
     });
-
-    await transaction.save();
-
-    // Update the User's model with the new credits
-    instructor.credits += earnedCredits;
-    await instructor.save();
 
     return formatCourseResponse(course);
   } catch (error) {
