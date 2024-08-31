@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import User from "../models/User.js";
 import Course from "../models/Course.js";
 
-const validateTransaction = [
+export const validateTransaction = [
   // Check if userId is provided and is a valid MongoDB ObjectId
   check("userId")
     .notEmpty()
@@ -53,5 +53,3 @@ const validateTransaction = [
     next();
   },
 ];
-
-export default validateTransaction;
