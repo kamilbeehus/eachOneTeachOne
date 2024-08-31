@@ -57,7 +57,6 @@ export const loginController = async (req, res) => {
       httpOnly: true,
       secure: false, // TODO: Set to true once we use HTTPS
       sameSite: "lax",
-      withCredentials: true,
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
     });
 
