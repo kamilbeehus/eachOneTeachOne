@@ -1,5 +1,6 @@
 import Course from "../models/Course.js";
 import User from "../models/User.js";
+import Transaction from "../models/Transaction.js";
 import { skillsEnum } from "../enums/skillsEnum.js";
 import {
   SkillNotValidError,
@@ -55,6 +56,23 @@ export const createCourse = async (courseData) => {
 
     const course = new Course({ ...courseData });
     await course.save();
+
+    // Calculate credits earned from the created course
+    const earnedCredits = course.creditsCost;
+
+    // Create a transaction for the User who created the course
+    const transaction = new Transaction({
+      userId: courseData.instructorId,
+      type: "earned",
+      amount: earnedCredits,
+      courseId: course._id,
+    });
+
+    await transaction.save();
+
+    // Update the User's model with the new credits
+    instructor.credits += earnedCredits;
+    await instructor.save();
 
     return formatCourseResponse(course);
   } catch (error) {
