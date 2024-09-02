@@ -1,6 +1,5 @@
 import Course from "../models/Course.js";
 import User from "../models/User.js";
-import Transaction from "../models/Transaction.js";
 import { skillsEnum } from "../enums/skillsEnum.js";
 import {
   SkillNotValidError,
@@ -9,6 +8,31 @@ import {
 } from "../errors/customErrors.js";
 import { formatCourseResponse } from "../utils/courseUtils.js";
 import { createTransaction } from "../services/transactionService.js";
+import mongoose from "mongoose";
+
+// Fetch courses by instructor ID and populates instructor details (firstName and lastName)
+export const getCoursesByInstructorId = async (instructorId) => {
+  if (!instructorId) {
+    throw new InstructorNotFoundError();
+  } else if (!mongoose.Types.ObjectId.isValid(instructorId)) {
+    throw new InstructorNotFoundError();
+  }
+
+  try {
+    const courses = await Course.find({ instructorId }).populate(
+      "instructorId",
+      "firstName lastName"
+    );
+
+    if (!courses.length) {
+      throw new CourseNotFoundError();
+    }
+    return courses.map(formatCourseResponse);
+  } catch (error) {
+    console.error("Error fetching courses by instructor ID:", error);
+    throw new Error("Error fetching courses by instructor ID.");
+  }
+};
 
 export const getCourseById = async (id) => {
   try {
