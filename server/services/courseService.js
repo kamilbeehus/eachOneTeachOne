@@ -1,5 +1,6 @@
 import Course from "../models/Course.js";
 import User from "../models/User.js";
+import Transaction from "../models/Transaction.js";
 import { skillsEnum } from "../enums/skillsEnum.js";
 import {
   SkillNotValidError,
@@ -7,6 +8,7 @@ import {
   CourseNotFoundError,
 } from "../errors/customErrors.js";
 import { formatCourseResponse } from "../utils/courseUtils.js";
+import { createTransaction } from "../services/transactionService.js";
 
 export const getCourseById = async (id) => {
   try {
@@ -55,6 +57,17 @@ export const createCourse = async (courseData) => {
 
     const course = new Course({ ...courseData });
     await course.save();
+
+    // Calculate credits earned from the created course
+    const earnedCredits = course.creditsCost;
+
+    // Create a transaction for the User who created the course
+    await createTransaction({
+      userId: courseData.instructorId,
+      type: "earned",
+      amount: earnedCredits,
+      courseId: course._id,
+    });
 
     return formatCourseResponse(course);
   } catch (error) {
