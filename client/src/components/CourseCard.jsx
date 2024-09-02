@@ -1,7 +1,10 @@
-// import raccoonLogo from "../assets/Raccoon.svg";
 import raccoonLogo from "../assets/Avatar.png";
 
-export default function CourseCard({ courseName, courseDescription }) {
+export default function CourseCard({
+  courseName,
+  courseDescription,
+  isUserCourse,
+}) {
   return (
     <>
       <div className="card bg-base-100 shadow-xl max-w-64">
@@ -12,11 +15,20 @@ export default function CourseCard({ courseName, courseDescription }) {
         <div className="card-body">
           <h2 className="card-title">{courseName}</h2>
           <p>{courseDescription}</p>
-          <div className="card-actions justify-between">
-            <button className="btn btn-primary">Enroll</button>
+
+          <div className="card-actions justify-end">
+            <Edit isUserCourse={isUserCourse} />
           </div>
         </div>
       </div>
     </>
   );
+}
+
+function Edit({ isUserCourse }) {
+  if (isUserCourse) {
+    return <button className="btn btn-primary">Edit</button>;
+  } else {
+    return <button className="btn btn-primary">Enroll</button>;
+  }
 }
