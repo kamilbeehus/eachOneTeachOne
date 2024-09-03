@@ -1,23 +1,45 @@
+import { useEffect, useState } from "react";
 import CourseCardRow from "../components/CourseCardRow";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 
+// Moved getUserCourses inside the component to utilize hooks properly
 const getUserCourses = async () => {
-  const response = await axios.get(
-    "http://localhost:3000/api/courses/66d411878418b8305289364f",
-    {
-      withCredentials: true,
-    },
-  );
-  let courseArray = [];
-  courseArray.push(response.data.course);
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/api/courses/66d411048418b83052893648",
+      {
+        withCredentials: true,
+      },
+    );
 
-  return courseArray;
+    const courseArray = response.data.courses; // Correct field name from the server is : `courses`
+
+    if (!courseArray || courseArray.length === 0) {
+      console.warn("No courses found for the given instructor.");
+      return []; // Return an empty array to avoid 'undefined' errors
+    }
+    return courseArray;
+  } catch (error) {
+    console.error("Failed to retrieve courses for the given instructor.");
+    console.error(error);
+    return [];
+  }
 };
-const userCourses = await getUserCourses();
-const isUserCourse = true;
 
-export default function HomePage() {
+export default function UserCoursePage() {
+  const [userCourses, setUserCourses] = useState([]); // State to hold courses
+  const isUserCourse = true;
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const courses = await getUserCourses();
+      setUserCourses(courses); // Update state with fetched courses
+    };
+
+    fetchCourses();
+  }, []);
+
   return (
     <>
       <Navbar />
