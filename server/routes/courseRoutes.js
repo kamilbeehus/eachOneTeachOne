@@ -5,8 +5,10 @@ import {
   createCourseController,
   getCoursesByInstructorIdController,
 } from "../controllers/courseController.js";
+import { enrollUserController } from "../controllers/enrollmentController.js";
 import { validateCourse } from "../middlewares/validateCourse.js";
 import { authenticateUser } from "../middlewares/authenticateUser.js";
+import { validateEnrollment } from "../middlewares/validateEnrollment.js";
 
 const router = express.Router();
 
@@ -24,5 +26,8 @@ router.get("/", getAllCoursesController);
 
 // Create a new course (POST): api/courses/create
 router.post("/create", validateCourse, createCourseController);
+
+// Enroll a user in a course (POST): api/courses/enroll
+router.post("/enroll", validateEnrollment, enrollUserController);
 
 export default router;
