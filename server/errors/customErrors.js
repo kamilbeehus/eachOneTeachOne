@@ -47,3 +47,11 @@ export class CourseNotFoundError extends Error {
     this.statusCode = 404;
   }
 }
+
+export class UserNotFoundError extends Error {
+  constructor(message = "User not found.") {
+    super(message);
+    this.name = "UserNotFoundError";
+    this.statusCode = 404;
+  }
+}

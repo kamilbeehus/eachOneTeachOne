@@ -3,13 +3,15 @@ import {
   signupController,
   loginController,
 } from "../controllers/authController.js";
+import { validateSignup } from "../middlewares/validateSignup.js";
+import { validateLogin } from "../middlewares/validateLogin.js";
 
 const router = express.Router();
 
 // Create a new user (POST): api/auth/signup
-router.route("/signup").post(signupController);
+router.post("/signup", validateSignup, signupController);
 
 // Login user (POST): api/auth/login
-router.route("/login").post(loginController);
+router.post("/login", validateLogin, loginController);
 
 export default router;

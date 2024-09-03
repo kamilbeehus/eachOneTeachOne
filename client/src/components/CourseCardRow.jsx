@@ -1,26 +1,29 @@
 import CourseCard from "./CourseCard";
 
-export default function CourseCardRow() {
+export default function CourseCardRow({ courseArray, isUserCourse }) {
   return (
     <>
-      <div className="card grid sm:grid-cols-4 grid-cols-2 gap-6">
-        <CourseCard
-          courseName="guitar lesson"
-          courseDescription="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-        />
-        <CourseCard
-          courseName="cooking"
-          courseDescription="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-        />
-        <CourseCard
-          courseName="dancing"
-          courseDescription="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-        />
-        <CourseCard
-          courseName="maths"
-          courseDescription="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-        />
+      <div className="grid content-center justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {courseArray.map((course) => (
+          <CourseCard
+            key={course._id}
+            courseName={course.title}
+            courseDescription={course.description}
+            isUserCourse={isUserCourse}
+          />
+        ))}
+        <div className="flex items-center justify-center">
+          <AddCourse isUserCourse={isUserCourse} />
+        </div>
       </div>
     </>
   );
+}
+
+function AddCourse({ isUserCourse }) {
+  if (isUserCourse) {
+    return <button className="btn btn-primary">Add a Course</button>;
+  } else {
+    null;
+  }
 }

@@ -3,8 +3,33 @@ import {
   createCourse,
   getAllCourses,
   getCourseById,
+  getCoursesByInstructorId,
 } from "../services/courseService.js";
-import { CourseNotFoundError } from "../errors/customErrors.js";
+import {
+  CourseNotFoundError,
+  InstructorNotFoundError,
+} from "../errors/customErrors.js";
+
+export const getCoursesByInstructorIdController = async (req, res, next) => {
+  try {
+    const { instructorId } = req.params;
+
+    const courses = await getCoursesByInstructorId(instructorId);
+
+    return res.status(200).json({
+      success: true,
+      message: "Courses by InstructorId fetched successfully",
+      courses,
+    });
+  } catch (error) {
+    if (error instanceof InstructorNotFoundError) {
+      return res.status(error.statusCode).json({ message: error.message });
+    } else if (error instanceof CourseNotFoundError) {
+      return res.status(error.statusCode).json({ message: error.message });
+    }
+    next(error);
+  }
+};
 
 export const getCourseByIdController = async (req, res, next) => {
   try {

@@ -1,4 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
+import Search from "./Search";
 import AvatarLogo from "../assets/Avatar.png";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";

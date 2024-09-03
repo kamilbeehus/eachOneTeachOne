@@ -3,14 +3,10 @@ import { generateToken } from "../utils/SecretToken.js";
 import {
   EmailAlreadyInUseError,
   AuthenticationError,
-  ValidationError,
 } from "../errors/customErrors.js";
 import { formatUserResponse } from "../utils/userUtils.js";
 
 export const signup = async ({ firstName, lastName, email, password }) => {
-  if (!firstName || !lastName || !email || !password) {
-    throw new ValidationError("All fields are required for signup.");
-  }
   // Check if the user already exists
   const existingUser = await User.findOne({ email });
   if (existingUser) {
@@ -35,10 +31,6 @@ export const signup = async ({ firstName, lastName, email, password }) => {
 };
 
 export const login = async ({ email, password }) => {
-  if (!email || !password) {
-    throw new ValidationError("All fields are required for login.");
-  }
-
   const user = await User.findOne({ email });
   if (!user) {
     throw new AuthenticationError();
