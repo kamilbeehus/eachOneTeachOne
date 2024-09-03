@@ -55,24 +55,24 @@ export default function Navbar() {
     </nav>
   );
 }
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            {/* Todo: add these options once, they are needed */}
-            <li>
-              <a className="justify-between">Profile</a>
-            </li>
-            <li>
-              <Link to="/usercourses">My Courses</Link>
-            </li>
-            <li>
-              <Link to="/">logout</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-}
-}
+//           <ul
+//             tabIndex={0}
+//             className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+//           >
+//             {/* Todo: add these options once, they are needed */}
+//             <li>
+//               <a className="justify-between">Profile</a>
+//             </li>
+//             <li>
+//               <Link to="/usercourses">My Courses</Link>
+//             </li>
+//             <li>
+//               <Link to="/">logout</Link>
+//             </li>
+//           </ul>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+// }
