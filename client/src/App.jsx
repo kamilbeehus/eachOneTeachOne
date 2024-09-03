@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import Error404Page from "./pages/Error404Page";
 import UserCoursePage from "./pages/UserCoursePage";
 
+
 function App() {
   return (
     <BrowserRouter>
