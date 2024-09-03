@@ -12,6 +12,7 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Signup() {
   const [signupState, setSignupState] = useState(fieldsState);
+  const [error, setError] = useState(null); // State for storing errors
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -20,9 +21,9 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate if passwords match when registering
+    //TODO: Provide feedback to the user if the passwords do not match
     if (signupState.password !== signupState["confirm-password"]) {
-      console.error("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
 
@@ -30,14 +31,19 @@ export default function Signup() {
       firstName: signupState.firstName,
       lastName: signupState.lastName,
       email: signupState.email,
-      password: signupState.password,
+      password: signupState.password, //TODO: Give feedback to the user that password must be at least 8 characters long
     };
 
-    console.log("Attempting to create account for:", payload.email);
-    createAccount(payload);
+    try {
+      await createAccount(payload);
+      navigate("/login"); // Redirect to login page after successful signup
+    } catch (error) {
+      setError(error.response ? error.response.data : error.message);
+    }
+    // TODO: Display error messages to the user in the UI to improve user experience.
   };
 
-  //handle Signup API Integration
+  // Signup API integration
   const createAccount = async (payload) => {
     try {
       const response = await axios.post(
@@ -45,14 +51,8 @@ export default function Signup() {
         payload,
       );
       console.log("User registered successfully :", response.data);
-      // Redirect to login page after successful signup
-      setTimeout(() => navigate("/login"), 2000); // TODO: Redirect to the `/login` endpoint
     } catch (error) {
-      console.error(
-        "Signup failed:",
-        error.response ? error.response.data : error.message,
-      );
-      // Handle signup failure here
+      throw error;
     }
   };
 

@@ -64,6 +64,11 @@ Ensure you have the following installed on your local machine :
    MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/your_database?retryWrites=true&w=majority
    ```
    
+- Generate a secret key for JWT and save it into your `.env` file as `JWT_SECRET`. You can do it from your terminal :
+
+   ```sh
+   openssl rand -base64 60  // On Linux
+   ```
 - Ensure the .env file is included in your .gitignore to prevent it from being committed:
 
    ```sh
@@ -89,6 +94,19 @@ Ensure you have the following installed on your local machine :
    ```sh
    cd ../client
    npm run dev
+   ```
+
+7. Or start both using one command in the root directory (beta):
+   
+   To install the necessary package, first run:
+
+   ```sh
+   npm install 
+   ```
+   Afterward, you can run this one-line command: 
+
+   ```sh
+   npm run start 
    ```
 
 ## Usage
