@@ -8,3 +8,11 @@ export const formatUserResponse = (user) => ({
   credits: user.credits,
   createdAt: user.createdAt,
 });
+
+export const formatUserByIdResponse = (user) => ({
+  firstName: user.firstName,
+  lastName: user.lastName,
+  credits: user.credits,
+  profilePicture: user.profilePicture,
+  bio: user.bio,
+});
