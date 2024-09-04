@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 export const authenticateUser = async (req, res, next) => {
-  const token = req.cookies.token; // Read token from cookie
+  // Extract the token from the request’s cookies:
+  const token = req.cookies.token;
 
   if (!token) {
     return res
@@ -11,17 +12,18 @@ export const authenticateUser = async (req, res, next) => {
   }
 
   try {
-    // Verify the token
+    // The token is then verified using a secret key. This verification process decodes the token and retrieves the payload,
+    // which typically includes the user’s ID and possibly other information.
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Fetch the user from the database
+    // With the decoded information, usually containing the user’s ID, the middleware fetches the user from the database.
     const user = await User.findById(decoded.id);
 
     if (!user) {
       return res.status(401).json({ message: "Unauthorized: User not found." });
     }
 
-    // Attach user to request object
+    // After the user is fetched, it is attached to the req object, making it accessible in subsequent middleware or controllers
     req.user = user;
     next();
   } catch (error) {
