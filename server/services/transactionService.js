@@ -3,18 +3,27 @@ import Transaction from "../models/Transaction.js";
 import User from "../models/User.js";
 import { UserNotFoundError, ValidationError } from "../errors/customErrors.js";
 
-export const createTransaction = async ({ userId, type, amount, courseId }) => {
-  // Validate the user exists
-  const user = await User.findById(userId);
-  if (!user) {
-    throw new UserNotFoundError(`User with ID ${userId} not found`);
+export const createTransaction = async (
+  { userId, type, amount, courseId },
+  session = null
+) => {
+  // If no session is passed, start a new session
+  const newSession = session || (await mongoose.startSession());
+
+  // Start a transaction only if a session was not provided
+  let transactionStarted = false;
+  if (!session) {
+    newSession.startTransaction();
+    transactionStarted = true;
   }
 
-  // Handle the transaction creation and user credit updates within a single atomic operation
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
   try {
+    // Validate the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new UserNotFoundError(`User with ID ${userId} not found`);
+    }
+
     // Create a new transaction
     const transaction = new Transaction({
       userId,
@@ -22,9 +31,6 @@ export const createTransaction = async ({ userId, type, amount, courseId }) => {
       amount,
       courseId,
     });
-
-    await transaction.save({ session });
-    await user.save({ session });
 
     // Update User credits based on the transaction type
     if (type === "earned") {
@@ -36,14 +42,24 @@ export const createTransaction = async ({ userId, type, amount, courseId }) => {
       user.credits -= amount;
     }
 
-    await user.save();
-    await session.commitTransaction();
-    session.endSession();
+    // Save the transaction and update the User in the same session
+    await transaction.save({ session: newSession });
+    await user.save({ session: newSession });
 
+    if (transactionStarted) {
+      await newSession.commitTransaction();
+    }
     return transaction;
   } catch (error) {
-    await session.abortTransaction();
-    session.endSession();
+    // Abort the transaction only if this method started it
+    if (transactionStarted) {
+      await newSession.abortTransaction();
+    }
     throw error;
+  } finally {
+    // End the session only if this method started it
+    if (transactionStarted) {
+      newSession.endSession();
+    }
   }
 };
