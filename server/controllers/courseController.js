@@ -75,9 +75,17 @@ export const createCourseController = async (req, res, next) => {
       });
     }
 
-    const { title, description, skill, creditsCost, schedule, maxStudents } =
-      req.body;
-    const instructorId = req.user._id; // Get the instructor ID from the authenticated user
+    const {
+      title,
+      description,
+      skill,
+      creditsCost,
+      schedule,
+      maxStudents,
+      instructorId, // Get the instructor ID directly from the request body
+    } = req.body;
+
+    // const instructorId = req.user._id; // Get the instructor ID from the authenticated user
 
     const course = await createCourse({
       title,
