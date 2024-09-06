@@ -16,7 +16,7 @@ const router = express.Router();
 // router.use(authenticateUser);
 
 // Get all courses by instructor ID (GET): api/courses/:instructorId
-router.get("/:instructorId", getCoursesByInstructorIdController);
+router.get("/instructor/:instructorId", getCoursesByInstructorIdController);
 
 // Get a specific course by ID (GET): api/courses/:id
 router.get("/:id", getCourseByIdController);
