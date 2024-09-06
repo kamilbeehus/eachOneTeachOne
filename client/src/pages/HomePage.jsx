@@ -10,9 +10,12 @@ export default function HomePage() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/courses/", {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "http://localhost:3000/api/courses/",
+          // {
+          //   withCredentials: true,
+          // }
+        );
         setAllCourses(response.data.courses);
       } catch (err) {
         console.error("Error fetching courses:", err);

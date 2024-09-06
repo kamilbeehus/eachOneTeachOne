@@ -13,11 +13,11 @@ export const getUserByIdController = async (req, res) => {
     // Check if the authenticated user is requesting their own profile
     // req.user.id is the ID of the authenticated user,
     // accessible in any route or controller that follows the middleware in the request lifecycle.
-    if (req.user.id !== userId) {
-      return res.status(403).json({
-        message: "Forbidden: User is not authorized to view this profile",
-      });
-    }
+    // if (req.user.id !== userId) {
+    //   return res.status(403).json({
+    //     message: "Forbidden: User is not authorized to view this profile",
+    //   });
+    // }
 
     const user = await getUserById(userId);
 
