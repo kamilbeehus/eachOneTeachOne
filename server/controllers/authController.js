@@ -10,7 +10,8 @@ export const signupController = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     // Call the signup service to create a new user and generate a token
-    const { user, token } = await signup({
+    //TODO: Pass token if we enable authorization in the future { user, token }
+    const { user } = await signup({
       firstName,
       lastName,
       email,
@@ -18,17 +19,16 @@ export const signupController = async (req, res) => {
     });
 
     // Set the token in a cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false, // TODO: Set to true once we use HTTPS
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days for the development phase
-    });
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: false, // TODO: Set to true once we use HTTPS
+    //   sameSite: "lax",
+    //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days for the development phase
+    // });
 
     return res.status(201).json({
       message: "User registered successfully",
       user,
-      token, // Include the token in the response
     });
   } catch (error) {
     if (error instanceof EmailAlreadyInUseError) {
@@ -49,15 +49,16 @@ export const loginController = async (req, res) => {
     const { email, password } = req.body;
 
     // Call the login service to authenticate the user and generate a token
-    const { user, token } = await login({ email, password });
+    //TODO: Pass token if we enable authorization in the future { user, token }
+    const { user } = await login({ email, password });
 
     // Set the token in a cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false, // TODO: Set to true once we use HTTPS
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days for the development phase
-    });
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: false, // TODO: Set to true once we use HTTPS
+    //   sameSite: "lax",
+    //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days for the development phase
+    // });
 
     return res.status(200).json({
       message: "User logged in successfully",

@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+// import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 // Middleware to parse cookies
-app.use(cookieParser());
+// app.use(cookieParser());
 
 // Middleware to allow cross-origin requests
 app.use(
