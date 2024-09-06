@@ -29,7 +29,7 @@ export default function Login() {
       const response = await axios.post(
         "http://localhost:3000/api/auth/login",
         payload,
-        { withCredentials: true }, // Ensures that the cookie (along with the token) is sent with the request
+        // { withCredentials: true }, // Ensures that the cookie (along with the token) is sent with the request
       );
       console.log("Login succesful:", response.data);
       // Clear any existing error messages

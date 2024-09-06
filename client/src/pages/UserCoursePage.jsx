@@ -8,9 +8,9 @@ const getUserCourses = async () => {
   try {
     const response = await axios.get(
       "http://localhost:3000/api/courses/66d411048418b83052893648",
-      {
-        withCredentials: true,
-      },
+      // {
+      //   withCredentials: true,
+      // },
     );
 
     const courseArray = response.data.courses; // Correct field name from the server is : `courses`
