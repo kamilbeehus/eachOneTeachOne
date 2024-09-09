@@ -1,5 +1,6 @@
 import express from "express";
 import { getUserByIdController } from "../controllers/userController.js";
+import { updateUserProfileController } from "../controllers/userController.js";
 // import { authenticateUser } from "../middlewares/authenticateUser.js";
 
 const router = express.Router();
@@ -8,5 +9,8 @@ const router = express.Router();
 
 // Get a specific user by ID (GET): api/users/:id
 router.get("/:id", getUserByIdController);
+
+// Update a user's profile (PATCH): api/users/:id
+router.patch("/:id", updateUserProfileController);
 
 export default router;
