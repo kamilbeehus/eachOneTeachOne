@@ -10,6 +10,20 @@ import { formatCourseResponse } from "../utils/courseUtils.js";
 import { createTransaction } from "../services/transactionService.js";
 import mongoose from "mongoose";
 
+// Fetch enrolled students by course ID and populates student details (firstName and lastName)
+export const getEnrolledStudentsService = async (courseId) => {
+  const course = await Course.findById(courseId).populate(
+    "enrolledStudents",
+    "firstName lastName"
+  );
+
+  if (!course) {
+    throw new CourseNotFoundError(`Course with id ${courseId} not found`);
+  }
+
+  return course.enrolledStudents;
+};
+
 // Fetch courses by instructor ID and populates instructor details (firstName and lastName)
 export const getCoursesByInstructorId = async (instructorId) => {
   if (!instructorId) {

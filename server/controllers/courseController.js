@@ -4,11 +4,30 @@ import {
   getAllCourses,
   getCourseById,
   getCoursesByInstructorId,
+  getEnrolledStudentsService,
 } from "../services/courseService.js";
 import {
   CourseNotFoundError,
   InstructorNotFoundError,
 } from "../errors/customErrors.js";
+
+// Fetch enrolled students by course ID and populates student details (firstName and lastName)
+export const getEnrolledStudentsController = async (req, res, next) => {
+  try {
+    const courseId = req.params.id;
+    const students = await getEnrolledStudentsService(courseId);
+
+    return res.status(200).json({
+      message: "Enrolled students fetched successfully",
+      students,
+    });
+  } catch (error) {
+    if (error instanceof CourseNotFoundError) {
+      return res.status(error.statusCode).json({ message: error.message });
+    }
+    next(error);
+  }
+};
 
 export const getCoursesByInstructorIdController = async (req, res, next) => {
   try {
