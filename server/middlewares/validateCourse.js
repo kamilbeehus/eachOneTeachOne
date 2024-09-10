@@ -2,6 +2,7 @@ import { body, validationResult } from "express-validator";
 import { ValidationError } from "../errors/customErrors.js";
 import { skillsEnum } from "../enums/skillsEnum.js";
 
+// Validate the Course data before creating a new course
 export const validateCourse = [
   body("title")
     .trim()

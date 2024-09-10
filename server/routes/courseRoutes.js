@@ -13,13 +13,15 @@ import { validateEnrollment } from "../middlewares/validateEnrollment.js";
 
 const router = express.Router();
 
-// Middleware to ensure the user is authenticated before accessing the routes
+// Code has been commented out for development purposes. Uncomment the code to enable user authentication with token.
+
+// Middleware to ensure the user is authenticated before accessing these routes
 // router.use(authenticateUser);
 
-// Get all enrolled students in a course by course ID (GET): api/courses/:id/enrolled-students
+// Get enrolled students in a course by course ID (GET): api/courses/:id/enrolled-students
 router.get("/:id/enrolled-students", getEnrolledStudentsController);
 
-// Get all courses by instructor ID (GET): api/courses/:instructorId
+// Get all courses by instructor ID (GET): api/courses/instructor/:instructorId
 router.get("/instructor/:instructorId", getCoursesByInstructorIdController);
 
 // Get a specific course by ID (GET): api/courses/:id

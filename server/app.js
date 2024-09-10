@@ -11,6 +11,8 @@ const app = express();
 // Middleware to parse the request body as JSON
 app.use(express.json());
 
+// This code has been commented for development purposes. Uncomment the code to enable cookie parsing.
+
 // Middleware to parse cookies
 // app.use(cookieParser());
 

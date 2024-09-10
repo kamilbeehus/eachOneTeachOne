@@ -1,6 +1,7 @@
 import { body, validationResult } from "express-validator";
 import { ValidationError } from "../errors/customErrors.js";
 
+// Validate the Login data before authenticating the user
 export const validateLogin = [
   body("email")
     .isEmail()

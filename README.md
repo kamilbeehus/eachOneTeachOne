@@ -75,15 +75,7 @@ Ensure you have the following installed on your local machine :
    echo ".env" >> .gitignore
    ```
 
-
 5. Start the backend server:
-
-   ```sh
-   cd server
-   npm start
-   ```
-
-   or, for development with auto-reloading:
 
    ```sh
    cd server
@@ -96,7 +88,7 @@ Ensure you have the following installed on your local machine :
    npm run dev
    ```
 
-7. Or start both using one command in the root directory (beta):
+7. Start both backend and frontend using one command in the root directory (beta):
    
    To install the necessary package, first run:
 

@@ -1,3 +1,4 @@
+// Utility function for formatting course response
 export const formatCourseResponse = (course) => ({
   _id: course._id,
   title: course.title,

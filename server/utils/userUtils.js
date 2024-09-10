@@ -1,3 +1,4 @@
+// Utility functions for formatting user related responses
 export const formatUserResponse = (user) => ({
   _id: user._id,
   firstName: user.firstName,

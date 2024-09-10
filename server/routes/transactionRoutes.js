@@ -3,6 +3,8 @@ import express from "express";
 
 const router = express.Router();
 
+// Code has been commented out for development purposes. Uncomment the code to enable user authentication with token.
+
 // All routes in this router require the user to be authenticated
 // router.use(authenticateUser);
 

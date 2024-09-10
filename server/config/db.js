@@ -1,6 +1,9 @@
+/**
+ * Connects to the MongoDB database using the provided MONGO_URI.
+ * @throws {Error} If there is an error connecting to the database.
+ */
 import mongoose from "mongoose";
 
-// Connect to MongoDB using Mongoose
 const connectDB = async () => {
   try {
     const MONGO_URI = process.env.MONGO_URI;
