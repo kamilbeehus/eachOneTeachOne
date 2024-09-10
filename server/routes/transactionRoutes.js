@@ -1,4 +1,5 @@
 import express from "express";
+import { getTransactionHistoryController } from "../controllers/transactionController.js";
 // import { authenticateUser } from "../middlewares/authenticateUser.js";
 
 const router = express.Router();
@@ -8,7 +9,7 @@ const router = express.Router();
 // All routes in this router require the user to be authenticated
 // router.use(authenticateUser);
 
-//TODO: Create a route responsible for retrieving all transaction history for a user or admin view.
-//Endpoint : api/transactions/user/:userId
+// Get transaction history for a specific user by userId (GET): api/transactions/user/:userId
+router.get("/user/:userId", getTransactionHistoryController);
 
 export default router;
