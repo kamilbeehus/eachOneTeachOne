@@ -1,7 +1,36 @@
 import mongoose from "mongoose";
 import Transaction from "../models/Transaction.js";
 import User from "../models/User.js";
-import { UserNotFoundError, ValidationError } from "../errors/customErrors.js";
+import {
+  TransactionHistoryNotFoundError,
+  UserNotFoundError,
+  ValidationError,
+} from "../errors/customErrors.js";
+import { formatTransactionResponse } from "../utils/transactionUtils.js";
+
+// Fetch the transaction history with all 'spent' and 'earned' credits for a User
+export const getTransactionHistoryByUserId = async (userId) => {
+  if (!userId) {
+    throw new UserNotFoundError();
+  } else if (!mongoose.Types.ObjectId.isValid(userId)) {
+    throw new ValidationError("Invalid user ID");
+  }
+
+  try {
+    const transactions = await Transaction.find({ userId })
+      .populate("userId", "firstName lastName") // Populate first and last name of the user
+      .populate("courseId", "title") // Populate the title of the course
+      .sort({ transactionDate: -1 }); // Sort by transactionDate in descending order
+
+    if (!transactions.length) {
+      throw new TransactionHistoryNotFoundError();
+    }
+    return transactions.map(formatTransactionResponse);
+  } catch (error) {
+    console.error("Error fetching transaction history:", error);
+    throw new Error("Error fetching transaction history.");
+  }
+};
 
 // Create a new transaction and update the User's credits
 export const createTransaction = async (

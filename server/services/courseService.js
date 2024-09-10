@@ -5,6 +5,7 @@ import {
   SkillNotValidError,
   InstructorNotFoundError,
   CourseNotFoundError,
+  ValidationError,
 } from "../errors/customErrors.js";
 import { formatCourseResponse } from "../utils/courseUtils.js";
 import { createTransaction } from "../services/transactionService.js";
@@ -29,7 +30,7 @@ export const getCoursesByInstructorId = async (instructorId) => {
   if (!instructorId) {
     throw new InstructorNotFoundError();
   } else if (!mongoose.Types.ObjectId.isValid(instructorId)) {
-    throw new InstructorNotFoundError();
+    throw new ValidationError("Invalid instructor ID");
   }
 
   try {
