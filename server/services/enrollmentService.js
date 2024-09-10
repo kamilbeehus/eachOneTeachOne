@@ -9,6 +9,7 @@ import {
 } from "../errors/customErrors.js";
 import { createTransaction } from "../services/transactionService.js";
 
+// Enroll a User in a Course
 export const enrollUserInCourse = async (userId, courseId) => {
   const session = await mongoose.startSession();
   session.startTransaction();

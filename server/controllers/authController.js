@@ -5,12 +5,13 @@ import {
   ValidationError,
 } from "../errors/customErrors.js";
 
+// Signup Controller
 export const signupController = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
 
     // Call the signup service to create a new user and generate a token
-    //TODO: Pass token if we enable authorization in the future { user, token }
+    // TODO: Pass token if we enable authorization in the future { user, token }
     const { user } = await signup({
       firstName,
       lastName,
@@ -44,12 +45,13 @@ export const signupController = async (req, res) => {
   }
 };
 
+// Login Controller
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     // Call the login service to authenticate the user and generate a token
-    //TODO: Pass token if we enable authorization in the future { user, token }
+    // TODO: Pass token if we enable authorization in the future { user, token }
     const { user } = await login({ email, password });
 
     // Set the token in a cookie

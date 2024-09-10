@@ -48,9 +48,9 @@ export const getCoursesByInstructorId = async (instructorId) => {
   }
 };
 
+// Fetch an individual course by its ID and populate instructor details (firstName and lastName)
 export const getCourseById = async (id) => {
   try {
-    // Fetch an individual course by its ID and populate instructor details (firstName and lastName)
     const course = await Course.findById(id).populate(
       "instructorId",
       "firstName lastName"
@@ -67,9 +67,9 @@ export const getCourseById = async (id) => {
   }
 };
 
+// Fetch all courses and populate instructor details (firstName and lastName)
 export const getAllCourses = async () => {
   try {
-    // Fetch courses and populate instructor details (firstName and lastName)
     const courses = await Course.find().populate(
       "instructorId",
       "firstName lastName"
@@ -82,6 +82,7 @@ export const getAllCourses = async () => {
   }
 };
 
+// Create a new course and save it to the database
 export const createCourse = async (courseData) => {
   try {
     if (!skillsEnum.includes(courseData.skill)) {

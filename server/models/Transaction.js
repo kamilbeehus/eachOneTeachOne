@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Transaction schema for MongoDB collection
 const transactionSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,

@@ -1,6 +1,7 @@
 import { body, validationResult } from "express-validator";
 import { ValidationError } from "../errors/customErrors.js";
 
+// Validate the Signup data before creating a new User
 export const validateSignup = [
   body("firstName")
     .trim()

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { skillsEnum } from "../enums/skillsEnum.js";
 
+// Course Schema for MongoDB collection
 const courseSchema = new mongoose.Schema({
   title: {
     type: String,

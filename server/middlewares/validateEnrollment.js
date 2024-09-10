@@ -1,5 +1,6 @@
 import { body, validationResult } from "express-validator";
 
+// Validate the Enrollment data before creating a new enrollment
 export const validateEnrollment = [
   body("userId")
     .notEmpty()

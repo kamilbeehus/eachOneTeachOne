@@ -11,7 +11,7 @@ const router = express.Router();
 // Create a new user (POST): api/auth/signup
 router.post("/signup", validateSignup, signupController);
 
-// Login user (POST): api/auth/login
+// Login a user (POST): api/auth/login
 router.post("/login", validateLogin, loginController);
 
 export default router;

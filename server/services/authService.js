@@ -6,6 +6,7 @@ import {
 } from "../errors/customErrors.js";
 import { formatUserResponse } from "../utils/userUtils.js";
 
+// Signup function to create a new User
 export const signup = async ({ firstName, lastName, email, password }) => {
   // Check if the user already exists
   const existingUser = await User.findOne({ email });
@@ -27,9 +28,10 @@ export const signup = async ({ firstName, lastName, email, password }) => {
   // Generate a JWT token with the user's information
   // const token = generateToken(user);
 
-  return { user: formatUserResponse(user) }; //TODO: Pass token if we enable authorization in the future
+  return { user: formatUserResponse(user) }; // TODO: Pass token if we enable authorization in the future
 };
 
+// Login function to authenticate a User
 export const login = async ({ email, password }) => {
   const user = await User.findOne({ email });
   if (!user) {
@@ -43,5 +45,5 @@ export const login = async ({ email, password }) => {
 
   // const token = generateToken(user);
 
-  return { user: formatUserResponse(user) }; //TODO: Pass token if we enable authorization in the future
+  return { user: formatUserResponse(user) }; // TODO: Pass token if we enable authorization in the future
 };

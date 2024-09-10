@@ -1,6 +1,8 @@
+// Code has been commented out for development purposes. Uncomment the code to enable user authentication with token.
+
 // import jwt from "jsonwebtoken";
 // import User from "../models/User.js";
-
+//
 // export const authenticateUser = async (req, res, next) => {
 //   // Extract the token from the request’s cookies:
 //   const token = req.cookies.token;

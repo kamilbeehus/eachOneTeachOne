@@ -3,6 +3,7 @@ import Transaction from "../models/Transaction.js";
 import User from "../models/User.js";
 import { UserNotFoundError, ValidationError } from "../errors/customErrors.js";
 
+// Create a new transaction and update the User's credits
 export const createTransaction = async (
   { userId, type, amount, courseId },
   session = null
