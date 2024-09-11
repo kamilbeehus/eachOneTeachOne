@@ -1,4 +1,5 @@
 import CourseCard from "./CourseCard";
+import { Link } from "react-router-dom";
 
 export default function CourseCardRow({ courseArray = [], isUserCourse }) {
   return (
@@ -32,7 +33,11 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
 
 function AddCourse({ isUserCourse }) {
   if (isUserCourse) {
-    return <button className="btn btn-primary">Add a Course</button>;
+    return (
+      <Link to="/offercourse">
+        <button className="btn btn-primary">Offer Course</button>
+      </Link>
+    );
   } else {
     null;
   }
