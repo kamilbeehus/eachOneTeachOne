@@ -53,3 +53,11 @@ export class UserNotFoundError extends Error {
     this.statusCode = 404;
   }
 }
+
+export class TransactionHistoryNotFoundError extends Error {
+  constructor(message = "Transaction history not found for the given User.") {
+    super(message);
+    this.name = "TransactionHistoryNotFoundError";
+    this.statusCode = 404;
+  }
+}
