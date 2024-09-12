@@ -4,7 +4,6 @@ export function getCurrentTime(timeOffsetInHours) {
   // Add a time offset to the time object e.g. add 2 hours: 9am -> 11am
   if (timeOffsetInHours) {
     time.setHours(time.getHours() + timeOffsetInHours);
-    console.log(time);
   }
 
   const currentMinutes = String(time.getMinutes()).padStart(2, "0");
