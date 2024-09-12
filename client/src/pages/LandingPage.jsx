@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import HowDoesItWork from "../components/HowDoesItWork";
-import WhyUs from "../components/WhyUs";
+import LandingNavbar from "../components/LandingNavbar";
+import LandingHowDoesItWork from "../components/LandingHowDoesItWork";
+import LandingWhyUs from "../components/LandingWhyUs";
 
 export default function LandingPage() {
   return (
     <>
-      <Navbar />
-      <HowDoesItWork />
-      <WhyUs />
+      <LandingNavbar />
+      <LandingHowDoesItWork />
+      <LandingWhyUs />
     </>
   );
 }

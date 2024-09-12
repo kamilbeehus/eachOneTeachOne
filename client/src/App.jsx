@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import Error404Page from "./pages/Error404Page";
 import UserCoursePage from "./pages/UserCoursePage";
-
+import OfferCoursePage from "./pages/OfferCoursePage";
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/usercourses" element={<UserCoursePage />} />
+        <Route path="/offercourse" element={<OfferCoursePage />} />
         <Route path="*" element={<Error404Page />} />
       </Routes>
     </BrowserRouter>

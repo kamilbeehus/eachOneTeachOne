@@ -80,7 +80,7 @@ const navItems = [
   { label: "Why us?", href: "#" },
   { label: "Testimonials", href: "#" },
 ];
-const WhyUsList = [
+const LandingWhyUsList = [
   {
     icon: <BookOpenText />,
     text: "Offer and Book courses",
@@ -118,4 +118,4 @@ const WhyUsList = [
       "Both teaching and learning foster personal and professional development. Share what you know and gain new skills in return.",
   },
 ];
-export { loginFields, signupFields, navItems, WhyUsList }; //signupFields to be added to the array
+export { loginFields, signupFields, navItems, LandingWhyUsList }; //signupFields to be added to the array
