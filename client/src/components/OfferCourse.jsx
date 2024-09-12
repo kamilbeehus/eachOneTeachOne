@@ -26,21 +26,19 @@ const createCourse = async (payload) => {
   }
 };
 
-// function handleSubmit(payload) {
-//   createCourse(payload);
-// }
-
-function printSubmit(payload, endTime, startTime) {
+function printSubmit(payload, endTime, startTime, date) {
   console.dir(payload);
   console.log(startTime);
   console.log(endTime);
+  console.log(date);
+  console.log(`${date}T${endTime}`);
 }
 
 export default function OfferCourse({ isUserCourse }) {
   const [skill, setSkill] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(getCurrentTime());
   const [endTime, setEndTime] = useState(getCurrentTime(1));
 
@@ -51,8 +49,8 @@ export default function OfferCourse({ isUserCourse }) {
     skill: skill,
     creditsCost: "1",
     schedule: {
-      startDate: new Date("October 15, 2025 05:35:32"),
-      endDate: new Date("October 15, 2025 06:35:32"),
+      startDate: new Date(`${date}T${startTime}`),
+      endDate: new Date(`${date}T${endTime}`),
     },
   };
 
@@ -71,7 +69,7 @@ export default function OfferCourse({ isUserCourse }) {
               method="dialog"
               onSubmit={(e) => {
                 e.preventDefault; //prevents form submit on page refresh.
-                printSubmit(payload, endTime, startTime); // handle submit, when submit button was pressed.
+                createCourse(payload); // handle submit, when submit button was pressed.
               }}
             >
               <div className="container min-h-screen mx-auto px-2 flex justify-center items-center">
@@ -134,8 +132,8 @@ export default function OfferCourse({ isUserCourse }) {
                     <br />
                     <input
                       type="date"
-                      selected={startDate}
-                      onChange={(date) => setStartDate(date)}
+                      selected={date}
+                      onChange={(e) => setDate(e.target.value)}
                       className="input input-bordered w-full"
                     />
                   </div>
