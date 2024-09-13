@@ -1,7 +1,8 @@
 export default function CloseButton() {
   return (
     <button
-      onClick={() => console.log("Close button clicked")}
+      onClick={() => document.getElementById("my_modal_3").close()}
+      type="button"
       className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
     >
       <svg

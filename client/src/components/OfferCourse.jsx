@@ -2,17 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { getCurrentTime } from "../helpers/getCurrentTime";
 import CloseButton from "./CloseButton";
-// const getUserById = async (userId) => {
-//   try {
-//     console.log("hi from getUserById");
-//     const response = await axios.get(
-//       `http://localhost:3000/api/users/${userId}`,
-//     );
-//     console.log(response);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
 
 const createCourse = async (payload) => {
   try {
@@ -25,14 +14,6 @@ const createCourse = async (payload) => {
     console.log(e);
   }
 };
-
-function printSubmit(payload, endTime, startTime, date) {
-  console.dir(payload);
-  console.log(startTime);
-  console.log(endTime);
-  console.log(date);
-  console.log(`${date}T${endTime}`);
-}
 
 export default function OfferCourse({ isUserCourse }) {
   const [skill, setSkill] = useState("");

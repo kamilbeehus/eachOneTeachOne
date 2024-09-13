@@ -12,7 +12,7 @@ export default function Navbar() {
         </Link>
         <ThemeController />
       </div>
-      <div className="flex-auto gap-2">
+      <div className="flex-none gap-2">
         <Search />
         <div className="dropdown dropdown-end">
           <div
