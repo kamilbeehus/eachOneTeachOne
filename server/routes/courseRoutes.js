@@ -5,6 +5,7 @@ import {
   createCourseController,
   getCoursesByInstructorIdController,
   getEnrolledStudentsController,
+  deleteCourseByIdController,
 } from "../controllers/courseController.js";
 import { enrollUserController } from "../controllers/enrollmentController.js";
 import { validateCourse } from "../middlewares/validateCourse.js";
@@ -35,5 +36,8 @@ router.post("/create", validateCourse, createCourseController);
 
 // Enroll a user in a course (POST): api/courses/enroll
 router.post("/enroll", validateEnrollment, enrollUserController);
+
+// Delete a course by ID (DELETE): api/courses/:id
+router.delete("/:id", deleteCourseByIdController);
 
 export default router;
