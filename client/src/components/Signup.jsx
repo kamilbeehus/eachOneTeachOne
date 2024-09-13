@@ -12,7 +12,7 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Signup() {
   const [signupState, setSignupState] = useState(fieldsState);
-  const [error, setError] = useState(null); // State for storing errors
+  const [, setError] = useState(null); // State for storing errors
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -52,6 +52,7 @@ export default function Signup() {
       );
       console.log("User registered successfully :", response.data);
     } catch (error) {
+      console.error(error);
       throw error;
     }
   };

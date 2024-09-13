@@ -5,9 +5,13 @@ import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
+
 const fields = loginFields;
+
 let fieldsState = {};
+
 fields.forEach((field) => (fieldsState[field.id] = ""));
+
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
   const [error, setError] = useState("");
@@ -65,7 +69,7 @@ export default function Login() {
           />
         ))}
       </div>
-      {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
+      {error && <div className="text-error text-sm mt-2">{error}</div>}
       <FormExtra />
       <FormAction handleSubmit={handleSubmit} text="Login" />
     </form>
