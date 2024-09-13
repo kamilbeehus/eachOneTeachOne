@@ -1,5 +1,8 @@
+import mongoose from "mongoose";
 import Course from "../models/Course.js";
 import User from "../models/User.js";
+import Enrollment from "../models/Enrollment.js";
+import Transaction from "../models/Transaction.js";
 import { skillsEnum } from "../enums/skillsEnum.js";
 import {
   SkillNotValidError,
@@ -9,20 +12,106 @@ import {
 } from "../errors/customErrors.js";
 import { formatCourseResponse } from "../utils/courseUtils.js";
 import { createTransaction } from "../services/transactionService.js";
-import mongoose from "mongoose";
+
+// Delete a course by its ID and update related collections from database (user, transaction, enrollment)
+export const deleteCourseById = async (courseId) => {
+  const session = await mongoose.startSession();
+  session.startTransaction(); // Start a new transaction to ensure data consistency across multiple collections
+
+  try {
+    // Fetch the course by its ID
+    const course = await Course.findById(courseId).session(session);
+    if (!course) {
+      throw new CourseNotFoundError(`Course with id ${courseId} not found`);
+    }
+
+    // Find all enrolled students for the course
+    const enrolledStudents = course.enrolledStudents;
+
+    // Refund credits to each enrolled student for the course
+    if (enrolledStudents.length > 0) {
+      await Promise.all(
+        enrolledStudents.map(async (studentId) => {
+          const student = await User.findById(studentId).session(session);
+
+          if (student) {
+            student.credits += course.creditsCost;
+            await student.save({ session });
+          }
+        })
+      );
+    }
+
+    // Delete all related enrollments for this course
+    const enrollmentsDeleted = await Enrollment.deleteMany({
+      courseId,
+    }).session(session);
+    if (enrollmentsDeleted.deletedCount > 0) {
+      console.log(
+        `Deleted ${enrollmentsDeleted.deletedCount} enrollments for course ${courseId}`
+      );
+    }
+
+    // Delete all related transactions for this course
+    const transactionsDeleted = await Transaction.deleteMany({
+      courseId,
+    }).session(session);
+    if (transactionsDeleted.deletedCount > 0) {
+      console.log(
+        `Deleted ${transactionsDeleted.deletedCount} transactions for course ${courseId}`
+      );
+    }
+
+    // Find the instructor (user) and update their credits
+    const instructor = await User.findById(course.instructorId).session(
+      session
+    );
+
+    if (!instructor) {
+      throw new InstructorNotFoundError(
+        `Instructor with id ${course.instructorId} not found`
+      );
+    }
+
+    // Subtract the course credits earned by the instructor
+    instructor.credits -= course.creditsCost;
+    await instructor.save({ session });
+
+    // Remove the course from the Course collection
+    await Course.deleteOne({ _id: courseId }).session(session);
+
+    // Commit the transaction
+    await session.commitTransaction();
+    session.endSession();
+
+    return {
+      message: `Course "${course.title}" with id ${courseId} and related data deleted successfully.`,
+    };
+  } catch (error) {
+    // Abort the transaction in case of error
+    await session.abortTransaction();
+    session.endSession();
+    console.error("Error deleting course by ID:", error);
+    throw error;
+  }
+};
 
 // Fetch enrolled students by course ID and populates student details (firstName and lastName)
 export const getEnrolledStudentsService = async (courseId) => {
-  const course = await Course.findById(courseId).populate(
-    "enrolledStudents",
-    "firstName lastName"
-  );
+  try {
+    const course = await Course.findById(courseId).populate(
+      "enrolledStudents",
+      "firstName lastName"
+    );
 
-  if (!course) {
-    throw new CourseNotFoundError(`Course with id ${courseId} not found`);
+    if (!course) {
+      throw new CourseNotFoundError(`Course with id ${courseId} not found`);
+    }
+    return course.enrolledStudents;
+  } catch (error) {
+    console.error("Error fetching enrolled students by course ID:", error);
+    throw error;
   }
-
-  return course.enrolledStudents;
 };
 
 // Fetch courses by instructor ID and populates instructor details (firstName and lastName)
