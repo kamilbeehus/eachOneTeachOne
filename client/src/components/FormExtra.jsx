@@ -14,7 +14,7 @@ export default function FormExtra() {
       </div>
 
       <div className="text-sm">
-        <a href="#" className="font-medium link-secondary">
+        <a href="#" className="font-medium link-primary">
           Forgot your password?
         </a>
       </div>

@@ -5,9 +5,13 @@ import LandingWhyUs from "../components/LandingWhyUs";
 export default function LandingPage() {
   return (
     <>
-      <LandingNavbar />
-      <LandingHowDoesItWork />
-      <LandingWhyUs />
+      <div className="bg-opacity-5">
+        <div className="bg-gradient-to-r from-secondary/30 to-primary/30 ">
+          <LandingNavbar />
+          <LandingHowDoesItWork />
+          <LandingWhyUs />
+        </div>
+      </div>
     </>
   );
 }

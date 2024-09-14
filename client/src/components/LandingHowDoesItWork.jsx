@@ -6,7 +6,7 @@ export default function LandingHowDoesItWork() {
     >
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">
         Each One Teach One.
-        <span className="bg-gradient-to-r from-orange-500 to-red-800 text-transparent bg-clip-text">
+        <span className="bg-clip-text">
           {" "}
           Empowering minds. Building futures.
         </span>
