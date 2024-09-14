@@ -1,4 +1,6 @@
 import CourseCard from "./CourseCard";
+import UsercourseForm from "./UsercourseForm";
+import { useState } from "react";
 
 export default function CourseCardRow({ courseArray = [], isUserCourse }) {
   return (
@@ -29,8 +31,27 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
 
 function AddCourse({ isUserCourse }) {
   if (isUserCourse) {
-    return <button className="btn btn-primary">Add a Course</button>;
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleClick = () => {
+      setIsOpen(true);
+    };
+
+    const handleClose = () => {
+      setIsOpen(false);
+    };
+
+    return (
+      <>
+        <button className="btn btn-primary" onClick={handleClick}>
+          Add a Course
+        </button>
+        {isOpen && (
+          <UsercourseForm onClose={handleClose} />
+        )}
+      </>
+    );
   } else {
-    null;
+    return null;
   }
 }
