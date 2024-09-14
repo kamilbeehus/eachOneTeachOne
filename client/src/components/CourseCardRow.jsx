@@ -1,5 +1,5 @@
 import CourseCard from "./CourseCard";
-import { Link } from "react-router-dom";
+import OfferCourse from "./OfferCourse";
 
 export default function CourseCardRow({ courseArray = [], isUserCourse }) {
   return (
@@ -23,22 +23,10 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
             );
           })}
           <div className="flex items-center justify-center">
-            <AddCourse isUserCourse={isUserCourse} />
+            <OfferCourse isUserCourse={isUserCourse} />
           </div>
         </div>
       </div>
     </>
   );
-}
-
-function AddCourse({ isUserCourse }) {
-  if (isUserCourse) {
-    return (
-      <Link to="/offercourse">
-        <button className="btn btn-primary">Offer Course</button>
-      </Link>
-    );
-  } else {
-    null;
-  }
 }
