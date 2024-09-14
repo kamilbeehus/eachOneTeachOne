@@ -27,7 +27,11 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <div className="h-12"></div>
+      <div className="h-12 flex justify-center">
+        <h2>
+          Home Page
+        </h2>
+      </div>
       <CourseCardRow courseArray={allCourses} isUserCourse={false} />
     </>
   );
