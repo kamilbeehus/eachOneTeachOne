@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import {
   createCourse,
+  deleteCourseById,
   getAllCourses,
   getCourseById,
   getCoursesByInstructorId,
@@ -10,6 +11,28 @@ import {
   CourseNotFoundError,
   InstructorNotFoundError,
 } from "../errors/customErrors.js";
+
+// Deletes a course by ID Controller
+export const deleteCourseByIdController = async (req, res, next) => {
+  try {
+    const courseId = req.params.id;
+
+    const result = await deleteCourseById(courseId);
+
+    return res.status(200).json({
+      success: true,
+      message: result.message,
+    });
+  } catch (error) {
+    if (
+      error instanceof CourseNotFoundError ||
+      error instanceof InstructorNotFoundError
+    ) {
+      return res.status(error.statusCode).json({ message: error.message });
+    }
+    next(error);
+  }
+};
 
 // Fetch enrolled students by course ID Controller
 export const getEnrolledStudentsController = async (req, res, next) => {
