@@ -1,25 +1,23 @@
-import axios from "axios";
 import { useState } from "react";
 import { getCurrentTime } from "../helpers/getCurrentTime";
+import { getCurrentDate } from "../helpers/getCurrentDate";
+import { postCourse } from "../helpers/postCourse";
 import CloseButton from "./CloseButton";
 
-const createCourse = async (payload) => {
-  try {
-    const response = await axios.post(
-      "http://localhost:3000/api/courses/create/",
-      payload,
-    );
-    console.log(response);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 export default function OfferCourse({ isUserCourse }) {
+  async function handleSubmit(payload) {
+    try {
+      const response = await postCourse(payload); // Something is not working
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   const [skill, setSkill] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(getCurrentDate());
   const [startTime, setStartTime] = useState(getCurrentTime());
   const [endTime, setEndTime] = useState(getCurrentTime(1));
 
@@ -49,8 +47,9 @@ export default function OfferCourse({ isUserCourse }) {
             <form
               method="dialog"
               onSubmit={(e) => {
-                e.preventDefault; //prevents form submit on page refresh.
-                createCourse(payload); // handle submit, when submit button was pressed.
+                e.preventDefault(); //prevents form submit on page refresh.
+                handleSubmit(payload); // handle submit, when submit button was pressed.
+                document.getElementById("my_modal_3").close();
               }}
             >
               <div className="container min-h-screen mx-auto px-2 flex justify-center items-center">
@@ -113,6 +112,7 @@ export default function OfferCourse({ isUserCourse }) {
                     <br />
                     <input
                       type="date"
+                      value={date}
                       selected={date}
                       onChange={(e) => setDate(e.target.value)}
                       className="input input-bordered w-full"

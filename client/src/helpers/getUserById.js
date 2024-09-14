@@ -5,7 +5,8 @@ export async function getUserById(userId) {
     const response = await axios.get(
       `http://localhost:3000/api/users/${userId}`,
     );
-    console.log(response);
+    console.log("return value of getUserById:" + response);
+    return response;
   } catch (e) {
     console.log(e);
   }

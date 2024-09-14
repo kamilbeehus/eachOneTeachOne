@@ -1,7 +1,7 @@
 export function getCurrentTime(timeOffsetInHours) {
   const time = new Date();
 
-  // Add a time offset to the time object e.g. add 2 hours: 9am -> 11am
+  // Optional: Add a time offset to the time object e.g. add 2 hours to the current time: 9.12am -> 11.12am
   if (timeOffsetInHours) {
     time.setHours(time.getHours() + timeOffsetInHours);
   }
