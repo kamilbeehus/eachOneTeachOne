@@ -18,7 +18,7 @@ export default function Header({
       <h2 className="mt-6 text-center text-3xl font-extrabold ">{heading}</h2>
       <p className="text-center text-sm mt-5">
         {paragraph}{" "}
-        <Link to={linkUrl} className="font-medium link-secondary">
+        <Link to={linkUrl} className="font-medium link-primary">
           {linkName}
         </Link>
       </p>
