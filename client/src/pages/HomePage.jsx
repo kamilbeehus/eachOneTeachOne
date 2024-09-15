@@ -26,9 +26,13 @@ export default function HomePage() {
 
   return (
     <>
-      <Navbar />
-      <div className="h-12"></div>
-      <CourseCardRow courseArray={allCourses} isUserCourse={false} />
+      <div className="min-h-screen flex flex-col ">
+        <Navbar />
+        <div className="h-12"></div>
+        <div className="flex-grow overflow-auto">
+          <CourseCardRow courseArray={allCourses} isUserCourse={false} />
+        </div>
+      </div>
     </>
   );
 }

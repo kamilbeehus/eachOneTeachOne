@@ -9,17 +9,29 @@ import SettingsPage from "./pages/SettingsPage";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/usercourses" element={<UserCoursePage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="*" element={<Error404Page />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="min-h-screen flex flex-col">
+      {/* <Navbar />
+        <div className="h-12"></div>
+        <CourseCardRow
+          className="flex-grow"
+          courseArray={allCourses}
+          isUserCourse={false}
+        />
+      </div> */}
+      <div className="min-h-screen bg-gradient-to-r from-secondary/30 to-primary/30 ">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/usercourses" element={<UserCoursePage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="*" element={<Error404Page />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </div>
   );
 }
 
