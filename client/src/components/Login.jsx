@@ -5,24 +5,29 @@ import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/UserContext.jsx";
 
 const fields = loginFields;
-
 let fieldsState = {};
-
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  // Get setUserId from the UserContext to update it after login
+  const { setUserId } = useUser();
+
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     authenticateUser();
   };
+
   // Login API Integration
   const authenticateUser = async () => {
     try {
@@ -35,9 +40,18 @@ export default function Login() {
         payload,
         // { withCredentials: true }, // Ensures that the cookie (along with the token) is sent with the request
       );
-      console.log("Login succesful:", response.data);
+
+      console.log("Login successful:", response.data);
+
+      const { _id: userId } = response.data.user;
+
+      // Store the userId in both UserContext and localStorage
+      setUserId(userId);  // Update global state with userId
+      localStorage.setItem('userId', userId); // Persist the userId in localStorage
+
       // Clear any existing error messages
       setError("");
+
       // Redirect to home page after successful login
       navigate("/home");
     } catch (error) {

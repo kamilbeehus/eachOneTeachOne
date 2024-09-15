@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import AvatarLogo from "../assets/Avatar.png";
+import LogoEoToSvg from "../assets/LogoEoTo.svg"
 import ThemeController from "./ThemeController";
 
 export default function Navbar() {
@@ -8,8 +9,8 @@ export default function Navbar() {
     <nav className="navbar sticky top-0 z-50 py-3 border-b border-neutral-700/80 backdrop-blur-lg">
       {/* kj<div className="navbar bg-base-100"> */}
       <div className="flex-1">
-        <Link to="/home" className="btn btn-ghost">
-          EachOne<br></br>TeachOne
+        <Link to="/home" className="btn btn-ghost rounded-full">
+        <img src={LogoEoToSvg} alt="" style={{ maxWidth: '100%', maxHeight: '40px', minWidth: '20px', minHeight: '20px' }} />
         </Link>
         <ThemeController />
       </div>

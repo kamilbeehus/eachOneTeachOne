@@ -24,7 +24,7 @@ export default function OfferCourse({ isUserCourse }) {
   const payload = {
     title: title,
     description: description,
-    instructorId: "66d411048418b83052893648",
+    instructorId: "66e5932d4084e0310cd7781e",
     skill: skill,
     creditsCost: "1",
     schedule: {
