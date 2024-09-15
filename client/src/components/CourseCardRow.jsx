@@ -6,7 +6,7 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
     <>
       {/* <div className="grid content-center justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> */}
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 content-center justify-items-center gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 px-8">
+        <div className="grid grid-cols-1 content-center justify-items-center gap-6 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 px-8">
           {courseArray.map((course) => {
             // Ensure each course object is valid
             if (!course || !course.title || !course._id) {

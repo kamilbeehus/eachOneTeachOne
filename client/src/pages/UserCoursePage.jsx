@@ -28,9 +28,15 @@ export default function UserCoursePage() {
 
   return (
     <>
-      <Navbar />
-      <div className="h-12"></div>
-      <CourseCardRow courseArray={userCourses} isUserCourse={isUserCourse} />
+      <div className="min-h-screen flex flex-col ">
+        <div className="flex-grow overflow-auto">
+          <Navbar />
+          <CourseCardRow
+            courseArray={userCourses}
+            isUserCourse={isUserCourse}
+          />
+        </div>
+      </div>
     </>
   );
 }
