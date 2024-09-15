@@ -57,7 +57,7 @@ export default function OfferCourse({ isUserCourse }) {
               }}
             >
               <div className="container min-h-screen mx-auto px-2 flex justify-center items-center">
-                <div className="card bg-base-100 p-20 shadow-2xl grid grid-cols-1 gap-6 justify-center xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+                <div className="card bg-base-100 p-20 shadow-2xl grid grid-cols-1 gap-6 justify-center xs:max-w-xs sm:max-w-sm md:max-w-md max-h-screen lg:max-w-lg overflow-y-auto xl:max-w-xl">
                   <CloseButton />
                   {/* --- TITLE --- */}
                   <div>

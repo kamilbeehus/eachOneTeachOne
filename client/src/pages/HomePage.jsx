@@ -27,9 +27,8 @@ export default function HomePage() {
   return (
     <>
       <div className="min-h-screen flex flex-col ">
-        <Navbar />
-        <div className="h-12"></div>
         <div className="flex-grow overflow-auto">
+          <Navbar />
           <CourseCardRow courseArray={allCourses} isUserCourse={false} />
         </div>
       </div>
