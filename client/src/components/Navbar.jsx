@@ -5,7 +5,8 @@ import ThemeController from "./ThemeController";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100">
+    <nav className="navbar sticky top-0 z-50 py-3 border-b border-neutral-700/80 backdrop-blur-lg">
+      {/* kj<div className="navbar bg-base-100"> */}
       <div className="flex-1">
         <Link to="/home" className="btn btn-ghost">
           EachOne<br></br>TeachOne
@@ -41,6 +42,6 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

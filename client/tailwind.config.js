@@ -8,6 +8,12 @@ export default {
   plugins: [daisyui],
   daisyui: {
     themes: [
+      // {
+      //   mytheme: {
+      //     "base-100": "",
+      //   },
+      // },
+      // "winter",
       "light",
       "dark",
       "cupcake",

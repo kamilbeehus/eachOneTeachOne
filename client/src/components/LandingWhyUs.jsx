@@ -12,7 +12,7 @@ export default function LandingWhyUs() {
         </span>
         <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">
           {" "}
-          <span className="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+          <span className=" bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
             Why Join Each One Teach One?
           </span>
         </h2>

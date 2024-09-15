@@ -1,12 +1,11 @@
 export default function Error404Page() {
   return (
     <>
-      <div className=" flex justify-center items-center min-h-screen space-y-4">
-        <div className="space-y-4 text-primary font-bold text-2xl">
-          <div className="flex jusify-center">
-            Sorry something went wrong...
-          </div>
-          <div className="flex justify-center"> Error 404 </div>
+      <div className=" flex flex-col justify-center items-center min-h-screen ">
+        <div className="space-y-6 text-primary text-center font-bold text-2xl">
+          <p>Oops something went wrong.</p>
+          <p>We couldn&apos;t find the page you were looking for.</p>
+          <div className="py-16"> Error 404 </div>
         </div>
       </div>
     </>
