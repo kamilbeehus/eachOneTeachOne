@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CourseCardRow from "../components/CourseCardRow";
 import Navbar from "../components/Navbar";
-import { getInstructorCourses } from "../api/courseApi";
+import { getInstructorCourses } from "../api/getInstructorCourses";
 import { useUser } from "../hooks/UserContext";
 
 export default function UserCoursePage() {

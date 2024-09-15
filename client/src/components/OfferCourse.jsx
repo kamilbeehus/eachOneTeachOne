@@ -3,11 +3,14 @@ import { getCurrentTime } from "../helpers/getCurrentTime";
 import { getCurrentDate } from "../helpers/getCurrentDate";
 import { postCourse } from "../helpers/postCourse";
 import CloseButton from "./CloseButton";
+import { useUser } from "../hooks/UserContext";
 
 export default function OfferCourse({ isUserCourse }) {
+  const { userId } = useUser(); // Get the user id from the context
+
   async function handleSubmit(payload) {
     try {
-      const response = await postCourse(payload); // Something is not working
+      const response = await postCourse(payload);
       console.log(response);
     } catch (e) {
       console.error(e);
@@ -20,20 +23,21 @@ export default function OfferCourse({ isUserCourse }) {
   const [date, setDate] = useState(getCurrentDate());
   const [startTime, setStartTime] = useState(getCurrentTime());
   const [endTime, setEndTime] = useState(getCurrentTime(1));
+  const [creditsCost, setCreditsCost] = useState("");
 
   const payload = {
     title: title,
     description: description,
-    instructorId: "66e5932d4084e0310cd7781e",
+    instructorId: userId,
     skill: skill,
-    creditsCost: "1",
+    creditsCost: creditsCost,
     schedule: {
       startDate: new Date(`${date}T${startTime}`),
       endDate: new Date(`${date}T${endTime}`),
     },
   };
 
-  if (isUserCourse) {
+  if (isUserCourse && userId) {
     return (
       <>
         <button
@@ -63,7 +67,7 @@ export default function OfferCourse({ isUserCourse }) {
                     <br />
                     <input
                       type="title"
-                      placeholder="title"
+                      placeholder="Enter the title of your course"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       className="input input-bordered w-full"
@@ -103,6 +107,21 @@ export default function OfferCourse({ isUserCourse }) {
                       <option value="Cooking">Cooking</option>
                       <option value="Programming">Programming</option>
                     </select>
+                  </div>
+                  {/* --- CREDITS COST --- */}
+                  <div>
+                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                      Credits Cost
+                    </label>
+                    <br />
+                    <input
+                      type="number"
+                      placeholder="Enter the cost in credits"
+                      value={creditsCost}
+                      onChange={(e) => setCreditsCost(e.target.value)}
+                      className="input input-bordered w-full"
+                      min="0" // Prevent negative numbers input
+                    />
                   </div>
                   {/* --- DATE --- */}
                   <div>
