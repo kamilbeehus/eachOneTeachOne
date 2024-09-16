@@ -15,6 +15,7 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
 
             return (
               <CourseCard
+                course={course}
                 key={course._id}
                 courseId={course._id} // Pass the courseId as a prop to the child component
                 courseName={course.title}
@@ -23,7 +24,7 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
               />
             );
           })}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-items-center justify-center">
             <OfferCourse isUserCourse={isUserCourse} />
           </div>
         </div>

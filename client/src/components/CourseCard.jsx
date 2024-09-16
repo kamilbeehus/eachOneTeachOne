@@ -1,13 +1,12 @@
-import React from "react";
 import { useUser } from "../hooks/UserContext.jsx";
 import axios from "axios";
 import raccoonLogo from "../assets/Avatar.png";
-import { toast, ToastContainer } from "react-toastify"; // Import toast for visual feedback
-import "react-toastify/dist/ReactToastify.css";
+import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
+import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
+import { Coins, Calendar, Clock } from "lucide-react";
 
 export default function CourseCard({
-  courseName,
-  courseDescription,
+  course,
   courseId, // This courseId is passed from the parent component
   isUserCourse,
 }) {
@@ -21,7 +20,7 @@ export default function CourseCard({
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/courses/enroll", //TODO: Use postEnroll from api.js
+        "http://localhost:3000/api/courses/enroll",
         { userId, courseId },
       );
 
@@ -43,8 +42,23 @@ export default function CourseCard({
           <img src={raccoonLogo} alt="raccoon" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{courseName}</h2>
-          <p>{courseDescription}</p>
+          <h2 className="card-title font-bold">{course.title}</h2>
+          <p className="line-clamp-2">{course.description}</p>
+          <div className="flex items-center space-x-2 pt-2">
+            <Calendar className="stroke-primary" />
+            <p>{getHumanReadableDate(course.schedule.startDate)}</p>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Clock className="stroke-primary" />
+            <p>
+              {getHumanReadableTime(course.schedule.startDate)} -{" "}
+              {getHumanReadableTime(course.schedule.endDate)}
+            </p>
+          </div>
+          <div className="flex items-center">
+            <Coins className="stroke-primary "></Coins>
+            <div className="pl-2 font-semibold">{course.creditsCost}</div>
+          </div>
 
           <div className="card-actions justify-end">
             <Edit
