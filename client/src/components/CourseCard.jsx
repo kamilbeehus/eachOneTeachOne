@@ -1,6 +1,8 @@
 import { useUser } from "../hooks/UserContext.jsx";
 import axios from "axios";
 import raccoonLogo from "../assets/Avatar.png";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
 import { Coins, Calendar, Clock } from "lucide-react";
