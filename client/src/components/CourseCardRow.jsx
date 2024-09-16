@@ -15,6 +15,7 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
 
             return (
               <CourseCard
+                course={course}
                 key={course._id}
                 courseId={course._id} // Pass the courseId as a prop to the child component
                 courseName={course.title}
