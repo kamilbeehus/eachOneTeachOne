@@ -14,7 +14,7 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Signup() {
   const [signupState, setSignupState] = useState(fieldsState);
-  const [, setError] = useState(null); // State for storing errors
+  const [error, setError] = useState(null); // State for storing errors
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -23,7 +23,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //TODO: Provide feedback to the user if the passwords do not match
+    // Provide feedback to the user if the passwords do not match
     if (signupState.password !== signupState["confirm-password"]) {
       setError("Passwords do not match");
       toast.error("Passwords do not match");
@@ -46,11 +46,13 @@ export default function Signup() {
 
     try {
       await createAccount(payload);
+      console.log("Account created successfully");
       toast.success("Account created successfully!");
       navigate("/login"); // Redirect to login page after successful signup
     } catch (error) {
-      setError(error.response ? error.response.data : error.message);
-      toast.error(error.response ? error.response.data : error.message);
+      const errorMessage = error.response?.data?.message || error.message;
+      setError(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
