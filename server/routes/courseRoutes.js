@@ -6,6 +6,7 @@ import {
   getCoursesByInstructorIdController,
   getEnrolledStudentsController,
   deleteCourseByIdController,
+  getCoursesByStudentIdController,
 } from "../controllers/courseController.js";
 import { enrollUserController } from "../controllers/enrollmentController.js";
 import { validateCourse } from "../middlewares/validateCourse.js";
@@ -18,6 +19,9 @@ const router = express.Router();
 
 // Middleware to ensure the user is authenticated before accessing these routes
 // router.use(authenticateUser);
+
+// Get all courses enrolled by a user (GET) : api/courses/user/:userId
+router.get("/user/:userId", getCoursesByStudentIdController);
 
 // Get enrolled students in a course by course ID (GET): api/courses/:id/enrolled-students
 router.get("/:id/enrolled-students", getEnrolledStudentsController);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getCurrentTime } from "../helpers/getCurrentTime";
 import { getCurrentDate } from "../helpers/getCurrentDate";
-import { postCourse } from "../helpers/postCourse";
+import { postCourse } from "../api/postCourse";
 import CloseButton from "./CloseButton";
 import { useUser } from "../hooks/UserContext";
 

@@ -6,11 +6,37 @@ import {
   getCourseById,
   getCoursesByInstructorId,
   getEnrolledStudentsService,
+  getCoursesByStudentId,
 } from "../services/courseService.js";
 import {
   CourseNotFoundError,
   InstructorNotFoundError,
+  UserNotFoundError,
 } from "../errors/customErrors.js";
+
+// Fetch courses by student ID Controller
+export const getCoursesByStudentIdController = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+
+    // Fetch the courses for the user
+    const courses = await getCoursesByStudentId(userId);
+
+    return res.status(200).json({
+      success: true,
+      message: "Courses by StudentId fetched successfully",
+      courses,
+    });
+  } catch (error) {
+    if (
+      error instanceof UserNotFoundError ||
+      error instanceof CourseNotFoundError
+    ) {
+      return res.status(error.statusCode).json({ message: error.message });
+    }
+    next(error);
+  }
+};
 
 // Deletes a course by ID Controller
 export const deleteCourseByIdController = async (req, res, next) => {
