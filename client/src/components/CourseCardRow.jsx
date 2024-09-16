@@ -23,7 +23,7 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
               />
             );
           })}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-items-center justify-center">
             <OfferCourse isUserCourse={isUserCourse} />
           </div>
         </div>
