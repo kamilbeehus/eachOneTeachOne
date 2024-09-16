@@ -46,8 +46,8 @@ export default function Login() {
       const { _id: userId } = response.data.user;
 
       // Store the userId in both UserContext and localStorage
-      setUserId(userId);  // Update global state with userId
-      localStorage.setItem('userId', userId); // Persist the userId in localStorage
+      setUserId(userId); // Update global state with userId
+      localStorage.setItem("userId", userId); // Persist the userId in localStorage
 
       // Clear any existing error messages
       setError("");

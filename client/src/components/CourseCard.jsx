@@ -1,6 +1,8 @@
 import { useUser } from "../hooks/UserContext.jsx";
 import axios from "axios";
 import raccoonLogo from "../assets/Avatar.png";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
 import { Coins, Calendar, Clock } from "lucide-react";
@@ -14,7 +16,7 @@ export default function CourseCard({
 
   const handleEnrollClick = async () => {
     if (!userId) {
-      alert("You must be logged in to enroll in a course.");
+      toast.error("You must be logged in to enroll in a course.");
       return;
     }
 
@@ -27,10 +29,10 @@ export default function CourseCard({
       if (!response.data) {
         throw new Error("Enrollment failed");
       }
-
-      alert("Enrolled successfully!");
+      toast.success("You are now enrolled in the course!");
     } catch (error) {
       console.error("Enrollment failed:", error.message);
+      toast.error("Enrollment failed. Please try again.");
     }
   };
 
@@ -67,6 +69,7 @@ export default function CourseCard({
             />
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );
