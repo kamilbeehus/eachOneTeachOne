@@ -1,7 +1,9 @@
-import React from 'react';
-import { useUser } from '../hooks/UserContext.jsx';
-import axios from 'axios';
+import React from "react";
+import { useUser } from "../hooks/UserContext.jsx";
+import axios from "axios";
 import raccoonLogo from "../assets/Avatar.png";
+import { toast, ToastContainer } from "react-toastify"; // Import toast for visual feedback
+import "react-toastify/dist/ReactToastify.css";
 
 export default function CourseCard({
   courseName,
@@ -9,28 +11,27 @@ export default function CourseCard({
   courseId, // This courseId is passed from the parent component
   isUserCourse,
 }) {
-
   const { userId } = useUser(); // Access the userId from context
 
   const handleEnrollClick = async () => {
     if (!userId) {
-      alert('You must be logged in to enroll in a course.');
+      toast.error("You must be logged in to enroll in a course.");
       return;
     }
 
     try {
       const response = await axios.post(
-          'http://localhost:3000/api/courses/enroll',
-          { userId, courseId }
+        "http://localhost:3000/api/courses/enroll", //TODO: Use postEnroll from api.js
+        { userId, courseId },
       );
 
       if (!response.data) {
-        throw new Error('Enrollment failed');
+        throw new Error("Enrollment failed");
       }
-
-      alert('Enrolled successfully!');
+      toast.success("You are now enrolled in the course!");
     } catch (error) {
-      console.error('Enrollment failed:', error.message);
+      console.error("Enrollment failed:", error.message);
+      toast.error("Enrollment failed. Please try again.");
     }
   };
 
@@ -47,11 +48,12 @@ export default function CourseCard({
 
           <div className="card-actions justify-end">
             <Edit
-                isUserCourse={isUserCourse}
-                handleEnrollClick={handleEnrollClick} // Pass handler function
+              isUserCourse={isUserCourse}
+              handleEnrollClick={handleEnrollClick} // Pass handler function
             />
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );
@@ -61,6 +63,10 @@ function Edit({ isUserCourse, handleEnrollClick }) {
   if (isUserCourse) {
     return <button className="btn btn-primary">Edit</button>;
   } else {
-    return <button className="btn btn-primary" onClick={handleEnrollClick}>Enroll</button>;
+    return (
+      <button className="btn btn-primary" onClick={handleEnrollClick}>
+        Enroll
+      </button>
+    );
   }
 }
