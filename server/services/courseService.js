@@ -9,9 +9,35 @@ import {
   InstructorNotFoundError,
   CourseNotFoundError,
   ValidationError,
+  UserNotFoundError,
 } from "../errors/customErrors.js";
 import { formatCourseResponse } from "../utils/courseUtils.js";
 import { createTransaction } from "../services/transactionService.js";
+
+// Get all courses where the given user is enrolled as a Student
+export const getCoursesByStudentId = async (userId) => {
+  if (!userId) {
+    throw new UserNotFoundError("User ID is required.");
+  }
+
+  try {
+    // Find all courses where the user is enrolled
+    const courses = await Course.find({ enrolledStudents: userId }).populate(
+      "instructorId",
+      "firstName lastName"
+    );
+
+    if (!courses || courses.length === 0) {
+      throw new CourseNotFoundError(`No courses found for user ID ${userId}`);
+    }
+
+    // Format and return the course data
+    return courses.map(formatCourseResponse);
+  } catch (error) {
+    console.error("Error fetching courses by student ID:", error);
+    throw error;
+  }
+};
 
 // Delete a course by its ID and update related collections from database (user, transaction, enrollment)
 export const deleteCourseById = async (courseId) => {
