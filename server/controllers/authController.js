@@ -11,13 +11,15 @@ export const signupController = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     // Call the signup service to create a new user and generate a token
-    // TODO: Pass token if we enable authorization in the future { user, token }
     const { user } = await signup({
+      // TODO: Pass token if we enable authorization in the future { user, token }
       firstName,
       lastName,
       email,
       password,
     });
+
+    // Code has been commented out for development purposes. Uncomment the code to enable user authentication with token.
 
     // Set the token in a cookie
     // res.cookie("token", token, {
@@ -53,6 +55,8 @@ export const loginController = async (req, res) => {
     // Call the login service to authenticate the user and generate a token
     // TODO: Pass token if we enable authorization in the future { user, token }
     const { user } = await login({ email, password });
+
+    // Code has been commented out for development purposes. Uncomment the code to enable user authentication with token.
 
     // Set the token in a cookie
     // res.cookie("token", token, {
