@@ -3,7 +3,7 @@ import axios from "axios";
 import raccoonLogo from "../assets/Avatar.png";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
-import { Calendar, Clock } from "lucide-react";
+import { Coins, Calendar, Clock } from "lucide-react";
 
 export default function CourseCard({
   course,
@@ -42,7 +42,7 @@ export default function CourseCard({
           <img src={raccoonLogo} alt="raccoon" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{course.title}</h2>
+          <h2 className="card-title font-bold">{course.title}</h2>
           <p className="line-clamp-2">{course.description}</p>
           <div className="flex items-center space-x-2 pt-2">
             <Calendar className="stroke-primary" />
@@ -54,6 +54,10 @@ export default function CourseCard({
               {getHumanReadableTime(course.schedule.startDate)} -{" "}
               {getHumanReadableTime(course.schedule.endDate)}
             </p>
+          </div>
+          <div className="flex items-center">
+            <Coins className="stroke-primary "></Coins>
+            <div className="pl-2 font-semibold">{course.creditsCost}</div>
           </div>
 
           <div className="card-actions justify-end">
