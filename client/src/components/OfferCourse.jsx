@@ -2,12 +2,12 @@ import { useState } from "react";
 import { getCurrentTime } from "../helpers/getCurrentTime";
 import { getCurrentDate } from "../helpers/getCurrentDate";
 import { postCourse } from "../api/postCourse";
-import CloseButton from "./CloseButton";
-import { useUser } from "../hooks/UserContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CloseButton from "./CloseButton";
+import { useUser } from "../hooks/UserContext";
 
-export default function OfferCourse({ isUserCourse }) {
+export default function OfferCourse({ isUserCourse, refreshCourses }) {
   const { userId } = useUser(); // Get the user id from the context
 
   async function handleSubmit(payload) {
@@ -15,6 +15,9 @@ export default function OfferCourse({ isUserCourse }) {
       const response = await postCourse(payload);
       toast.success("Your course has been created successfully!");
       console.log(response);
+
+      // Refresh the courses list after successful course creation
+      refreshCourses();
     } catch (e) {
       console.error(e);
       toast.error("Failed to create course. Please try again.");

@@ -1,7 +1,11 @@
 import CourseCard from "./CourseCard";
 import OfferCourse from "./OfferCourse";
 
-export default function CourseCardRow({ courseArray = [], isUserCourse }) {
+export default function CourseCardRow({
+  courseArray = [],
+  isUserCourse,
+  refreshCourses,
+}) {
   return (
     <>
       {/* <div className="grid content-center justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> */}
@@ -25,7 +29,11 @@ export default function CourseCardRow({ courseArray = [], isUserCourse }) {
             );
           })}
           <div className="flex items-center justify-items-center justify-center">
-            <OfferCourse isUserCourse={isUserCourse} />
+            {/* Pass refreshCourses to OfferCourse */}
+            <OfferCourse
+              isUserCourse={isUserCourse}
+              refreshCourses={refreshCourses}
+            />
           </div>
         </div>
       </div>

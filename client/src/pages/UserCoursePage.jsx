@@ -10,20 +10,29 @@ export default function UserCoursePage() {
   const isUserCourse = true;
   const [fetched, setFetched] = useState(false); // Flag to avoid double call
 
+  // Function to fetch instructor's courses by ID
+  const fetchCourses = async () => {
+    if (!userId) return; // If userId is not set, return
+    console.log("Fetching courses for userId:", userId);
+    const courses = await getInstructorCourses(userId);
+
+    if (courses.length === 0) {
+      console.warn("No courses found for user:", userId);
+    }
+    setUserCourses(courses); // Update state with fetched courses
+    setFetched(true); // Set flag to true after fetching courses
+  };
+
+  // Function to refresh courses, after successful course creation
+  const refreshCourses = () => {
+    setFetched(false); // Reset flag to false
+    fetchCourses(); // Re-fetch courses
+  };
+
   useEffect(() => {
-    const fetchCourses = async () => {
-      if (!userId || fetched) return; // If userId is not set or already fetched, return
-      console.log("Fetching courses for userId:", userId);
-      const courses = await getInstructorCourses(userId);
-
-      if (courses.length === 0) {
-        console.warn("No courses found for user:", userId);
-      }
-      setUserCourses(courses); // Update state with fetched courses
-      setFetched(true); // Set flag to true after fetching courses
-    };
-
-    fetchCourses();
+    if (!fetched) {
+      fetchCourses(); // Fetch courses on initial render or when refresh is triggered
+    }
   }, [userId, fetched]); // Re-run the effect when userId changes
 
   return (
@@ -34,6 +43,7 @@ export default function UserCoursePage() {
           <CourseCardRow
             courseArray={userCourses}
             isUserCourse={isUserCourse}
+            refreshCourses={refreshCourses}
           />
         </div>
       </div>
