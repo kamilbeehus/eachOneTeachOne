@@ -4,6 +4,8 @@ import { getCurrentDate } from "../helpers/getCurrentDate";
 import { postCourse } from "../api/postCourse";
 import CloseButton from "./CloseButton";
 import { useUser } from "../hooks/UserContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function OfferCourse({ isUserCourse }) {
   const { userId } = useUser(); // Get the user id from the context
@@ -11,9 +13,11 @@ export default function OfferCourse({ isUserCourse }) {
   async function handleSubmit(payload) {
     try {
       const response = await postCourse(payload);
+      toast.success("Your course has been created successfully!");
       console.log(response);
     } catch (e) {
       console.error(e);
+      toast.error("Failed to create course. Please try again.");
     }
   }
 
@@ -24,6 +28,7 @@ export default function OfferCourse({ isUserCourse }) {
   const [startTime, setStartTime] = useState(getCurrentTime());
   const [endTime, setEndTime] = useState(getCurrentTime(1));
   const [creditsCost, setCreditsCost] = useState("");
+  const [maxStudents, setMaxStudents] = useState("");
 
   const payload = {
     title: title,
@@ -31,6 +36,7 @@ export default function OfferCourse({ isUserCourse }) {
     instructorId: userId,
     skill: skill,
     creditsCost: creditsCost,
+    maxStudents: maxStudents,
     schedule: {
       startDate: new Date(`${date}T${startTime}`),
       endDate: new Date(`${date}T${endTime}`),
@@ -120,7 +126,22 @@ export default function OfferCourse({ isUserCourse }) {
                       value={creditsCost}
                       onChange={(e) => setCreditsCost(e.target.value)}
                       className="input input-bordered w-full"
-                      min="0" // Prevent negative numbers input
+                      min="1" // Prevent negative numbers input
+                    />
+                  </div>
+                  {/* --- MAX STUDENTS --- */}
+                  <div>
+                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                      Maximum number of students
+                    </label>
+                    <br />
+                    <input
+                      type="number"
+                      placeholder="Enter the max. number of students"
+                      value={maxStudents}
+                      onChange={(e) => setMaxStudents(e.target.value)}
+                      className="input input-bordered w-full"
+                      min="1" // Prevent negative numbers input
                     />
                   </div>
                   {/* --- DATE --- */}
@@ -176,9 +197,10 @@ export default function OfferCourse({ isUserCourse }) {
             </form>
           </div>
         </dialog>
+        <ToastContainer />
       </>
     );
   } else {
-    null;
+    return null;
   }
 }
