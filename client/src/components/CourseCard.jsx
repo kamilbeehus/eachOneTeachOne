@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
 import { Coins, Calendar, Clock } from "lucide-react";
+import EditCourse from "./EditCourse.jsx";
 
 export default function CourseCard({
   course,
@@ -63,9 +64,10 @@ export default function CourseCard({
           </div>
 
           <div className="card-actions justify-end">
-            <Edit
+            <EditOrEnroll
               isUserCourse={isUserCourse}
               handleEnrollClick={handleEnrollClick} // Pass handler function
+              course={course}
             />
           </div>
         </div>
@@ -75,9 +77,9 @@ export default function CourseCard({
   );
 }
 
-function Edit({ isUserCourse, handleEnrollClick }) {
+function EditOrEnroll({ isUserCourse, handleEnrollClick, course }) {
   if (isUserCourse) {
-    return <button className="btn btn-primary">Edit</button>;
+    return <EditCourse course={course} key={course._id} />;
   } else {
     return (
       <button className="btn btn-primary" onClick={handleEnrollClick}>
