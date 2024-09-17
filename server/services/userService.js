@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import { UserNotFoundError, ValidationError } from "../errors/customErrors.js";
 import { formatUserByIdResponse } from "../utils/userUtils.js";
 
-// Get a specific User by their id and return a formatted response
+/** Get a specific User by their id and return a formatted response */
 export const getUserById = async (userId) => {
   const user = await User.findById(userId);
 
@@ -14,7 +14,7 @@ export const getUserById = async (userId) => {
   return formatUserByIdResponse(user);
 };
 
-// Update a user's profile allowing them to update their bio and profile picture
+/** Update a user's profile allowing them to update their bio and profile picture */
 export const updateUserProfile = async (userId, updates) => {
   const allowedUpdates = ["bio", "profilePicture"];
 

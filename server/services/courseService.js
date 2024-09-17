@@ -14,7 +14,7 @@ import {
 import { formatCourseResponse } from "../utils/courseUtils.js";
 import { createTransaction } from "../services/transactionService.js";
 
-// Get all courses where the given user is enrolled as a Student
+/** Get all courses where the given user is enrolled as a Student */
 export const getCoursesByStudentId = async (userId) => {
   if (!userId) {
     throw new UserNotFoundError("User ID is required.");
@@ -39,7 +39,7 @@ export const getCoursesByStudentId = async (userId) => {
   }
 };
 
-// Delete a course by its ID and update related collections from database (user, transaction, enrollment)
+/** Delete a course by its ID and update related collections from database (user, transaction, enrollment) */
 export const deleteCourseById = async (courseId) => {
   const session = await mongoose.startSession();
   session.startTransaction(); // Start a new transaction to ensure data consistency across multiple collections
@@ -122,7 +122,7 @@ export const deleteCourseById = async (courseId) => {
   }
 };
 
-// Fetch enrolled students by course ID and populates student details (firstName and lastName)
+/** Fetch enrolled students by course ID and populates student details (firstName and lastName) */
 export const getEnrolledStudentsService = async (courseId) => {
   try {
     const course = await Course.findById(courseId).populate(
@@ -140,7 +140,7 @@ export const getEnrolledStudentsService = async (courseId) => {
   }
 };
 
-// Fetch courses by instructor ID and populates instructor details (firstName and lastName)
+/** Fetch courses by instructor ID and populates instructor details (firstName and lastName) */
 export const getCoursesByInstructorId = async (instructorId) => {
   if (!instructorId) {
     throw new InstructorNotFoundError();
@@ -164,7 +164,7 @@ export const getCoursesByInstructorId = async (instructorId) => {
   }
 };
 
-// Fetch an individual course by its ID and populate instructor details (firstName and lastName)
+/** Fetch an individual course by its ID and populate instructor details (firstName and lastName) */
 export const getCourseById = async (id) => {
   try {
     const course = await Course.findById(id).populate(
@@ -183,7 +183,7 @@ export const getCourseById = async (id) => {
   }
 };
 
-// Fetch all courses and populate instructor details (firstName and lastName)
+/** Fetch all courses and populate instructor details (firstName and lastName) */
 export const getAllCourses = async () => {
   try {
     const courses = await Course.find().populate(
@@ -198,7 +198,7 @@ export const getAllCourses = async () => {
   }
 };
 
-// Create a new course and save it to the database
+/** Create a new course and save it to the database */
 export const createCourse = async (courseData) => {
   try {
     if (!skillsEnum.includes(courseData.skill)) {

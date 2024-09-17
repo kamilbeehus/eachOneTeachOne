@@ -1,4 +1,4 @@
-// Code has been commented out for development purposes. Uncomment the code to enable user authentication with token.
+/** Code has been commented out for development purposes. Uncomment the code to enable user authentication with token. */
 
 // import jwt from "jsonwebtoken";
 // import User from "../models/User.js";

@@ -8,7 +8,7 @@ import {
 } from "../errors/customErrors.js";
 import { formatTransactionResponse } from "../utils/transactionUtils.js";
 
-// Fetch the transaction history with all 'spent' and 'earned' credits for a User
+/** Fetch the transaction history with all 'spent' and 'earned' credits for a User */
 export const getTransactionHistoryByUserId = async (userId) => {
   if (!userId) {
     throw new UserNotFoundError();
@@ -32,7 +32,7 @@ export const getTransactionHistoryByUserId = async (userId) => {
   }
 };
 
-// Create a new transaction and update the User's credits
+/** Create a new transaction and update the User's credits */
 export const createTransaction = async (
   { userId, type, amount, courseId },
   session = null

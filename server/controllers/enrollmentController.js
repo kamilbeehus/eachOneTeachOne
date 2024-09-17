@@ -1,7 +1,7 @@
 import { enrollUserInCourse } from "../services/enrollmentService.js";
 import { validationResult } from "express-validator";
 
-// Enroll User in a Course Controller
+/** Enroll User in a Course Controller */
 export const enrollUserController = async (req, res, next) => {
   // Input validation using express-validator
   const errors = validationResult(req);
