@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import CourseCardRow from "../components/CourseCardRow";
 import { getCourses } from "../api/getCourses";
 import Navbar from "../components/Navbar";
 import { filterCoursesBySkill } from "../helpers/filterCoursesBySkill";
@@ -13,14 +12,20 @@ export default function HomePage() {
   // const [programmingCourses, setProgrammingCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
 
+  // Simulate a short delay for smoother transitions
+  const simulateDelay = (ms) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+
   async function fetchCourses() {
+    setIsLoading(true); // Start loading when fetching begins
     try {
       const courses = await getCourses();
+      await simulateDelay(400);
       setAllCourses(courses);
-      setIsLoading(false); // Stop loading when courses are fetched
     } catch (error) {
       console.error("Failed to fetch courses", error);
-      setIsLoading(false); // Stop loading even if there is an error
+    } finally {
+      setIsLoading(false); // Stop loading after fetching is done
     }
   }
 
@@ -43,6 +48,7 @@ export default function HomePage() {
             <div className="flex justify-center mt-10">
               {/* DaisyUI Loading Spinner */}
               <span className="loading loading-spinner loading-lg"></span>
+              <p>Loading...</p>
             </div>
           ) : (
             <>
