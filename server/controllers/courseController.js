@@ -14,7 +14,7 @@ import {
   UserNotFoundError,
 } from "../errors/customErrors.js";
 
-// Fetch courses by student ID Controller
+/** Fetch courses by student ID Controller */
 export const getCoursesByStudentIdController = async (req, res, next) => {
   try {
     const { userId } = req.params;
@@ -38,7 +38,7 @@ export const getCoursesByStudentIdController = async (req, res, next) => {
   }
 };
 
-// Deletes a course by ID Controller
+/** Deletes a course by ID Controller */
 export const deleteCourseByIdController = async (req, res, next) => {
   try {
     const courseId = req.params.id;
@@ -60,7 +60,7 @@ export const deleteCourseByIdController = async (req, res, next) => {
   }
 };
 
-// Fetch enrolled students by course ID Controller
+/** Fetch enrolled students by course ID Controller */
 export const getEnrolledStudentsController = async (req, res, next) => {
   try {
     const courseId = req.params.id;
@@ -78,7 +78,7 @@ export const getEnrolledStudentsController = async (req, res, next) => {
   }
 };
 
-// Fetch courses by instructor ID Controller
+/** Fetch courses by instructor ID Controller */
 export const getCoursesByInstructorIdController = async (req, res, next) => {
   try {
     const { instructorId } = req.params;
@@ -100,7 +100,7 @@ export const getCoursesByInstructorIdController = async (req, res, next) => {
   }
 };
 
-// Fetch course by ID Controller
+/** Fetch course by ID Controller */
 export const getCourseByIdController = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -120,7 +120,7 @@ export const getCourseByIdController = async (req, res, next) => {
   }
 };
 
-// Fetch all courses Controller
+/** Fetch all courses Controller */
 export const getAllCoursesController = async (req, res, next) => {
   try {
     const courses = await getAllCourses();
@@ -134,7 +134,7 @@ export const getAllCoursesController = async (req, res, next) => {
   }
 };
 
-// Create course Controller
+/** Create new course Controller */
 export const createCourseController = async (req, res, next) => {
   try {
     // Input validation using express-validator

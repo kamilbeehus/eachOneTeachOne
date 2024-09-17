@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import User from "../models/User.js";
 import Course from "../models/Course.js";
 
-// Validate the Transaction data before creating a new transaction
+/** Validate the Transaction data before creating a new transaction */
 export const validateTransaction = [
   // Check if userId is provided and is a valid MongoDB ObjectId
   check("userId")

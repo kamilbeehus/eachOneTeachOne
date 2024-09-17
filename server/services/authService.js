@@ -6,7 +6,7 @@ import {
 } from "../errors/customErrors.js";
 import { formatUserResponse } from "../utils/userUtils.js";
 
-// Signup function to create a new User
+/** Signup function to create a new User */
 export const signup = async ({ firstName, lastName, email, password }) => {
   // Check if the user already exists
   const existingUser = await User.findOne({ email });
@@ -31,7 +31,7 @@ export const signup = async ({ firstName, lastName, email, password }) => {
   return { user: formatUserResponse(user) }; // TODO: Pass token if we enable authorization in the future
 };
 
-// Login function to authenticate a User
+/** Login function to authenticate a User */
 export const login = async ({ email, password }) => {
   const user = await User.findOne({ email });
   if (!user) {

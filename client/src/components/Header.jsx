@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-//import LogoEoTo.svg from "..\assets\LogoEoTo.svg" ;
 import LogoEoToSvg from "../assets/LogoEoTo.svg";
 
 export default function Header({

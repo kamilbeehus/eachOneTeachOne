@@ -5,7 +5,7 @@ import {
   ValidationError,
 } from "../errors/customErrors.js";
 
-// Signup Controller
+/** Signup Controller */
 export const signupController = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
@@ -47,7 +47,7 @@ export const signupController = async (req, res) => {
   }
 };
 
-// Login Controller
+/** Login Controller */
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;

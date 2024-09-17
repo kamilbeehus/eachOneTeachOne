@@ -4,7 +4,7 @@ import {
   TransactionHistoryNotFoundError,
 } from "../errors/customErrors.js";
 
-// Get transaction history for a user by user ID Controller
+/** Get transaction history for a user by user ID Controller */
 export const getTransactionHistoryController = async (req, res, next) => {
   try {
     const userId = req.params.userId;

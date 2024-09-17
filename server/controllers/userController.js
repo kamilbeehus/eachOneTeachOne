@@ -3,7 +3,7 @@ import { getUserById } from "../services/userService.js";
 import { updateUserProfile } from "../services/userService.js";
 import { ValidationError, UserNotFoundError } from "../errors/customErrors.js";
 
-// Fetch User by ID Controller
+/** Fetch User by ID Controller */
 export const getUserByIdController = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -42,7 +42,7 @@ export const getUserByIdController = async (req, res) => {
   }
 };
 
-// Update User Profile Controller
+/** Update User Profile Controller */
 export const updateUserProfileController = async (req, res) => {
   try {
     const userId = req.params.id;

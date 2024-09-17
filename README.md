@@ -75,6 +75,8 @@ Ensure you have the following installed on your local machine :
    echo ".env" >> .gitignore
    ```
 
+- Ensure your .env file is located inside of your `server` directory.
+
 5. Start the backend server:
 
    ```sh
@@ -120,6 +122,11 @@ Ensure you have the following installed on your local machine :
 ## Contributing
 
 \*\*Guidelines for contributing to the project in case we decide to make it open source in the future.
+
+## Authors
+- [Fiorella Mansilla](https://github.com/fiorella-mansilla)
+- [Ferdinand Biermann](https://github.com/M0reThanMach1nery)
+- [Kamil Beehuspoteea](https://github.com/kamilbeehus)
 
 ## License
 
