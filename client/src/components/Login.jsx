@@ -14,6 +14,8 @@ fields.forEach((field) => (fieldsState[field.id] = ""));
 export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+
   const navigate = useNavigate();
 
   // Get setUserId from the UserContext to update it after login
@@ -30,6 +32,7 @@ export default function Login() {
 
   // Login API Integration
   const authenticateUser = async () => {
+    setIsLoading(true); // Start loading when authentication begins
     try {
       const payload = {
         email: loginState.email,
@@ -52,8 +55,11 @@ export default function Login() {
       // Clear any existing error messages
       setError("");
 
-      // Redirect to home page after successful login
-      navigate("/home");
+      // Simulate data fetching/loading before redirecting
+      setTimeout(() => {
+        setIsLoading(false); // Stop loading
+        navigate("/home"); // Redirect after the loading ends
+      }, 1000); // Simulated delay for smoother transition (adjust as needed)
     } catch (error) {
       console.error(
         "Login failed:",
@@ -63,8 +69,10 @@ export default function Login() {
       setError(
         error.response?.data?.message || "Login failed. Please try again.",
       );
+      setIsLoading(false); // End loading if there's an error
     }
   };
+
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
       <div className="-space-y-px">
@@ -84,8 +92,19 @@ export default function Login() {
         ))}
       </div>
       {error && <div className="text-error text-sm mt-2">{error}</div>}
-      <FormExtra />
-      <FormAction handleSubmit={handleSubmit} text="Login" />
+
+      {isLoading ? (
+        <div className="text-center mt-4">
+          {/* DaisyUI Spinner */}
+          <span className="loading loading-spinner loading-lg"></span>
+          <p>Logging in...</p>
+        </div>
+      ) : (
+        <>
+          <FormExtra />
+          <FormAction handleSubmit={handleSubmit} text="Login" />
+        </>
+      )}
     </form>
   );
 }
