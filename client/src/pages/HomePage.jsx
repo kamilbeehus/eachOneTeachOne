@@ -11,10 +11,17 @@ export default function HomePage() {
   // const [cookingCourses, setCookingCourses] = useState([]);
   // const [languagesCourses, setLanguagesCourses] = useState([]);
   // const [programmingCourses, setProgrammingCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Loading state
 
   async function fetchCourses() {
-    const courses = await getCourses();
-    setAllCourses(courses);
+    try {
+      const courses = await getCourses();
+      setAllCourses(courses);
+      setIsLoading(false); // Stop loading when courses are fetched
+    } catch (error) {
+      console.error("Failed to fetch courses", error);
+      setIsLoading(false); // Stop loading even if there is an error
+    }
   }
 
   useEffect(() => {
@@ -32,10 +39,26 @@ export default function HomePage() {
       <div className="min-h-screen flex flex-col ">
         <div className="flex-grow overflow-auto">
           <Navbar />
-          <FilteredCourseCardRow skill="Music" allCourses={allCourses} />
-          <FilteredCourseCardRow skill="Languages" allCourses={allCourses} />
-          <FilteredCourseCardRow skill="Cooking" allCourses={allCourses} />
-          <FilteredCourseCardRow skill="Programming" allCourses={allCourses} />
+          {isLoading ? (
+            <div className="flex justify-center mt-10">
+              {/* DaisyUI Loading Spinner */}
+              <span className="loading loading-spinner loading-lg"></span>
+            </div>
+          ) : (
+            <>
+              {/* Show filtered course rows once data is loaded */}
+              <FilteredCourseCardRow skill="Music" allCourses={allCourses} />
+              <FilteredCourseCardRow
+                skill="Languages"
+                allCourses={allCourses}
+              />
+              <FilteredCourseCardRow skill="Cooking" allCourses={allCourses} />
+              <FilteredCourseCardRow
+                skill="Programming"
+                allCourses={allCourses}
+              />
+            </>
+          )}
         </div>
       </div>
     </>
