@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import AvatarLogo from "../assets/Avatar.png";
-import LogoEoToSvg from "../assets/LogoEoTo.svg"
+import LogoEoToSvg from "../assets/LogoEoTo.svg";
 import ThemeController from "./ThemeController";
 
 export default function Navbar() {
@@ -10,7 +10,16 @@ export default function Navbar() {
       {/* kj<div className="navbar bg-base-100"> */}
       <div className="flex-1">
         <Link to="/home" className="btn btn-ghost rounded-full">
-        <img src={LogoEoToSvg} alt="" style={{ maxWidth: '100%', maxHeight: '40px', minWidth: '20px', minHeight: '20px' }} />
+          <img
+            src={LogoEoToSvg}
+            alt=""
+            style={{
+              maxWidth: "100%",
+              maxHeight: "40px",
+              minWidth: "20px",
+              minHeight: "20px",
+            }}
+          />
         </Link>
         <ThemeController />
       </div>
@@ -31,14 +40,14 @@ export default function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li>
+            {/* <li>
               <Link to="/settings">Settings</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/usercourses">My Courses</Link>
             </li>
             <li>
-              <Link to="/">logout</Link>
+              <Link to="/">Logout</Link>
             </li>
           </ul>
         </div>
