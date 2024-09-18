@@ -45,7 +45,7 @@ export default function CourseCard({
         </figure>
         <div className="card-body">
           <h2 className="card-title font-bold">{course.title}</h2>
-          <p className="line-clamp-2">{course.description}</p>
+          <p>{course.description}</p>
           <div className="flex items-center space-x-2 pt-2">
             <Calendar className="stroke-primary" />
             <p>{getHumanReadableDate(course.schedule.startDate)}</p>
