@@ -12,6 +12,7 @@ Each one Teach one is a social web platform that allows users to exchange knowle
   - [Usage](#usage)
   - [Configuration](#configuration)
     - [Use Prettier ESlint in the client folder](#use-prettier-eslint-in-the-client-folder)
+  - [Authors](#authors)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -119,14 +120,14 @@ Ensure you have the following installed on your local machine :
 
 ![PNG showing how to install the recommended VSCode Extensions](images/installRecommendedExtensions.png "Install instructions for recommended VSCode Extensions")
 
+## Authors
+- [Fiorella Mansilla](https://github.com/fiorella-mansilla) - Backend Development
+- [Ferdinand Biermann](https://github.com/M0reThanMach1nery) - Frontend Development
+- [Kamil Beehuspoteea](https://github.com/kamilbeehus) - Frontend Development
+
 ## Contributing
 
 \*\*Guidelines for contributing to the project in case we decide to make it open source in the future.
-
-## Authors
-- [Fiorella Mansilla](https://github.com/fiorella-mansilla)
-- [Ferdinand Biermann](https://github.com/M0reThanMach1nery)
-- [Kamil Beehuspoteea](https://github.com/kamilbeehus)
 
 ## License
 
