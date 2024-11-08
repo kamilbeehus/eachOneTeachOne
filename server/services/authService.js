@@ -47,3 +47,12 @@ export const login = async ({ email, password }) => {
 
   return { user: formatUserResponse(user), token };
 };
+
+/** Returns the User's relevant data after successful authentication */
+export const getAuthenticatedUserData = (user) => {
+  return {
+    id: user._id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+  };
+};

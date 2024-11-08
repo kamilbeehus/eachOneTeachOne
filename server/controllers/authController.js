@@ -1,4 +1,8 @@
-import { signup, login } from "../services/authService.js";
+import {
+  signup,
+  login,
+  getAuthenticatedUserData,
+} from "../services/authService.js";
 import {
   EmailAlreadyInUseError,
   AuthenticationError,
@@ -75,6 +79,18 @@ export const loginController = async (req, res) => {
     }
 
     console.error("Login error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+/** Returns the authenticated user's relevat data. By this point, authenticateUser middleware has already validated the token
+ * and attached the user to req.user, so we can safely return the user data. */
+export const getAuthenticatedUserController = (req, res) => {
+  try {
+    const userData = getAuthenticatedUserData(req.user);
+    res.json({ user: userData });
+  } catch (error) {
+    console.error("Get authenticated user error:", error);
     return res.status(500).json({ message: "Server error" });
   }
 };
