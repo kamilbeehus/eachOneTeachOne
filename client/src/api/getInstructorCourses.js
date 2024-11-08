@@ -10,9 +10,9 @@ export const getInstructorCourses = async (userId) => {
   try {
     const response = await axios.get(
       `http://localhost:3000/api/courses/instructor/${userId}`,
-      // {
-      //   withCredentials: true,
-      // },
+      {
+        withCredentials: true,
+      },
     );
     const courseArray = response.data.courses || [];
 

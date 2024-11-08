@@ -4,9 +4,9 @@ export async function getCourses() {
   try {
     const response = await axios.get(
       "http://localhost:3000/api/courses/",
-      // {
-      //   withCredentials: true,
-      // }
+      {
+        withCredentials: true,
+      }
     );
     return response.data.courses;
   } catch (err) {

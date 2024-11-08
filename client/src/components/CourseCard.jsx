@@ -12,7 +12,7 @@ export default function CourseCard({
   courseId, // This courseId is passed from the parent component
   isUserCourse,
 }) {
-  const { userId } = useUser(); // Access the userId from context
+  // const { userId } = useUser(); // Access the userId from context
 
   const handleEnrollClick = async () => {
     if (!userId) {

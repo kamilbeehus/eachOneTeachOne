@@ -11,6 +11,9 @@ export async function postEnroll(payload) {
     const response = await axios.post(
       "http://localhost:3000/api/courses/enroll/",
       payload,
+      {
+        withCredentials: true,
+      },
     );
     console.log(response);
   } catch (e) {

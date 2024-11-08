@@ -20,6 +20,9 @@ export async function postCourse(payload) {
     const response = await axios.post(
       "http://localhost:3000/api/courses/create/",
       payload,
+      {
+        withCredentials: true,
+      },
     );
     return response;
   } catch (e) {

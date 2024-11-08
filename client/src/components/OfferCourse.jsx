@@ -5,10 +5,10 @@ import { postCourse } from "../api/postCourse";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CloseButton from "./CloseButton";
-import { useUser } from "../hooks/UserContext";
+// import { useUser } from "../hooks/UserContext";
 
 export default function OfferCourse({ isUserCourse, refreshCourses }) {
-  const { userId } = useUser(); // Get the user id from the context
+  // const { userId } = useUser(); // Get the user id from the context
 
   async function handleSubmit(payload) {
     try {
