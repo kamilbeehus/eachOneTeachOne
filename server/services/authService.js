@@ -45,14 +45,10 @@ export const login = async ({ email, password }) => {
 
   const token = generateToken(user);
 
-  return { user: formatUserResponse(user), token };
+  return { token };
 };
 
 /** Returns the User's relevant data after successful authentication */
 export const getAuthenticatedUserData = (user) => {
-  return {
-    id: user._id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-  };
+  return { user: formatUserResponse(user) };
 };

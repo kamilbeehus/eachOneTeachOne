@@ -54,9 +54,9 @@ export const loginController = async (req, res) => {
     const { email, password } = req.body;
 
     // Call the login service to authenticate the user and generate a token
-    const { user, token } = await login({ email, password });
+    const { token } = await login({ email, password });
 
-    // Set the token in a cookie
+    // Set the token in an HTTP-only cookie
     res.cookie("token", token, {
       httpOnly: true,
       secure: false, // TODO: Set to true once we use HTTPS
@@ -65,9 +65,8 @@ export const loginController = async (req, res) => {
     });
 
     return res.status(200).json({
+      success: true,
       message: "User logged in successfully",
-      user,
-      redirectUrl: "/home", // Redirect to the home page after login
     });
   } catch (error) {
     if (error instanceof AuthenticationError) {
