@@ -3,12 +3,12 @@ import CourseCardRow from "../components/CourseCardRow";
 import Navbar from "../components/Navbar";
 import { getInstructorCourses } from "../api/getInstructorCourses";
 import { getEnrolledCoursesByUserId } from "../api/getEnrolledCoursesByUserId";
-import { useUser } from "../hooks/UserContext";
+// import { useUser } from "../hooks/UserContext";
 
 export default function UserCoursePage() {
   const [enrolledCourses, setEnrolledCourses] = useState([]); // State to hold courses
   const [offeredCourses, setOfferedCourses] = useState([]);
-  const { userId } = useUser(); // Get userId from context (after successful login)
+  // const { userId } = useUser(); // Get userId from context (after successful login)
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const isUserCourse = true;
   const [fetched, setFetched] = useState(false); // Flag to avoid double call

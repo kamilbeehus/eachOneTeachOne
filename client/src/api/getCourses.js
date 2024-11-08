@@ -1,13 +1,8 @@
-import axios from "axios";
+import api from "../api/apiInstance";
 
 export async function getCourses() {
   try {
-    const response = await axios.get(
-      "http://localhost:3000/api/courses/",
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await api.get("/courses");
     return response.data.courses;
   } catch (err) {
     console.error("Error fetching courses:", err);

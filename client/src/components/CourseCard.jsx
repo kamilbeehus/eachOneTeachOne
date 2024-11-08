@@ -1,8 +1,8 @@
-import { useUser } from "../hooks/UserContext.jsx";
-import axios from "axios";
 import raccoonLogo from "../assets/Avatar.png";
+import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { postEnroll } from "../api/postEnroll.js";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
 import { Coins, Calendar, Clock } from "lucide-react";
@@ -12,27 +12,28 @@ export default function CourseCard({
   courseId, // This courseId is passed from the parent component
   isUserCourse,
 }) {
-  // const { userId } = useUser(); // Access the userId from context
+  const [isEnrolling, setIsEnrolling] = useState(false);
+  const [error, setError] = useState("");
 
   const handleEnrollClick = async () => {
-    if (!userId) {
-      toast.error("You must be logged in to enroll in a course.");
-      return;
-    }
+    setIsEnrolling(true);
+    setError("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/courses/enroll",
-        { userId, courseId },
-      );
+      // Call the postEnroll function (which automatically handles user authentication via cookies)
+      const response = await postEnroll(courseId);
 
-      if (!response.data) {
+      if (response.success) {
+        toast.success("You are now enrolled in the course!");
+      } else {
         throw new Error("Enrollment failed");
       }
-      toast.success("You are now enrolled in the course!");
     } catch (error) {
       console.error("Enrollment failed:", error.message);
       toast.error("Enrollment failed. Please try again.");
+      setError("Enrollment failed. Please try again.");
+    } finally {
+      setIsEnrolling(false);
     }
   };
 
@@ -65,6 +66,7 @@ export default function CourseCard({
           <div className="card-actions justify-end">
             <Edit
               isUserCourse={isUserCourse}
+              isEnrolling={isEnrolling}
               handleEnrollClick={handleEnrollClick} // Pass handler function
             />
           </div>
@@ -75,13 +77,13 @@ export default function CourseCard({
   );
 }
 
-function Edit({ isUserCourse, handleEnrollClick }) {
+function Edit({ isUserCourse, isEnrolling, handleEnrollClick }) {
   if (isUserCourse) {
     return <button className="btn btn-primary">Edit</button>;
   } else {
     return (
       <button className="btn btn-primary" onClick={handleEnrollClick}>
-        Enroll
+        {isEnrolling ? "Enrolling..." : "Enroll"}
       </button>
     );
   }
