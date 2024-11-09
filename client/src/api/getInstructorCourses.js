@@ -1,4 +1,4 @@
-import { api } from "../api/apiInstance.js";
+import api from "../api/apiInstance.js";
 import { getCurrentUser } from "./getCurrentUser.js";
 
 // Utility function to fetch all courses for a specific instructor by userId

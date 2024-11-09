@@ -1,4 +1,4 @@
-import { api } from "../api/apiInstance.js";
+import api from "../api/apiInstance.js";
 
 /**
  * Fetches the currently authenticated user's data
