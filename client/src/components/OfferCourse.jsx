@@ -1,15 +1,13 @@
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import { getCurrentTime } from "../helpers/getCurrentTime";
 import { getCurrentDate } from "../helpers/getCurrentDate";
+import { getCurrentUser } from "../api/getCurrentUser";
 import { postCourse } from "../api/postCourse";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import CloseButton from "./CloseButton";
-// import { useUser } from "../hooks/UserContext";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function OfferCourse({ isUserCourse, refreshCourses }) {
-  // const { userId } = useUser(); // Get the user id from the context
-
   async function handleSubmit(payload) {
     try {
       const response = await postCourse(payload);
@@ -36,7 +34,6 @@ export default function OfferCourse({ isUserCourse, refreshCourses }) {
   const payload = {
     title: title,
     description: description,
-    instructorId: userId,
     skill: skill,
     creditsCost: creditsCost,
     maxStudents: maxStudents,

@@ -2,7 +2,7 @@ import { api } from "../api/apiInstance.js";
 import { getCurrentUser } from "./getCurrentUser.js";
 
 // Utility function to fetch all courses for a specific instructor by userId
-export const getInstructorCourses = async (userId) => {
+export const getInstructorCourses = async () => {
   try {
     // Fetch data from current authenticated User
     const userData = await getCurrentUser();

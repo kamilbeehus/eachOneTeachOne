@@ -1,4 +1,6 @@
-import axios from "axios";
+import api from "../api/apiInstance.js";
+import { getCurrentUser } from "../api/getCurrentUser.js";
+
 /**
  * Sends a POST request to create a course with the given payload.
  *
@@ -16,16 +18,33 @@ import axios from "axios";
 
 export async function postCourse(payload) {
   try {
-    console.log(payload);
-    const response = await axios.post(
-      "http://localhost:3000/api/courses/create/",
-      payload,
-      {
-        withCredentials: true,
-      },
+    // Retrieve the authenticated user's details for the instructor ID.
+    const user = await getCurrentUser();
+
+    if (!user || !user.userId) {
+      throw new Error("Failed to retrieve instructor ID.");
+    }
+
+    const instructorId = user.userId;
+
+    // Include instructorId in the payload
+    const coursePayload = {
+      ...payload,
+      instructorId, // Set from authenticated user data
+    };
+
+    // Make the POST request to create the course
+    const response = await api.post("/courses/create", coursePayload);
+
+    console.log("Course created successfully:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Failed to create course:",
+      error.response?.data || error.message,
     );
-    return response;
-  } catch (e) {
-    console.log(e);
+    throw new Error(
+      error.response?.data?.message || "Failed to create course.",
+    );
   }
 }

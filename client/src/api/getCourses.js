@@ -1,4 +1,4 @@
-import api from "../api/apiInstance";
+import { api } from "../api/apiInstance";
 
 export async function getCourses() {
   try {
