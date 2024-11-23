@@ -1,4 +1,4 @@
-import { useUser } from "../hooks/UserContext.jsx";
+import { useUser } from "../hooks/UserContext.js";
 import axios from "axios";
 import raccoonLogo from "../assets/Avatar.png";
 import { toast, ToastContainer } from "react-toastify";

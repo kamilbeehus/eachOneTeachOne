@@ -5,7 +5,7 @@ import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../hooks/UserContext.jsx";
+import { useUser } from "../hooks/UserContext.js";
 
 const fields = loginFields;
 let fieldsState = {};
