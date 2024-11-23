@@ -43,7 +43,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }) {
     },
   };
 
-  if (isUserCourse && userId) {
+  if (isUserCourse) {
     return (
       <>
         <button
