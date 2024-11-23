@@ -6,11 +6,6 @@ export default function Header({
   paragraph,
   linkName,
   linkUrl = "#",
-}:{
-  heading:string; 
-  paragraph:string; 
-  linkName:string; 
-  linkUrl:string;
 }) {
   return (
     <div className="mb-10">

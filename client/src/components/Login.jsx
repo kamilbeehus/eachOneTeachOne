@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import { loginFields } from "../constants/formFields.ts";
-import FormAction from "./FormAction.tsx";
-import FormExtra from "./FormExtra.tsx";
-import Input from "./Input.tsx";
+import { loginFields } from "../constants/formFields.jsx";
+import FormAction from "./FormAction.jsx";
+import FormExtra from "./FormExtra.jsx";
+import Input from "./Input.jsx";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../hooks/UserContext.tsx";
+// import { useUser } from "../hooks/UserContext.js";
 
 const fields = loginFields;
 const fieldsState = {};
