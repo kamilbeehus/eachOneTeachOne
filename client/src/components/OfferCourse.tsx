@@ -5,6 +5,7 @@ import { getCurrentDate } from "../helpers/getCurrentDate";
 // import { getCurrentUser } from "../api/getCurrentUser";
 import { postCourse } from "../api/postCourse";
 import CloseButton from "./CloseButton";
+import { DatePickerDemo } from "./DatePickerDemo";
 // import "react-toastify/dist/ReactToastify.css";
 
 export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCourse:boolean; refreshCourses:any}) {
@@ -150,6 +151,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                       Date
                     </label>
                     <br />
+                    <DatePickerDemo></DatePickerDemo>
                     <input
                       type="date"
                       value={date}
