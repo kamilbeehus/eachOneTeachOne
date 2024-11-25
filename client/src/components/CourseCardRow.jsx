@@ -1,4 +1,5 @@
 import CourseCard from "./CourseCard";
+import CourseOfferDialog from "./CourseOfferDialog";
 import OfferCourse from "./OfferCourse";
 
 export default function CourseCardRow({
@@ -30,6 +31,7 @@ export default function CourseCardRow({
           })}
           <div className="flex items-center justify-items-center justify-center">
             {/* Pass refreshCourses to OfferCourse */}
+            <CourseOfferDialog/>
             <OfferCourse
               isUserCourse={isUserCourse}
               refreshCourses={refreshCourses}
