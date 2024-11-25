@@ -20,12 +20,11 @@ export async function postCourse(payload) {
   try {
     // Retrieve the authenticated user's details for the instructor ID.
     const user = await getCurrentUser();
+    const instructorId = user?._id;
 
     if (!user || !user.userId) {
       throw new Error("Failed to retrieve instructor ID.");
     }
-
-    const instructorId = user.userId;
 
     // Include instructorId in the payload
     const coursePayload = {

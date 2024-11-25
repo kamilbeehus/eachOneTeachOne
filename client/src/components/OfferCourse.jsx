@@ -2,7 +2,6 @@ import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { getCurrentTime } from "../helpers/getCurrentTime";
 import { getCurrentDate } from "../helpers/getCurrentDate";
-import { getCurrentUser } from "../api/getCurrentUser";
 import { postCourse } from "../api/postCourse";
 import CloseButton from "./CloseButton";
 import "react-toastify/dist/ReactToastify.css";
@@ -43,7 +42,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }) {
     },
   };
 
-  if (isUserCourse && userId) {
+  if (isUserCourse) {
     return (
       <>
         <button

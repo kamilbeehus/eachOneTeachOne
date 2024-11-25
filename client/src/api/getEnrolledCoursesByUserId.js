@@ -22,7 +22,14 @@ export const getEnrolledCoursesByUserId = async () => {
 
     return courseArray;
   } catch (error) {
-    console.error("Failed to retrieve enrolled courses for the user.", error);
+    if (error.response && error.response.status === 404) {
+      console.error("Courses not found for this user.");
+    } else {
+      console.error(
+        "Failed to retrieve enrolled courses for the user.",
+        error.message,
+      );
+    }
     return [];
   }
 };

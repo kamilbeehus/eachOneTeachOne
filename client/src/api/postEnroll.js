@@ -1,21 +1,23 @@
 import api from "../api/apiInstance";
+import { getCurrentUser } from "./getCurrentUser.js";
+
 /**
  * Sends a POST request to enroll a user in a specific course.
  *
  * @param {string} courseId - The ID of the course in which the user will be enrolled.
  * @returns {Promise<Object>} The response from the server, indicating the enrollment status.
  */
-export async function postEnroll(payload) {
+export async function postEnroll(courseId) {
   try {
-    // Fetch the authenticated user's data
-    const { data: userData } = await api.get("/auth/me"); // Automatically handled by cookie
+    const userData = await getCurrentUser();
+    const userId = userData?._id;
 
-    if (!userData || !userData._id) {
+    if (!userData || !userId) {
       throw new Error("User is not authenticated");
     }
 
     const payload = {
-      userId: userData._id, // Use the userId from the authenticated user
+      userId,
       courseId,
     };
 
