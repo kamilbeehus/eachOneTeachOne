@@ -27,9 +27,7 @@ export async function postEnroll(courseId) {
     console.log("Enrollment successful:", response.data);
     return response.data;
   } catch (error) {
-    console.error(
-      "Error enrolling in course:",
-      error.response ? error.response.data : error.message,
-    );
+    console.error("API Error:", error.response?.data || error.message);
+    throw error;
   }
 }

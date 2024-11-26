@@ -23,9 +23,10 @@ export default function CourseCard({
       // Call the postEnroll function (which automatically handles user authentication via cookies)
       const response = await postEnroll(courseId);
 
-      if (response.success) {
+      if (response?.success) {
         toast.success("You are now enrolled in the course!");
       } else {
+        console.warn("Unexpected API response:", response);
         throw new Error("Enrollment failed");
       }
     } catch (error) {
