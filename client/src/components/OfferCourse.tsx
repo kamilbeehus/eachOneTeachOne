@@ -1,14 +1,23 @@
-import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { getCurrentTime } from "../helpers/getCurrentTime";
 import { getCurrentDate } from "../helpers/getCurrentDate";
 // import { getCurrentUser } from "../api/getCurrentUser";
 import { postCourse } from "../api/postCourse";
 import CloseButton from "./CloseButton";
+
+import { useState } from "react";
+
 import { DatePickerDemo } from "./DatePickerDemo";
+
 // import "react-toastify/dist/ReactToastify.css";
 
-export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCourse:boolean; refreshCourses:any}) {
+export default function OfferCourse({
+  isUserCourse,
+  refreshCourses,
+}: {
+  isUserCourse: boolean;
+  refreshCourses: any;
+}) {
   async function handleSubmit(payload) {
     try {
       const response = await postCourse(payload);
@@ -63,12 +72,12 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                 document.getElementById("my_modal_3").close();
               }}
             >
-              <div className="container min-h-screen mx-auto px-2 flex justify-center items-center">
-                <div className="card bg-base-100 p-20 shadow-2xl grid grid-cols-1 gap-6 justify-center xs:max-w-xs sm:max-w-sm md:max-w-md max-h-screen lg:max-w-lg overflow-y-auto xl:max-w-xl">
+              <div className="container mx-auto flex min-h-screen items-center justify-center px-2">
+                <div className="xs:max-w-xs card grid max-h-screen grid-cols-1 justify-center gap-6 overflow-y-auto bg-base-100 p-20 shadow-2xl sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
                   <CloseButton />
                   {/* --- TITLE --- */}
                   <div>
-                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                    <label className="label-text pb-0 pl-2 text-sm font-semibold text-primary">
                       Title
                     </label>
                     <br />
@@ -82,7 +91,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                   </div>
                   {/* --- DESCRIPTION --- */}
                   <div>
-                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                    <label className="label-text pb-0 pl-2 text-sm font-semibold text-primary">
                       Description
                     </label>
                     <br />
@@ -96,7 +105,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                   </div>
                   {/* --- SKILL --- */}
                   <div>
-                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                    <label className="label-text pb-0 pl-2 text-sm font-semibold text-primary">
                       Skill
                     </label>
                     <br />
@@ -117,7 +126,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                   </div>
                   {/* --- CREDITS COST --- */}
                   <div>
-                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                    <label className="label-text pb-0 pl-2 text-sm font-semibold text-primary">
                       Credits Cost
                     </label>
                     <br />
@@ -132,7 +141,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                   </div>
                   {/* --- MAX STUDENTS --- */}
                   <div>
-                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                    <label className="label-text pb-0 pl-2 text-sm font-semibold text-primary">
                       Maximum number of students
                     </label>
                     <br />
@@ -147,7 +156,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                   </div>
                   {/* --- DATE --- */}
                   <div>
-                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                    <label className="label-text pb-0 pl-2 text-sm font-semibold text-primary">
                       Date
                     </label>
                     <br />
@@ -162,7 +171,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                   </div>
                   {/* --- START TIME --- */}
                   <div>
-                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                    <label className="label-text pb-0 pl-2 text-sm font-semibold text-primary">
                       Start Time
                     </label>
                     <br />
@@ -176,7 +185,7 @@ export default function OfferCourse({ isUserCourse, refreshCourses }:{isUserCour
                   </div>
                   {/* --- END TIME --- */}
                   <div>
-                    <label className="label-text text-primary font-semibold text-sm pb-0 pl-2">
+                    <label className="label-text pb-0 pl-2 text-sm font-semibold text-primary">
                       End Time
                     </label>
                     <br />
