@@ -1,11 +1,13 @@
-import raccoonLogo from "../assets/Avatar.png";
+import "react-toastify/dist/ReactToastify.css";
+
+import { Calendar, Clock, Coins } from "lucide-react";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { postEnroll } from "../api/postEnroll.js";
+import raccoonLogo from "../assets/Avatar.png";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
-import { Coins, Calendar, Clock } from "lucide-react";
 
 export default function CourseCard({
   course,
