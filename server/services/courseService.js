@@ -27,15 +27,11 @@ export const getCoursesByStudentId = async (userId) => {
       "firstName lastName"
     );
 
-    if (!courses || courses.length === 0) {
-      throw new CourseNotFoundError(`No courses found for user ID ${userId}`);
-    }
-
-    // Format and return the course data
-    return courses.map(formatCourseResponse);
+    // Return an empty array if no courses are found
+    return courses.length > 0 ? courses.map(formatCourseResponse) : [];
   } catch (error) {
-    console.error("Error fetching courses by student ID:", error);
-    throw error;
+    console.error("Unexpected error fetching courses by student ID:", error);
+    throw new Error("Error fetching courses by student ID.");
   }
 };
 
@@ -154,12 +150,9 @@ export const getCoursesByInstructorId = async (instructorId) => {
       "firstName lastName"
     );
 
-    if (!courses.length) {
-      throw new CourseNotFoundError();
-    }
-    return courses.map(formatCourseResponse);
+    return courses.length > 0 ? courses.map(formatCourseResponse) : [];
   } catch (error) {
-    console.error("Error fetching courses by instructor ID:", error);
+    console.error("Unexpected error fetching courses by instructor ID:", error);
     throw new Error("Error fetching courses by instructor ID.");
   }
 };

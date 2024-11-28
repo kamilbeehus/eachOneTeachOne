@@ -18,7 +18,7 @@ export const enrollUserController = async (req, res, next) => {
   try {
     const enrollment = await enrollUserInCourse(userId, courseId);
     res.status(201).json({
-      sucess: true,
+      success: true,
       message: "User enrolled in course successfully",
       enrollment,
     });
