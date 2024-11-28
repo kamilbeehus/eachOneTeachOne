@@ -1,7 +1,11 @@
 import api from "../api/apiInstance.js";
 import { getCurrentUser } from "./getCurrentUser.js";
 
-// Utility function to fetch all courses for a specific instructor by userId
+/**
+ * Fetch all courses a user is enrolled in.
+ *
+ * @returns {Promise<Array>} List of enrolled courses or an empty array if none.
+ */
 export const getEnrolledCoursesByUserId = async () => {
   try {
     // Fetch the authenticated user's information
@@ -9,7 +13,7 @@ export const getEnrolledCoursesByUserId = async () => {
     const userId = userData?._id;
 
     if (!userId) {
-      console.error("User ID not found. Ensure the user is authenticated.");
+      console.info("User is not authenticated or user ID is missing.");
       return [];
     }
 
@@ -17,18 +21,15 @@ export const getEnrolledCoursesByUserId = async () => {
     const courseArray = response.data.courses || [];
 
     if (courseArray.length === 0) {
-      console.warn("No enrolled courses found for the user.");
+      console.info("No enrolled courses were found for the user.");
     }
 
     return courseArray;
   } catch (error) {
-    if (error.response && error.response.status === 404) {
-      console.error("Courses not found for this user.");
+    if (error.response?.status === 404) {
+      console.info("No enrolled courses found for this user.");
     } else {
-      console.error(
-        "Failed to retrieve enrolled courses for the user.",
-        error.message,
-      );
+      console.error("Failed to retrieve enrolled courses.", error.message);
     }
     return [];
   }

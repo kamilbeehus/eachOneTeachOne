@@ -27,10 +27,11 @@ export default function CourseCard({
         toast.success("You are now enrolled in the course!");
       } else {
         console.warn("Unexpected API response:", response);
-        throw new Error("Enrollment failed");
+        throw new Error(response?.message || "Unexpected response structure");
       }
     } catch (error) {
       console.error("Enrollment failed:", error.message);
+
       toast.error("Enrollment failed. Please try again.");
       setError("Enrollment failed. Please try again.");
     } finally {

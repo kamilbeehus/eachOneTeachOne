@@ -36,10 +36,10 @@ export default function Login() {
 
       // Make login request to authenticate user and store token in cookies
       await api.post("/auth/login", payload);
+      console.log("User logged in successfully!");
 
       // Fetch authenticated user data from /auth/me endpoint
       const { data } = await api.get("/auth/me");
-
       console.log("User data retrieved :", data.user);
 
       // Clear any existing error messages
