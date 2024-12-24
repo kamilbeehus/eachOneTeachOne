@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
   DialogContent,
@@ -21,10 +22,26 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
+  title: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  description: z.string().min(2, {
+    message: "Description must be at least 2 characters.",
+  }),
+  skill: z.string().min(2, {
+    message: "Skill must be at least 2 characters.",
+  }),
+  creditCost: z.string().min(2, {
+    message: "creditCost must be at least 2 characters.",
+  }),
+  maxStudents: z.string().min(2, {
+    message: "Must be at least 2 characters.",
+  }),
+  date: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
 });
@@ -34,15 +51,20 @@ export default function CourseOfferDialog() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      title: "",
+      description: "",
+      skill: "",
+      creditCost: "",
+      maxStudents: "",
+      date: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(payload: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    console.log(payload);
   }
 
   return (
@@ -50,32 +72,124 @@ export default function CourseOfferDialog() {
       <DialogTrigger asChild>
         <Button variant="outline">Offer Course New</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="h-svh sm:h-[512px]">
         <DialogHeader>
           <DialogTitle>Add Course</DialogTitle>
           <DialogDescription>Add a course, you want to offer</DialogDescription>
         </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="shadcn" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit">Save changes</Button>
-          </form>
-        </Form>
+        <Separator className="my-1" />
+        <ScrollArea className="rounded-md">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-8 p-4"
+            >
+              {/* --- TITLE --- */}
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This is the title of your Course.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* --- DESCRIPTION --- */}
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Describe the content of your course in a few
+                      words/sentences.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* --- SKILL --- */}
+              <FormField
+                control={form.control}
+                name="skill"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Skill</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Pick the skill you want to teach
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* --- CREDIT COST --- */}
+              <FormField
+                control={form.control}
+                name="creditCost"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Credit Cost</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      How much should your course offer cost.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* --- MAX STUDENTS --- */}
+              <FormField
+                control={form.control}
+                name="maxStudents"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Max Students</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Maximum Number of students you want to teach at once in
+                      your course.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* --- DATE --- */}
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Date</FormLabel>
+                    <FormControl>
+                      <Input placeholder="shadcn" {...field} />
+                    </FormControl>
+                    <FormDescription>Choose a time frame.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Save changes</Button>
+            </form>
+          </Form>
+        </ScrollArea>
         <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>
