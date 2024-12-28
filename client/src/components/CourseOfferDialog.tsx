@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { DatePickerDemo } from "./DatePickerDemo";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -26,22 +27,28 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  title: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  title: z.string().min(3, {
+    message: "Title must be at least 3 characters.",
   }),
-  description: z.string().min(2, {
-    message: "Description must be at least 2 characters.",
+  description: z.string().min(3, {
+    message: "Description must be at least 3 characters.",
   }),
-  skill: z.string().min(2, {
-    message: "Skill must be at least 2 characters.",
+  skill: z.string().min(3, {
+    message: "Skill must be at least 3 characters.",
   }),
-  creditCost: z.string().min(2, {
-    message: "creditCost must be at least 2 characters.",
+  creditCost: z.string().min(1, {
+    message: "creditCost must be at least 1 character.",
   }),
   maxStudents: z.string().min(2, {
     message: "Must be at least 2 characters.",
   }),
-  date: z.string().min(2, {
+  startDate: z.date().min(new Date(), {
+    message: "Start Date must lie in the future",
+  }),
+  startTime: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  endTime: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
 });
@@ -56,7 +63,9 @@ export default function CourseOfferDialog() {
       skill: "",
       creditCost: "",
       maxStudents: "",
-      date: "",
+      startDate: new Date(),
+      startTime: "12:00",
+      endTime: "12:00",
     },
   });
 
@@ -70,7 +79,7 @@ export default function CourseOfferDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Offer Course New</Button>
+        <Button variant="outline">Offer Course</Button>
       </DialogTrigger>
       <DialogContent className="h-svh sm:h-[512px]">
         <DialogHeader>
@@ -92,7 +101,7 @@ export default function CourseOfferDialog() {
                   <FormItem>
                     <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="title" {...field} />
                     </FormControl>
                     <FormDescription>
                       This is the title of your Course.
@@ -109,7 +118,7 @@ export default function CourseOfferDialog() {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="description" {...field} />
                     </FormControl>
                     <FormDescription>
                       Describe the content of your course in a few
@@ -127,7 +136,7 @@ export default function CourseOfferDialog() {
                   <FormItem>
                     <FormLabel>Skill</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="skill" {...field} />
                     </FormControl>
                     <FormDescription>
                       Pick the skill you want to teach
@@ -144,7 +153,7 @@ export default function CourseOfferDialog() {
                   <FormItem>
                     <FormLabel>Credit Cost</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="creditCost" {...field} />
                     </FormControl>
                     <FormDescription>
                       How much should your course offer cost.
@@ -161,7 +170,7 @@ export default function CourseOfferDialog() {
                   <FormItem>
                     <FormLabel>Max Students</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="maxStudents" {...field} />
                     </FormControl>
                     <FormDescription>
                       Maximum Number of students you want to teach at once in
@@ -171,17 +180,48 @@ export default function CourseOfferDialog() {
                   </FormItem>
                 )}
               />
-              {/* --- DATE --- */}
+              {/* --- START DATE --- */}
               <FormField
                 control={form.control}
-                name="date"
+                name="startDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Date</FormLabel>
+                    <FormLabel>Start Date</FormLabel>
+                    <br />
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <DatePickerDemo placeholder="12:00" field="field" />
                     </FormControl>
-                    <FormDescription>Choose a time frame.</FormDescription>
+                    <FormDescription>Choose the starting date</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* --- START TIME --- */}
+              <FormField
+                control={form.control}
+                name="startTime"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Start Time</FormLabel>
+                    <FormControl>
+                      <Input type="time" placeholder="12:00" {...field} />
+                    </FormControl>
+                    <FormDescription>Choose the start time</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* --- END TIME --- */}
+              <FormField
+                control={form.control}
+                name="endTime"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>End Time</FormLabel>
+                    <FormControl>
+                      <Input type="time" placeholder="11:00" {...field} />
+                    </FormControl>
+                    <FormDescription>Choose the end time</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

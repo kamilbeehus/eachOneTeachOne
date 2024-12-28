@@ -41,7 +41,7 @@ export default function CourseCard({
 
   return (
     <>
-      <div className="card bg-base-100 shadow-xl max-w-64">
+      <div className="bg-base card max-w-64 shadow-xl">
         <figure>
           {/* Todo: insert teachers profile photo */}
           <img src={raccoonLogo} alt="raccoon" />
@@ -61,7 +61,7 @@ export default function CourseCard({
             </p>
           </div>
           <div className="flex items-center">
-            <Coins className="stroke-primary "></Coins>
+            <Coins className="stroke-primary"></Coins>
             <div className="pl-2 font-semibold">{course.creditsCost}</div>
           </div>
 
