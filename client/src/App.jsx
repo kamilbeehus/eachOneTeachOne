@@ -9,16 +9,8 @@ import UserCoursePage from "./pages/UserCoursePage";
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* <Navbar />
-        <div className="h-12"></div>
-        <CourseCardRow
-          className="flex-grow"
-          courseArray={allCourses}
-          isUserCourse={false}
-        />
-      </div> */}
-      <div className="min-h-screen bg-gradient-to-r from-secondary/30 to-primary/30 ">
+    <div className="flex min-h-screen flex-col">
+      <div className="min-h-screen bg-gradient-to-r from-secondary/30 to-primary/30">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />

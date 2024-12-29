@@ -53,6 +53,7 @@ export default function UserCoursePage() {
   const refreshCourses = () => {
     setFetched(false); // Reset flag to false
     fetchOfferedCourses(); // Re-fetch courses
+    console.log("TRIGGERED refreshCourses");
   };
 
   useEffect(() => {
@@ -64,20 +65,20 @@ export default function UserCoursePage() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col ">
+      <div className="flex min-h-screen flex-col">
         <div className="flex-grow overflow-auto">
           <Navbar />
           <div className="container mx-auto">
-            <div className="grid grid-cols-1 gap-6 pt-20 sm:pl-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl text-center tracking-wide font-medium">
-                <span className="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+            <div className="grid grid-cols-1 gap-6 pt-20 sm:grid-cols-2 sm:pl-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+              <h1 className="text-center text-3xl font-medium tracking-wide sm:text-5xl lg:text-6xl">
+                <span className="bg-gradient-to-r from-primary to-error bg-clip-text text-transparent">
                   Offered
                 </span>
               </h1>
             </div>
           </div>
           {isLoadingOffered ? (
-            <div className="flex justify-center mt-10">
+            <div className="mt-10 flex justify-center">
               {/* DaisyUI Loading Spinner */}
               <span className="loading loading-spinner loading-lg"></span>
               <p>Loading...</p>
@@ -90,16 +91,16 @@ export default function UserCoursePage() {
             />
           )}
           <div className="container mx-auto">
-            <div className="grid grid-cols-1 gap-6 pt-20 sm:pl-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl text-center tracking-wide font-medium">
-                <span className="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+            <div className="grid grid-cols-1 gap-6 pt-20 sm:grid-cols-2 sm:pl-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+              <h1 className="text-center text-3xl font-medium tracking-wide sm:text-5xl lg:text-6xl">
+                <span className="bg-gradient-to-r from-primary to-error bg-clip-text text-transparent">
                   Enrolled
                 </span>
               </h1>
             </div>
           </div>
           {isLoadingEnrolled ? (
-            <div className="flex justify-center mt-10">
+            <div className="mt-10 flex justify-center">
               {/* DaisyUI Loading Spinner */}
               <span className="loading loading-spinner loading-lg"></span>
               <p>Loading...</p>

@@ -21,18 +21,17 @@ export default function NavbarDropdown() {
             <AvatarImage src={AvatarLogo} alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          {/* <Button variant="outline" size="icon">
-            <img src={AvatarLogo}></img>
-          </Button> */}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <Link to="/usercourses">My Courses</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
+            <Link to="/usercourses">
+              <DropdownMenuItem>My Courses</DropdownMenuItem>
+            </Link>
+            <Link to="/">
+              <DropdownMenuItem>Logout</DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
