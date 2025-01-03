@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-// import { generateToken } from "../utils/SecretToken.js";
+import { generateToken } from "../utils/SecretToken.js";
 import {
   EmailAlreadyInUseError,
   AuthenticationError,
@@ -26,9 +26,9 @@ export const signup = async ({ firstName, lastName, email, password }) => {
   await user.save();
 
   // Generate a JWT token with the user's information
-  // const token = generateToken(user);
+  const token = generateToken(user);
 
-  return { user: formatUserResponse(user) }; // TODO: Pass token if we enable authorization in the future
+  return { user: formatUserResponse(user), token };
 };
 
 /** Login function to authenticate a User */
@@ -43,7 +43,12 @@ export const login = async ({ email, password }) => {
     throw new AuthenticationError();
   }
 
-  // const token = generateToken(user);
+  const token = generateToken(user);
 
-  return { user: formatUserResponse(user) }; // TODO: Pass token if we enable authorization in the future
+  return { token };
+};
+
+/** Returns the User's relevant data after successful authentication */
+export const getAuthenticatedUserData = (user) => {
+  return { user: formatUserResponse(user) };
 };

@@ -1,11 +1,10 @@
-import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api/apiInstance";
 import { loginFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../hooks/UserContext.jsx";
 
 const fields = loginFields;
 let fieldsState = {};
@@ -15,11 +14,7 @@ export default function Login() {
   const [loginState, setLoginState] = useState(fieldsState);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
-
   const navigate = useNavigate();
-
-  // Get setUserId from the UserContext to update it after login
-  const { setUserId } = useUser();
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
@@ -38,19 +33,14 @@ export default function Login() {
         email: loginState.email,
         password: loginState.password,
       };
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        payload,
-        // { withCredentials: true }, // Ensures that the cookie (along with the token) is sent with the request
-      );
 
-      console.log("Login successful:", response.data);
+      // Make login request to authenticate user and store token in cookies
+      await api.post("/auth/login", payload);
+      console.log("User logged in successfully!");
 
-      const { _id: userId } = response.data.user;
-
-      // Store the userId in both UserContext and localStorage
-      setUserId(userId); // Update global state with userId
-      localStorage.setItem("userId", userId); // Persist the userId in localStorage
+      // Fetch authenticated user data from /auth/me endpoint
+      const { data } = await api.get("/auth/me");
+      console.log("User data retrieved :", data.user);
 
       // Clear any existing error messages
       setError("");

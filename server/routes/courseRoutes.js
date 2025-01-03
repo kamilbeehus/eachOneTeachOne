@@ -10,15 +10,13 @@ import {
 } from "../controllers/courseController.js";
 import { enrollUserController } from "../controllers/enrollmentController.js";
 import { validateCourse } from "../middlewares/validateCourse.js";
-// import { authenticateUser } from "../middlewares/authenticateUser.js";
+import { authenticateUser } from "../middlewares/authenticateUser.js";
 import { validateEnrollment } from "../middlewares/validateEnrollment.js";
 
 const router = express.Router();
 
-// Code has been commented out for development purposes. Uncomment the code to enable user authentication with token.
-
 // Middleware to ensure the user is authenticated before accessing these routes
-// router.use(authenticateUser);
+router.use(authenticateUser);
 
 // Get all courses enrolled by a user (GET) : api/courses/user/:userId
 router.get("/user/:userId", getCoursesByStudentIdController);

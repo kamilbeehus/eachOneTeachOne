@@ -1,28 +1,36 @@
-import axios from "axios";
+import api from "../api/apiInstance.js";
+import { getCurrentUser } from "./getCurrentUser.js";
 
-// Utility function to fetch all courses for a specific instructor by userId
-export const getEnrolledCoursesByUserId = async (userId) => {
-  if (!userId) {
-    console.error("Invalid userId provided");
-    return [];
-  }
-
+/**
+ * Fetch all courses a user is enrolled in.
+ *
+ * @returns {Promise<Array>} List of enrolled courses or an empty array if none.
+ */
+export const getEnrolledCoursesByUserId = async () => {
   try {
-    const response = await axios.get(
-      `http://localhost:3000/api/courses/user/${userId}`,
-      // {
-      //   withCredentials: true,
-      // },
-    );
+    // Fetch the authenticated user's information
+    const userData = await getCurrentUser();
+    const userId = userData?._id;
+
+    if (!userId) {
+      console.info("User is not authenticated or user ID is missing.");
+      return [];
+    }
+
+    const response = await api.get(`/courses/user/${userId}`);
     const courseArray = response.data.courses || [];
 
     if (courseArray.length === 0) {
-      console.warn("No enrolled courses found for the user.");
+      console.info("No enrolled courses were found for the user.");
     }
 
     return courseArray;
   } catch (error) {
-    console.error("Failed to retrieve enrolled courses for the user.", error);
+    if (error.response?.status === 404) {
+      console.info("No enrolled courses found for this user.");
+    } else {
+      console.error("Failed to retrieve enrolled courses.", error.message);
+    }
     return [];
   }
 };

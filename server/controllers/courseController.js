@@ -24,7 +24,10 @@ export const getCoursesByStudentIdController = async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: "Courses by StudentId fetched successfully",
+      message:
+        courses.length > 0
+          ? "Courses fetched successfully."
+          : "No courses found for the user.",
       courses,
     });
   } catch (error) {
@@ -32,7 +35,7 @@ export const getCoursesByStudentIdController = async (req, res, next) => {
       error instanceof UserNotFoundError ||
       error instanceof CourseNotFoundError
     ) {
-      return res.status(error.statusCode).json({ message: error.message });
+      return res.status(400).json({ success: false, message: error.message });
     }
     next(error);
   }
@@ -87,14 +90,20 @@ export const getCoursesByInstructorIdController = async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: "Courses by InstructorId fetched successfully",
+      message:
+        courses.length > 0
+          ? "Courses fetched successfully."
+          : "No courses found for the instructor.",
       courses,
     });
   } catch (error) {
     if (error instanceof InstructorNotFoundError) {
-      return res.status(error.statusCode).json({ message: error.message });
-    } else if (error instanceof CourseNotFoundError) {
-      return res.status(error.statusCode).json({ message: error.message });
+      return res.status(400).json({ success: false, message: error.message });
+    } else if (
+      error instanceof CourseNotFoundError ||
+      error instanceof ValidationError
+    ) {
+      return res.status(400).json({ success: false, message: error.message });
     }
     next(error);
   }
@@ -147,17 +156,9 @@ export const createCourseController = async (req, res, next) => {
       });
     }
 
-    const {
-      title,
-      description,
-      skill,
-      creditsCost,
-      schedule,
-      maxStudents,
-      instructorId, // Get the instructor ID directly from the request body
-    } = req.body;
-
-    // const instructorId = req.user._id; // Get the instructor ID from the authenticated user
+    const { title, description, skill, creditsCost, schedule, maxStudents } =
+      req.body;
+    const instructorId = req.user._id; // Get the instructor ID from the authenticated user
 
     const course = await createCourse({
       title,
