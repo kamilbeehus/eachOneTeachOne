@@ -4,31 +4,29 @@ export default function LandingWhyUs() {
   return (
     <div
       id="whyUs"
-      className="relative mt-20 border-b border-neutral-800 min-h-[800px]"
+      className="relative mt-20 min-h-[800px] border-b border-neutral-800"
     >
       <div className="text-center">
-        <span className="bg-base-300 text-primary rounded-full h-6 text-sm font-medium px-2 py-1 uppercase">
+        <span className="h-6 rounded-full bg-accent px-2 py-1 text-sm font-medium uppercase text-primary">
           Why Us?
         </span>
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl mt-10 lg:mt-20 tracking-wide">
+        <h2 className="mt-10 text-3xl tracking-wide sm:text-5xl lg:mt-20 lg:text-6xl">
           {" "}
-          <span className=" bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
-            Why Join Each One Teach One?
-          </span>
+          <span className="text-primary">Why Join Each One Teach One?</span>
         </h2>
       </div>
-      <div className="flex flex-wrap mt-10 lg:mt-20">
+      <div className="mt-10 flex flex-wrap lg:mt-20">
         {LandingWhyUsList.map((LandingWhyUsList, index) => (
           <div key={index} className="w-full sm:w-1/2 lg:w-1/3">
             <div className="flex">
-              <div className="flex mx-6 h-10 w-10 p-2 bg-base-300 text-primary justify-center items-center rounded-full">
+              <div className="mx-6 flex h-10 w-10 items-center justify-center rounded-full bg-accent p-2 text-primary">
                 {LandingWhyUsList.icon}
               </div>
               <div>
-                <h5 className="mt-1 mb-6 font-semibold text-xl">
+                <h5 className="mb-6 mt-1 text-xl font-semibold">
                   {LandingWhyUsList.text}
                 </h5>
-                <p className="text-md p-2 mb-20 ">
+                <p className="text-md mb-20 p-2">
                   {LandingWhyUsList.description}
                 </p>
               </div>

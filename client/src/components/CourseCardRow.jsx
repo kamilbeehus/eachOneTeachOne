@@ -1,4 +1,5 @@
 import CourseCard from "./CourseCard";
+import CourseOfferDialog from "./CourseOfferDialog";
 import OfferCourse from "./OfferCourse";
 
 export default function CourseCardRow({
@@ -8,9 +9,8 @@ export default function CourseCardRow({
 }) {
   return (
     <>
-      {/* <div className="grid content-center justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> */}
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 content-center justify-items-center gap-6 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 px-8">
+        <div className="grid grid-cols-1 content-center justify-items-center gap-6 px-8 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {courseArray.map((course) => {
             // Ensure each course object is valid
             if (!course || !course.title || !course._id) {
@@ -28,11 +28,11 @@ export default function CourseCardRow({
               />
             );
           })}
-          <div className="flex items-center justify-items-center justify-center">
+          <div className="flex items-center justify-center justify-items-center">
             {/* Pass refreshCourses to OfferCourse */}
-            <OfferCourse
-              isUserCourse={isUserCourse}
+            <CourseOfferDialog
               refreshCourses={refreshCourses}
+              isUserCourse={isUserCourse}
             />
           </div>
         </div>

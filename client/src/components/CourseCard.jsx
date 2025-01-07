@@ -1,11 +1,13 @@
-import raccoonLogo from "../assets/Avatar.png";
+import "react-toastify/dist/ReactToastify.css";
+
+import { Calendar, Clock, Coins } from "lucide-react";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { postEnroll } from "../api/postEnroll.js";
+import raccoonLogo from "../assets/Avatar.png";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
-import { Coins, Calendar, Clock } from "lucide-react";
 
 export default function CourseCard({
   course,
@@ -41,7 +43,7 @@ export default function CourseCard({
 
   return (
     <>
-      <div className="card bg-base-100 shadow-xl max-w-64">
+      <div className="bg-base card max-w-64 shadow-xl">
         <figure>
           {/* Todo: insert teachers profile photo */}
           <img src={raccoonLogo} alt="raccoon" />
@@ -61,7 +63,7 @@ export default function CourseCard({
             </p>
           </div>
           <div className="flex items-center">
-            <Coins className="stroke-primary "></Coins>
+            <Coins className="stroke-primary"></Coins>
             <div className="pl-2 font-semibold">{course.creditsCost}</div>
           </div>
 

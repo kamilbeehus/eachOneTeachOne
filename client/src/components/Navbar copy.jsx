@@ -6,7 +6,7 @@ import ThemeController from "./ThemeController";
 
 export default function Navbar() {
   return (
-    <nav className="navbar sticky top-0 z-50 py-3 border-b border-neutral-700/80 backdrop-blur-lg">
+    <nav className="navbar sticky top-0 z-50 border-b border-neutral-700/80 py-3 backdrop-blur-lg">
       {/* kj<div className="navbar bg-base-100"> */}
       <div className="flex-1">
         <Link to="/home" className="btn btn-ghost rounded-full">
@@ -29,7 +29,7 @@ export default function Navbar() {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle avatar"
+            className="avatar btn btn-circle btn-ghost"
           >
             <div className="w-10 rounded-full">
               {/* Todo: insert teachers profile photo */}
@@ -38,7 +38,7 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-300 p-2 shadow"
           >
             {/* <li>
               <Link to="/settings">Settings</Link>
