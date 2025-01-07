@@ -49,10 +49,13 @@ const formSchema = z.object({
   endTime: z.string(),
 });
 
-export default function CourseOfferDialog(
-  isUserCourse: boolean,
-  refreshCourses: () => void,
-) {
+export default function CourseOfferDialog({
+  isUserCourse,
+  refreshCourses,
+}: {
+  isUserCourse: boolean;
+  refreshCourses: () => void;
+}) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -83,7 +86,7 @@ export default function CourseOfferDialog(
         <DialogTrigger asChild>
           <Button variant="outline">Offer Course</Button>
         </DialogTrigger>
-        <DialogContent className="h-svh sm:h-[512px]">
+        <DialogContent className="h-svh sm:h-[90vh]">
           <DialogHeader>
             <DialogTitle>Add Course</DialogTitle>
             <DialogDescription>
