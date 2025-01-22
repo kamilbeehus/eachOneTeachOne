@@ -1,7 +1,5 @@
 import CourseCard from "./CourseCard";
 import CourseOfferDialog from "./CourseOfferDialog";
-import OfferCourse from "./OfferCourse";
-
 export default function CourseCardRow({
   courseArray = [],
   isUserCourse,
