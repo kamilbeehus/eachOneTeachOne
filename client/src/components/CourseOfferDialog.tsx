@@ -65,7 +65,10 @@ export default function CourseOfferDialog({
       skill: "",
       creditCost: "",
       maxStudents: "",
-      startDate: new Date(),
+      dateRange: {
+        startDate: new Date(), // date.from
+        endDate: new Date(), // date.to
+      },
       startTime: "12:00",
       endTime: "12:00",
     },
@@ -190,13 +193,13 @@ export default function CourseOfferDialog({
                 {/* --- START DATE --- */}
                 <FormField
                   control={form.control}
-                  name="startDate"
+                  name="dateRange"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Start Date</FormLabel>
                       <br />
                       <FormControl>
-                        <DatePickerDemo placeholder="12:00" field="field" />
+                        <DatePickerDemo placeholder="12:00" field="field" /> 
                       </FormControl>
                       <FormDescription>
                         Choose the starting date
