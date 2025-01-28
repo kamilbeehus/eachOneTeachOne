@@ -19,7 +19,6 @@ export function DatePickerDemo({
     from: new Date(),
     to: addDays(new Date(), 0),
   });
-
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>

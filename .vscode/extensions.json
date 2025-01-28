@@ -1,7 +1,8 @@
 {
-    "recommendations": [
-        // Intellisense/autocomplete for Tailwind CSS classes
-        "bradlc.vscode-tailwindcss",
-        "rvest.vs-code-prettier-eslint"
-    ]
+  "recommendations": [
+    // Intellisense/autocomplete for Tailwind CSS classes
+    "bradlc.vscode-tailwindcss",
+    "rvest.vs-code-prettier-eslint",
+    "pomdtr.excalidraw-editor"
+  ]
 }

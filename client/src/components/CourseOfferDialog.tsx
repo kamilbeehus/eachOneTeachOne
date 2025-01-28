@@ -1,10 +1,21 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { postCourse } from "../api/postCourse";
 import { DatePickerDemo } from "./DatePickerDemo";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import * as React from "react";
+import { addDays, format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { DateRange } from "react-day-picker";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Dialog,
   DialogContent,
@@ -36,14 +47,15 @@ const formSchema = z.object({
   skill: z.string().min(3, {
     message: "Skill must be at least 3 characters.",
   }),
-  creditCost: z.string().min(1, {
-    message: "creditCost must be at least 1 character.",
+  creditsCost: z.number().min(1, {
+    message: "creditsCost must be at least 1 character.",
   }),
   maxStudents: z.string().min(1, {
     message: "Must be at least 1 characters.",
   }),
-  startDate: z.date().min(new Date(), {
-    message: "Start Date must lie in the future",
+  dateRange: z.object({
+    from: z.date(),
+    to: z.date(),
   }),
   startTime: z.string(),
   endTime: z.string(),
@@ -60,27 +72,36 @@ export default function CourseOfferDialog({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      skill: "",
-      creditCost: "",
-      maxStudents: "",
+      title: "hello",
+      description: "piano",
+      skill: "Music",
+      creditsCost: 1,
+      maxStudents: "4",
       dateRange: {
-        startDate: new Date(), // date.from
-        endDate: new Date(), // date.to
+        from: new Date(),
+        to: addDays(new Date(), 1),
       },
-      startTime: "12:00",
+      startTime: "11:00",
       endTime: "12:00",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(payload: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  async function onSubmit(payload: z.infer<typeof formSchema>) {
+    try {
+      console.log("hi from onSubmit - TRY");
+      const response = await postCourse(payload);
+      // toast.success("Your course has been created successfully!");
+      console.log(response);
+
+      // Refresh the courses list after successful course creation
+      refreshCourses();
+    } catch (e) {
+      console.log("hi from onSubmit - CATCH");
+      console.error(e);
+      // toast.error("Failed to create course. Please try again.");
+    }
     console.log(payload);
-    console.log("Hi from onSubmit");
-    refreshCourses;
   }
 
   if (isUserCourse) {
@@ -111,7 +132,7 @@ export default function CourseOfferDialog({
                     <FormItem>
                       <FormLabel>Title</FormLabel>
                       <FormControl>
-                        <Input placeholder="title" {...field} />
+                        <Input placeholder="Title" {...field} />
                       </FormControl>
                       <FormDescription>
                         This is the title of your Course.
@@ -128,7 +149,7 @@ export default function CourseOfferDialog({
                     <FormItem>
                       <FormLabel>Description</FormLabel>
                       <FormControl>
-                        <Input placeholder="description" {...field} />
+                        <Input placeholder="Description" {...field} />
                       </FormControl>
                       <FormDescription>
                         Describe the content of your course in a few
@@ -146,7 +167,7 @@ export default function CourseOfferDialog({
                     <FormItem>
                       <FormLabel>Skill</FormLabel>
                       <FormControl>
-                        <Input placeholder="skill" {...field} />
+                        <Input placeholder="Skill" {...field} />
                       </FormControl>
                       <FormDescription>
                         Pick the skill you want to teach
@@ -158,12 +179,12 @@ export default function CourseOfferDialog({
                 {/* --- CREDIT COST --- */}
                 <FormField
                   control={form.control}
-                  name="creditCost"
+                  name="creditsCost"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Credit Cost</FormLabel>
                       <FormControl>
-                        <Input placeholder="creditCost" {...field} />
+                        <Input placeholder="creditsCost" {...field} />
                       </FormControl>
                       <FormDescription>
                         How much should your course offer cost.
@@ -190,16 +211,56 @@ export default function CourseOfferDialog({
                     </FormItem>
                   )}
                 />
-                {/* --- START DATE --- */}
+                {/* --- dateRange --- */}
                 <FormField
                   control={form.control}
                   name="dateRange"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Start Date</FormLabel>
+                      <FormLabel>Date Range</FormLabel>
                       <br />
                       <FormControl>
-                        <DatePickerDemo placeholder="12:00" field="field" /> 
+                        <div className={cn("grid gap-2")}>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                id="date"
+                                variant={"outline"}
+                                className={cn(
+                                  "w-[300px] justify-start text-left font-normal",
+                                  !field.value && "text-muted-foreground",
+                                )}
+                              >
+                                <CalendarIcon />
+                                {field.value?.from ? (
+                                  field.value.to ? (
+                                    <>
+                                      {format(field.value.from, "LLL dd, y")} -{" "}
+                                      {format(field.value.to, "LLL dd, y")}
+                                    </>
+                                  ) : (
+                                    format(field.value.from, "LLL dd, y")
+                                  )
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent
+                              className="w-auto p-0"
+                              align="start"
+                            >
+                              <Calendar
+                                initialFocus
+                                mode="range"
+                                defaultMonth={field.value?.from}
+                                selected={field.value}
+                                onSelect={field.onChange}
+                                numberOfMonths={2}
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        </div>
                       </FormControl>
                       <FormDescription>
                         Choose the starting date
@@ -216,7 +277,7 @@ export default function CourseOfferDialog({
                     <FormItem>
                       <FormLabel>Start Time</FormLabel>
                       <FormControl>
-                        <Input type="time" placeholder="12:00" {...field} />
+                        <Input type="time" {...field} />
                       </FormControl>
                       <FormDescription>Choose the start time</FormDescription>
                       <FormMessage />
@@ -231,7 +292,7 @@ export default function CourseOfferDialog({
                     <FormItem>
                       <FormLabel>End Time</FormLabel>
                       <FormControl>
-                        <Input type="time" placeholder="11:00" {...field} />
+                        <Input type="time" {...field} />
                       </FormControl>
                       <FormDescription>Choose the end time</FormDescription>
                       <FormMessage />
