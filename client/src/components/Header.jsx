@@ -9,13 +9,10 @@ export default function Header({
 }) {
   return (
     <div className="mb-10">
-      <div className="flex justify-center">
-        <img className="h-14 w-14" src={LogoEoToSvg} alt="" />
-      </div>
-      <h2 className="mt-6 text-center text-3xl font-extrabold ">{heading}</h2>
-      <p className="text-center text-sm mt-5">
+      <h2 className="mt-6 text-center text-3xl font-extrabold">{heading}</h2>
+      <p className="mt-5 text-center text-sm">
         {paragraph}{" "}
-        <Link to={linkUrl} className="font-medium link-primary">
+        <Link to={linkUrl} className="link-primary font-medium">
           {linkName}
         </Link>
       </p>

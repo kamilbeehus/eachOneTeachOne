@@ -9,7 +9,7 @@ export default function FormAction({
       {type === "Button" ? (
         <button
           type={action}
-          className="w-full flex justify-center btn btn-primary"
+          className="btn btn-primary flex w-full justify-center"
           onSubmit={handleSubmit}
         >
           {text}
