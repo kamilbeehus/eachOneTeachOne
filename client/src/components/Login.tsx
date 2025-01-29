@@ -26,7 +26,6 @@ const formSchema = z.object({
 });
 
 export default function Login() {
-  //   const [loginState, setLoginState] = useState(fieldsState);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
@@ -34,7 +33,6 @@ export default function Login() {
   const onSubmit = (payload: z.infer<typeof formSchema>) => {
     console.log("payload:", payload);
     authenticateUser(payload);
-    // authenticateUser();
   };
 
   // Login API Integration
@@ -91,9 +89,6 @@ export default function Login() {
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -107,9 +102,6 @@ export default function Login() {
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
