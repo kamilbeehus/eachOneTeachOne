@@ -1,4 +1,4 @@
-import CourseCardRow from "./CourseCardRow";
+import CourseCardRow from "./CourseCardRow.tsx";
 import { filterCoursesBySkill } from "../helpers/filterCoursesBySkill";
 import { useEffect, useState } from "react";
 

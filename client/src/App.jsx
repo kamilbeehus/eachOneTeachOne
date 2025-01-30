@@ -1,4 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Toaster } from "@/components/ui/toaster";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
@@ -22,6 +23,7 @@ function App() {
             <Route path="*" element={<Error404Page />} />
           </Routes>
         </BrowserRouter>
+        <Toaster></Toaster>
       </div>
     </div>
   );

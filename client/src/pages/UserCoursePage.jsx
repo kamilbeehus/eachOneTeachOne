@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CourseCardRow from "../components/CourseCardRow";
+import CourseCardRow from "../components/CourseCardRow.tsx";
 import Navbar from "../components/Navbar";
 import { getInstructorCourses } from "../api/getInstructorCourses";
 import { getEnrolledCoursesByUserId } from "../api/getEnrolledCoursesByUserId";

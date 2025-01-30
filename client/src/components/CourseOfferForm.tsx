@@ -275,7 +275,11 @@ export default function CourseOfferDialog({
                     <FormItem>
                       <FormLabel>Start Time</FormLabel>
                       <FormControl>
-                        <Input type="time" {...field} />
+                        <Input
+                          className="stroke-slate-600"
+                          type="time"
+                          {...field}
+                        />
                       </FormControl>
                       <FormDescription>Choose the start time</FormDescription>
                       <FormMessage />

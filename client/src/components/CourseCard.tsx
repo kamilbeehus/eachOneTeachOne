@@ -1,8 +1,6 @@
-import "react-toastify/dist/ReactToastify.css";
-
 import { Calendar, Clock, Coins } from "lucide-react";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+// import { toast, ToastContainer } from "react-toastify";
 
 import { postEnroll } from "../api/postEnroll.js";
 import raccoonLogo from "../assets/Avatar.png";
@@ -13,6 +11,10 @@ export default function CourseCard({
   course,
   courseId, // This courseId is passed from the parent component
   isUserCourse,
+}: {
+  course: any;
+  courseId: any;
+  isUserCourse: any;
 }) {
   const [isEnrolling, setIsEnrolling] = useState(false);
   const [error, setError] = useState("");
@@ -26,7 +28,7 @@ export default function CourseCard({
       const response = await postEnroll(courseId);
 
       if (response?.success) {
-        toast.success("You are now enrolled in the course!");
+        // toast.success("You are now enrolled in the course!");
       } else {
         console.warn("Unexpected API response:", response);
         throw new Error(response?.message || "Unexpected response structure");
@@ -34,7 +36,7 @@ export default function CourseCard({
     } catch (error) {
       console.error("Enrollment failed:", error.message);
 
-      toast.error("Enrollment failed. Please try again.");
+      // toast.error("Enrollment failed. Please try again.");
       setError("Enrollment failed. Please try again.");
     } finally {
       setIsEnrolling(false);
@@ -75,7 +77,7 @@ export default function CourseCard({
             />
           </div>
         </div>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </div>
     </>
   );
