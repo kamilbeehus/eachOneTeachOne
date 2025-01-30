@@ -1,11 +1,11 @@
 import Header from "../components/Header";
-import Signup from "../components/Signup";
+import Signup from "../components/Signup.tsx";
 
 export default function SignupPage() {
   return (
     <>
-      <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+      <div className="flex h-screen min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md space-y-8">
           <Header
             heading="Sign Up to create an account"
             paragraph="Already have an account? "

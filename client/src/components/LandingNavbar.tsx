@@ -1,24 +1,25 @@
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 export default function LandingNavbar() {
   return (
-    <nav className="sticky top-0 z-50 py-3 backdrop-blur-lg border-b border-neutral-700/80">
-      <div className="container px-4 mx-auto relative lg:text-sm">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center flex-shrink-0">
+    <nav className="sticky top-0 z-50 border-b border-neutral-700/80 py-3 backdrop-blur-lg">
+      <div className="container relative mx-auto px-4 lg:text-sm">
+        <div className="flex items-center justify-between">
+          <div className="flex flex-shrink-0 items-center">
             {/* <img className="h-10 w-10 mr-2" src={AvatarLogo} alt="Logo" /> */}
-            <span className="md:text-xl tracking-tight">
+            <span className="tracking-tight md:text-xl">
               EachOne
               <br />
               TeachOne
             </span>
           </div>
-          <div className="justify-center space-x-2">
-            <Link to="/login" className=" px-1">
-              <button className="btn btn-primary"> Login</button>
+          <div className="flex-col justify-center space-x-2">
+            <Link to="/login" className="px-1">
+              <Button> Login</Button>
             </Link>
-            <Link to="/Signup" className=" px-1">
-              <button className="btn btn-primary">Create an account</button>
+            <Link to="/Signup" className="px-1">
+              <Button>Sign Up</Button>
             </Link>
           </div>
         </div>
