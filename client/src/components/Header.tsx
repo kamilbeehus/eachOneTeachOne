@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-import LogoEoToSvg from "../assets/LogoEoTo.svg";
 
 export default function Header({
   heading,
   paragraph,
   linkName,
   linkUrl = "#",
+}: {
+  heading: string;
+  paragraph: string;
+  linkName: string;
+  linkUrl: string;
 }) {
   return (
     <div className="mb-10">

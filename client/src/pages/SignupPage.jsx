@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../components/Header.tsx";
 import Signup from "../components/Signup.tsx";
 
 export default function SignupPage() {

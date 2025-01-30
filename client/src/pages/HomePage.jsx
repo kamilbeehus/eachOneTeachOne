@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getCourses } from "../api/getCourses";
 import Navbar from "../components/Navbar";
 import { filterCoursesBySkill } from "../helpers/filterCoursesBySkill";
-import FilteredCourseCardRow from "../components/FilteredCourseCardRow";
+import CourseCardRowFiltered from "../components/CourseCardRowFiltered.tsx";
 
 export default function HomePage() {
   const [allCourses, setAllCourses] = useState([]);
@@ -41,11 +41,11 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col ">
+      <div className="flex min-h-screen flex-col">
         <div className="flex-grow overflow-auto">
           <Navbar />
           {isLoading ? (
-            <div className="flex justify-center mt-10">
+            <div className="mt-10 flex justify-center">
               {/* DaisyUI Loading Spinner */}
               <span className="loading loading-spinner loading-lg"></span>
               <p>Loading...</p>
@@ -53,13 +53,13 @@ export default function HomePage() {
           ) : (
             <>
               {/* Show filtered course rows once data is loaded */}
-              <FilteredCourseCardRow skill="Music" allCourses={allCourses} />
-              <FilteredCourseCardRow
+              <CourseCardRowFiltered skill="Music" allCourses={allCourses} />
+              <CourseCardRowFiltered
                 skill="Languages"
                 allCourses={allCourses}
               />
-              <FilteredCourseCardRow skill="Cooking" allCourses={allCourses} />
-              <FilteredCourseCardRow
+              <CourseCardRowFiltered skill="Cooking" allCourses={allCourses} />
+              <CourseCardRowFiltered
                 skill="Programming"
                 allCourses={allCourses}
               />

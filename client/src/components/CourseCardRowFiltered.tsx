@@ -2,7 +2,13 @@ import CourseCardRow from "./CourseCardRow";
 import { filterCoursesBySkill } from "../helpers/filterCoursesBySkill";
 import { useEffect, useState } from "react";
 
-export default function FilteredCourseCardRow({ skill, allCourses }) {
+export default function CourseCardRowFiltered({
+  skill,
+  allCourses,
+}: {
+  skill: String;
+  allCourses: any;
+}) {
   const [skillCourses, setSkillCourses] = useState([]);
 
   useEffect(() => {
