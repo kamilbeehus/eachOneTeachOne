@@ -1,9 +1,18 @@
 import { Calendar, Clock, Coins } from "lucide-react";
 import { useState } from "react";
 // import { toast, ToastContainer } from "react-toastify";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 import { postEnroll } from "../api/postEnroll.js";
-import raccoonLogo from "../assets/Avatar.png";
+import AvatarLogo from "../assets/Avatar.png";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
 
@@ -13,8 +22,8 @@ export default function CourseCard({
   isUserCourse,
 }: {
   course: any;
-  courseId: any;
-  isUserCourse: any;
+  courseId: string;
+  isUserCourse: boolean;
 }) {
   const [isEnrolling, setIsEnrolling] = useState(false);
   const [error, setError] = useState("");
@@ -45,14 +54,19 @@ export default function CourseCard({
 
   return (
     <>
-      <div className="bg-base card max-w-64 shadow-xl">
-        <figure>
-          {/* Todo: insert teachers profile photo */}
-          <img src={raccoonLogo} alt="raccoon" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title font-bold">{course.title}</h2>
-          <p>{course.description}</p>
+      <Card className="mx-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg">
+        <img
+          src={AvatarLogo}
+          alt="Avatar picture"
+          className="h-48 w-full object-cover"
+        />
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold">{course.title}</CardTitle>
+          {course.description && (
+            <CardDescription>{course.description}</CardDescription>
+          )}
+        </CardHeader>
+        <CardContent className="space-y-3">
           <div className="flex items-center space-x-2 pt-2">
             <Calendar className="stroke-primary" />
             <p>{getHumanReadableDate(course.schedule.startDate)}</p>
@@ -69,28 +83,17 @@ export default function CourseCard({
             <div className="pl-2 font-semibold">{course.creditsCost}</div>
           </div>
 
-          <div className="card-actions justify-end">
-            <Edit
-              isUserCourse={isUserCourse}
-              isEnrolling={isEnrolling}
-              handleEnrollClick={handleEnrollClick} // Pass handler function
-            />
-          </div>
-        </div>
-        {/* <ToastContainer /> */}
-      </div>
+          <div className="card-actions justify-end"></div>
+        </CardContent>
+        <CardFooter className="flex justify-end space-x-2">
+          {isUserCourse && <Button className="btn btn-primary">Edit</Button>}
+          {!isUserCourse && (
+            <Button className="btn btn-primary" onClick={handleEnrollClick}>
+              {isEnrolling ? "Enrolling..." : "Enroll"}
+            </Button>
+          )}
+        </CardFooter>
+      </Card>
     </>
   );
-}
-
-function Edit({ isUserCourse, isEnrolling, handleEnrollClick }) {
-  if (isUserCourse) {
-    return <button className="btn btn-primary">Edit</button>;
-  } else {
-    return (
-      <button className="btn btn-primary" onClick={handleEnrollClick}>
-        {isEnrolling ? "Enrolling..." : "Enroll"}
-      </button>
-    );
-  }
 }

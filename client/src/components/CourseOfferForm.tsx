@@ -3,9 +3,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { postCourse } from "../api/postCourse";
 import { Separator } from "@/components/ui/separator";
-import { addDays, format } from "date-fns";
+import { format, startOfDay } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -51,10 +50,11 @@ const formSchema = z.object({
   maxStudents: z.string().min(1, {
     message: "Must be at least 1 characters.",
   }),
-  dateRange: z.object({
-    from: z.date(),
-    to: z.date(),
-  }),
+  date: z.date(),
+  // dateRange: z.object({
+  //   from: z.date(),
+  //   to: z.date(),
+  // }),
   startTime: z.string(),
   endTime: z.string(),
 });
@@ -75,10 +75,11 @@ export default function CourseOfferDialog({
       skill: "Music",
       creditsCost: 1,
       maxStudents: "4",
-      dateRange: {
-        from: new Date(),
-        to: addDays(new Date(), 1),
-      },
+      date: new Date(),
+      // date: {
+      //   from: new Date(),
+      //   to: addDays(new Date(), 1),
+      // },
       startTime: "11:00",
       endTime: "12:00",
     },
@@ -212,33 +213,25 @@ export default function CourseOfferDialog({
                 {/* --- dateRange --- */}
                 <FormField
                   control={form.control}
-                  name="dateRange"
+                  name="date"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Date Range</FormLabel>
+                      <FormLabel>Date</FormLabel>
                       <br />
                       <FormControl>
                         <div className={cn("grid gap-2")}>
                           <Popover>
                             <PopoverTrigger asChild>
                               <Button
-                                id="date"
                                 variant={"outline"}
                                 className={cn(
-                                  "w-[300px] justify-start text-left font-normal",
+                                  "w-[240px] justify-start text-left font-normal",
                                   !field.value && "text-muted-foreground",
                                 )}
                               >
                                 <CalendarIcon />
-                                {field.value?.from ? (
-                                  field.value.to ? (
-                                    <>
-                                      {format(field.value.from, "LLL dd, y")} -{" "}
-                                      {format(field.value.to, "LLL dd, y")}
-                                    </>
-                                  ) : (
-                                    format(field.value.from, "LLL dd, y")
-                                  )
+                                {field.value ? (
+                                  format(field.value, "PPP")
                                 ) : (
                                   <span>Pick a date</span>
                                 )}
@@ -249,20 +242,19 @@ export default function CourseOfferDialog({
                               align="start"
                             >
                               <Calendar
-                                initialFocus
-                                mode="range"
-                                defaultMonth={field.value?.from}
+                                mode="single"
                                 selected={field.value}
                                 onSelect={field.onChange}
-                                numberOfMonths={2}
+                                disabled={(date) =>
+                                  date < startOfDay(new Date())
+                                }
+                                initialFocus
                               />
                             </PopoverContent>
                           </Popover>
                         </div>
                       </FormControl>
-                      <FormDescription>
-                        Choose the starting date
-                      </FormDescription>
+                      <FormDescription>Choose the date</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -301,7 +293,10 @@ export default function CourseOfferDialog({
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Save changes</Button>
+                <div className="flex justify-between">
+                  <Button variant="outline">Cancel</Button>
+                  <Button type="submit">Save changes</Button>
+                </div>
               </form>
             </Form>
           </ScrollArea>
