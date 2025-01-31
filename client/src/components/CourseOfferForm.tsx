@@ -293,8 +293,7 @@ export default function CourseOfferDialog({
                     </FormItem>
                   )}
                 />
-                <div className="flex justify-between">
-                  <Button variant="outline">Cancel</Button>
+                <div className="flex justify-end">
                   <Button type="submit">Save changes</Button>
                 </div>
               </form>
