@@ -81,7 +81,7 @@ export default function Signup() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="firstName"
@@ -147,17 +147,19 @@ export default function Signup() {
             </FormItem>
           )}
         />
-        {isLoading ? (
-          <div className="mt-4 text-center">
-            <span className="loading loading-spinner loading-lg"></span>
-            <p>Signing up...</p>
-          </div>
-        ) : (
-          <Button type="submit" className="w-full">
-            Sign Up
-          </Button>
-        )}
-        {error && <div className="mt-2 text-sm text-error">{error}</div>}
+        <div>
+          {isLoading ? (
+            <div className="mt-4 text-center">
+              <span className="loading loading-spinner loading-lg"></span>
+              <p>Signing up...</p>
+            </div>
+          ) : (
+            <Button type="submit" className="mt-8 w-full">
+              Sign Up
+            </Button>
+          )}
+          {error && <div className="mt-2 text-sm text-error">{error}</div>}
+        </div>
       </form>
     </Form>
   );

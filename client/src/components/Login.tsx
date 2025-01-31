@@ -79,7 +79,7 @@ export default function Login() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="email"
@@ -106,17 +106,19 @@ export default function Login() {
             </FormItem>
           )}
         />
-        {isLoading ? (
-          <div className="mt-4 text-center">
-            <span className="loading loading-spinner loading-lg"></span>
-            <p>Logging in...</p>
-          </div>
-        ) : (
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
-        )}
-        {error && <div className="mt-2 text-sm text-error">{error}</div>}
+        <div>
+          {isLoading ? (
+            <div className="mt-4 text-center">
+              <span className="loading loading-spinner loading-lg"></span>
+              <p>Logging in...</p>
+            </div>
+          ) : (
+            <Button type="submit" className="mt-8 w-full">
+              Login
+            </Button>
+          )}
+          {error && <div className="mt-2 text-sm text-error">{error}</div>}
+        </div>
       </form>
     </Form>
   );

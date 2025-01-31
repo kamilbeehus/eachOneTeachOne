@@ -5,13 +5,13 @@ export default function LandingContent() {
     <>
       <div
         id="howDoesItWork"
-        className="mt-6 flex flex-col items-center lg:mt-20"
+        className="m-14 flex flex-col items-center lg:mt-20"
       >
-        <h1 className="text-center text-4xl tracking-wide sm:text-6xl lg:text-7xl">
-          <span className="text-primary">
+        <div className="bg-gradient-to-r from-primary to-error bg-clip-text pb-6 text-center text-transparent">
+          <h1 className="text-3xl font-extrabold sm:text-6xl lg:text-7xl">
             Each One Teach One. Empowering minds. Building futures.
-          </span>
-        </h1>
+          </h1>
+        </div>
         <p className="mt-10 max-w-4xl text-center text-lg">
           Offer courses in your area of expertise and earn credits for each hour
           you teach. These credits can then be used to book courses offered by
@@ -23,19 +23,18 @@ export default function LandingContent() {
         className="relative mt-20 min-h-[800px] border-b border-neutral-800"
       >
         <div className="text-center">
-          <span className="h-6 rounded-full bg-accent px-2 py-1 text-sm font-medium uppercase text-primary">
-            Why Us?
-          </span>
-          <h2 className="mt-10 text-3xl tracking-wide sm:text-5xl lg:mt-20 lg:text-6xl">
-            {" "}
-            <span className="text-primary">Why Join Each One Teach One?</span>
-          </h2>
+          <div className="bg-gradient-to-r from-primary to-error bg-clip-text pb-6 text-center text-transparent">
+            <h2 className="mt-10 text-3xl font-extrabold sm:text-5xl lg:mt-20 lg:text-6xl">
+              {" "}
+              Why Join Each One Teach One?
+            </h2>
+          </div>
         </div>
         <div className="mt-10 flex flex-wrap lg:mt-20">
           {LandingWhyUsList.map((LandingWhyUsList, index) => (
             <div key={index} className="w-full sm:w-1/2 lg:w-1/3">
               <div className="flex">
-                <div className="mx-6 flex h-10 w-10 items-center justify-center rounded-full bg-accent p-2 text-primary">
+                <div className="mx-6 flex h-10 w-10 items-center justify-center rounded-full bg-transparent p-2 text-primary">
                   {LandingWhyUsList.icon}
                 </div>
                 <div>
