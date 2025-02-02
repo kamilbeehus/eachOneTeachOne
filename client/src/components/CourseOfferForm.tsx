@@ -50,11 +50,11 @@ const formSchema = z.object({
   maxStudents: z.string().min(1, {
     message: "Must be at least 1 characters.",
   }),
-  date: z.date(),
-  // dateRange: z.object({
-  //   from: z.date(),
-  //   to: z.date(),
-  // }),
+  // Updated date to match backend payload - Schedule (date) is an object with nested dates (startDate, endDate)
+  schedule: z.object({
+    startDate: z.date(),
+    endDate: z.date(),
+  }),
   startTime: z.string(),
   endTime: z.string(),
 });
@@ -69,17 +69,18 @@ export default function CourseOfferDialog({
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    // To-do: Remove default values
     defaultValues: {
       title: "hello",
       description: "piano",
       skill: "Music",
       creditsCost: 1,
       maxStudents: "4",
-      date: new Date(),
-      // date: {
-      //   from: new Date(),
-      //   to: addDays(new Date(), 1),
-      // },
+      // Updated date to match backend payload - Schedule (date) is an object with nested dates (startDate, endDate)
+      schedule: {
+        startDate: new Date(),
+        endDate: new Date(),
+    },
       startTime: "11:00",
       endTime: "12:00",
     },
@@ -89,6 +90,7 @@ export default function CourseOfferDialog({
   async function onSubmit(payload: z.infer<typeof formSchema>) {
     try {
       console.log("hi from onSubmit - TRY");
+      
       const response = await postCourse(payload);
       // toast.success("Your course has been created successfully!");
       console.log(response);
@@ -213,10 +215,10 @@ export default function CourseOfferDialog({
                 {/* --- dateRange --- */}
                 <FormField
                   control={form.control}
-                  name="date"
+                  name="schedule"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Date</FormLabel>
+                      <FormLabel>Course Duration</FormLabel>
                       <br />
                       <FormControl>
                         <div className={cn("grid gap-2")}>
@@ -229,11 +231,12 @@ export default function CourseOfferDialog({
                                   !field.value && "text-muted-foreground",
                                 )}
                               >
+                                {/* Updated Date picker to allow both a startDate and endDate in the same component */}
                                 <CalendarIcon />
-                                {field.value ? (
-                                  format(field.value, "PPP")
+                                {field.value?.startDate && field.value?.endDate ? (
+                                  `${format(field.value.startDate, "PPP")} - ${format(field.value.endDate, "PPP")}`
                                 ) : (
-                                  <span>Pick a date</span>
+                                  <span>Pick a date range</span>
                                 )}
                               </Button>
                             </PopoverTrigger>
@@ -242,9 +245,17 @@ export default function CourseOfferDialog({
                               align="start"
                             >
                               <Calendar
-                                mode="single"
-                                selected={field.value}
-                                onSelect={field.onChange}
+                                mode="range" // Updated to allow for a range of dates and not a single date
+                                selected={{
+                                  from: field.value?.startDate,
+                                  to: field.value?.endDate,
+                                }}
+                                onSelect={(range) => {
+                                  field.onChange({
+                                    startDate: range?.from || new Date(),
+                                    endDate: range?.to || new Date(),
+                                  });
+                                }}
                                 disabled={(date) =>
                                   date < startOfDay(new Date())
                                 }
@@ -254,7 +265,7 @@ export default function CourseOfferDialog({
                           </Popover>
                         </div>
                       </FormControl>
-                      <FormDescription>Choose the date</FormDescription>
+                      <FormDescription>Select the start and end dates.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
