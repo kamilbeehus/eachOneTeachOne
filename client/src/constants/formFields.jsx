@@ -83,9 +83,9 @@ const navItems = [
 const LandingWhyUsList = [
   {
     icon: <BookOpenText />,
-    text: "Offer and Book courses",
+    text: "Offer and book courses",
     description:
-      "Share your skills and passions by offering a course on our platform.Use your earned credits to book and attend courses offered by other members of the platform. Explore new interests, enhance your skills, and grow through learning from others.",
+      "Share your skills and passions by offering a course on our platform. Use your earned credits to book and attend courses offered by other members of the platform. Explore new interests, enhance your skills and grow through learning from others.",
   },
   {
     icon: <HandCoins />,

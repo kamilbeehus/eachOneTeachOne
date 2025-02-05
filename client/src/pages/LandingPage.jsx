@@ -1,13 +1,11 @@
-import LandingNavbar from "../components/LandingNavbar";
-import LandingHowDoesItWork from "../components/LandingHowDoesItWork";
-import LandingWhyUs from "../components/LandingWhyUs";
+import LandingNavbar from "../components/LandingNavbar.tsx";
+import LandingContent from "../components/LandingContent.tsx";
 
 export default function LandingPage() {
   return (
-    <>
+    <div className="">
       <LandingNavbar />
-      <LandingHowDoesItWork />
-      <LandingWhyUs />
-    </>
+      <LandingContent />
+    </div>
   );
 }

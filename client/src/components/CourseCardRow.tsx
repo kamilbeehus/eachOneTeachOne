@@ -1,17 +1,19 @@
-import CourseCard from "./CourseCard";
-import OfferCourse from "./OfferCourse";
-
+import CourseCard from "./CourseCard.tsx";
+import CourseOfferDialog from "./CourseOfferForm";
 export default function CourseCardRow({
   courseArray = [],
   isUserCourse,
   refreshCourses,
+}: {
+  courseArray: any;
+  isUserCourse: boolean;
+  refreshCourses: any;
 }) {
   return (
     <>
-      {/* <div className="grid content-center justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> */}
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 content-center justify-items-center gap-6 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 px-8">
-          {courseArray.map((course) => {
+        <div className="grid grid-cols-1 content-center justify-items-center gap-6 px-8 py-12 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          {courseArray.map((course: any) => {
             // Ensure each course object is valid
             if (!course || !course.title || !course._id) {
               return null;
@@ -22,17 +24,17 @@ export default function CourseCardRow({
                 course={course}
                 key={course._id}
                 courseId={course._id} // Pass the courseId as a prop to the child component
-                courseName={course.title}
-                courseDescription={course.description}
+                // courseName={course.title}
+                // courseDescription={course.description}
                 isUserCourse={isUserCourse}
               />
             );
           })}
-          <div className="flex items-center justify-items-center justify-center">
+          <div className="flex items-center justify-center justify-items-center">
             {/* Pass refreshCourses to OfferCourse */}
-            <OfferCourse
-              isUserCourse={isUserCourse}
+            <CourseOfferDialog
               refreshCourses={refreshCourses}
+              isUserCourse={isUserCourse}
             />
           </div>
         </div>

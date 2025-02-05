@@ -1,16 +1,29 @@
-import raccoonLogo from "../assets/Avatar.png";
+import { Calendar, Clock, Coins } from "lucide-react";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { toast, ToastContainer } from "react-toastify";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 import { postEnroll } from "../api/postEnroll.js";
+import AvatarLogo from "../assets/Avatar.png";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
-import { Coins, Calendar, Clock } from "lucide-react";
 
 export default function CourseCard({
   course,
   courseId, // This courseId is passed from the parent component
   isUserCourse,
+}: {
+  course: any;
+  courseId: string;
+  isUserCourse: boolean;
 }) {
   const [isEnrolling, setIsEnrolling] = useState(false);
   const [error, setError] = useState("");
@@ -24,7 +37,7 @@ export default function CourseCard({
       const response = await postEnroll(courseId);
 
       if (response?.success) {
-        toast.success("You are now enrolled in the course!");
+        // toast.success("You are now enrolled in the course!");
       } else {
         console.warn("Unexpected API response:", response);
         throw new Error(response?.message || "Unexpected response structure");
@@ -32,7 +45,7 @@ export default function CourseCard({
     } catch (error) {
       console.error("Enrollment failed:", error.message);
 
-      toast.error("Enrollment failed. Please try again.");
+      // toast.error("Enrollment failed. Please try again.");
       setError("Enrollment failed. Please try again.");
     } finally {
       setIsEnrolling(false);
@@ -41,14 +54,19 @@ export default function CourseCard({
 
   return (
     <>
-      <div className="card bg-base-100 shadow-xl max-w-64">
-        <figure>
-          {/* Todo: insert teachers profile photo */}
-          <img src={raccoonLogo} alt="raccoon" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title font-bold">{course.title}</h2>
-          <p>{course.description}</p>
+      <Card className="mx-auto flex w-[280px] flex-col overflow-hidden rounded-lg shadow-lg">
+        <img
+          src={AvatarLogo}
+          alt="Avatar picture"
+          className="h-48 w-full object-cover"
+        />
+        <CardHeader className="flex-auto">
+          <CardTitle className="text-2xl font-bold">{course.title}</CardTitle>
+          {course.description && (
+            <CardDescription>{course.description}</CardDescription>
+          )}
+        </CardHeader>
+        <CardContent className="flex-2 space-y-3">
           <div className="flex items-center space-x-2 pt-2">
             <Calendar className="stroke-primary" />
             <p>{getHumanReadableDate(course.schedule.startDate)}</p>
@@ -61,32 +79,21 @@ export default function CourseCard({
             </p>
           </div>
           <div className="flex items-center">
-            <Coins className="stroke-primary "></Coins>
+            <Coins className="stroke-primary"></Coins>
             <div className="pl-2 font-semibold">{course.creditsCost}</div>
           </div>
 
-          <div className="card-actions justify-end">
-            <Edit
-              isUserCourse={isUserCourse}
-              isEnrolling={isEnrolling}
-              handleEnrollClick={handleEnrollClick} // Pass handler function
-            />
-          </div>
-        </div>
-        <ToastContainer />
-      </div>
+          <div className="card-actions justify-end"></div>
+        </CardContent>
+        <CardFooter className="flex flex-none justify-end space-x-2">
+          {isUserCourse && <Button>Edit</Button>}
+          {!isUserCourse && (
+            <Button onClick={handleEnrollClick}>
+              {isEnrolling ? "Enrolling..." : "Enroll"}
+            </Button>
+          )}
+        </CardFooter>
+      </Card>
     </>
   );
-}
-
-function Edit({ isUserCourse, isEnrolling, handleEnrollClick }) {
-  if (isUserCourse) {
-    return <button className="btn btn-primary">Edit</button>;
-  } else {
-    return (
-      <button className="btn btn-primary" onClick={handleEnrollClick}>
-        {isEnrolling ? "Enrolling..." : "Enroll"}
-      </button>
-    );
-  }
 }
