@@ -54,19 +54,19 @@ export default function CourseCard({
 
   return (
     <>
-      <Card className="mx-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg">
+      <Card className="mx-auto flex w-[280px] flex-col overflow-hidden rounded-lg shadow-lg">
         <img
           src={AvatarLogo}
           alt="Avatar picture"
           className="h-48 w-full object-cover"
         />
-        <CardHeader>
+        <CardHeader className="flex-auto">
           <CardTitle className="text-2xl font-bold">{course.title}</CardTitle>
           {course.description && (
             <CardDescription>{course.description}</CardDescription>
           )}
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="flex-2 space-y-3">
           <div className="flex items-center space-x-2 pt-2">
             <Calendar className="stroke-primary" />
             <p>{getHumanReadableDate(course.schedule.startDate)}</p>
@@ -85,10 +85,10 @@ export default function CourseCard({
 
           <div className="card-actions justify-end"></div>
         </CardContent>
-        <CardFooter className="flex justify-end space-x-2">
-          {isUserCourse && <Button className="btn btn-primary">Edit</Button>}
+        <CardFooter className="flex flex-none justify-end space-x-2">
+          {isUserCourse && <Button>Edit</Button>}
           {!isUserCourse && (
-            <Button className="btn btn-primary" onClick={handleEnrollClick}>
+            <Button onClick={handleEnrollClick}>
               {isEnrolling ? "Enrolling..." : "Enroll"}
             </Button>
           )}

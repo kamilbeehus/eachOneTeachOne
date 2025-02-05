@@ -80,7 +80,7 @@ export default function CourseOfferDialog({
       schedule: {
         startDate: new Date(),
         endDate: new Date(),
-    },
+      },
       startTime: "11:00",
       endTime: "12:00",
     },
@@ -89,8 +89,7 @@ export default function CourseOfferDialog({
   // 2. Define a submit handler.
   async function onSubmit(payload: z.infer<typeof formSchema>) {
     try {
-      console.log("hi from onSubmit - TRY");
-      
+      console.log("onSubmit() - TRY");
       const response = await postCourse(payload);
       // toast.success("Your course has been created successfully!");
       console.log(response);
@@ -98,7 +97,7 @@ export default function CourseOfferDialog({
       // Refresh the courses list after successful course creation
       refreshCourses();
     } catch (e) {
-      console.log("hi from onSubmit - CATCH");
+      console.log("onSubmit() - CATCH");
       console.error(e);
       // toast.error("Failed to create course. Please try again.");
     }
@@ -185,7 +184,11 @@ export default function CourseOfferDialog({
                     <FormItem>
                       <FormLabel>Credit Cost</FormLabel>
                       <FormControl>
-                        <Input placeholder="creditsCost" {...field} />
+                        <Input
+                          type="number"
+                          placeholder="creditsCost"
+                          {...field}
+                        />
                       </FormControl>
                       <FormDescription>
                         How much should your course offer cost.
@@ -227,13 +230,14 @@ export default function CourseOfferDialog({
                               <Button
                                 variant={"outline"}
                                 className={cn(
-                                  "w-[240px] justify-start text-left font-normal",
+                                  "w-full justify-start text-left font-normal",
                                   !field.value && "text-muted-foreground",
                                 )}
                               >
                                 {/* Updated Date picker to allow both a startDate and endDate in the same component */}
                                 <CalendarIcon />
-                                {field.value?.startDate && field.value?.endDate ? (
+                                {field.value?.startDate &&
+                                field.value?.endDate ? (
                                   `${format(field.value.startDate, "PPP")} - ${format(field.value.endDate, "PPP")}`
                                 ) : (
                                   <span>Pick a date range</span>
@@ -265,7 +269,9 @@ export default function CourseOfferDialog({
                           </Popover>
                         </div>
                       </FormControl>
-                      <FormDescription>Select the start and end dates.</FormDescription>
+                      <FormDescription>
+                        Select the start and end dates.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -305,7 +311,7 @@ export default function CourseOfferDialog({
                   )}
                 />
                 <div className="flex justify-end">
-                  <Button type="submit">Save changes</Button>
+                  <Button type="submit">Offer Course</Button>
                 </div>
               </form>
             </Form>

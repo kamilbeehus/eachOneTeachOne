@@ -12,7 +12,7 @@ export default function CourseCardRow({
   return (
     <>
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 content-center justify-items-center gap-6 px-8 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="grid grid-cols-1 content-center justify-items-center gap-6 px-8 py-12 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {courseArray.map((course: any) => {
             // Ensure each course object is valid
             if (!course || !course.title || !course._id) {

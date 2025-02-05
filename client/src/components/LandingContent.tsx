@@ -26,7 +26,7 @@ export default function LandingContent() {
           <div className="bg-gradient-to-r from-primary to-error bg-clip-text pb-6 text-center text-transparent">
             <h2 className="mt-10 text-3xl font-extrabold sm:text-5xl lg:mt-20 lg:text-6xl">
               {" "}
-              Why Join Each One Teach One?
+              Why join Each One Teach One?
             </h2>
           </div>
         </div>
