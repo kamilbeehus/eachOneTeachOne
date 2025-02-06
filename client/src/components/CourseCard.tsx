@@ -10,11 +10,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Pencil, Trash2 } from "lucide-react";
 
 import { postEnroll } from "../api/postEnroll.js";
 import AvatarLogo from "../assets/Avatar.png";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
+
+function handleDelete() {
+  console.log("delete");
+}
 
 export default function CourseCard({
   course,
@@ -85,8 +96,28 @@ export default function CourseCard({
 
           <div className="card-actions justify-end"></div>
         </CardContent>
-        <CardFooter className="flex flex-none justify-end space-x-2">
-          {isUserCourse && <Button>Edit</Button>}
+        <CardFooter className="">
+          {isUserCourse && (
+            <div className="flex w-full justify-between">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-10"
+                      onClick={handleDelete}
+                    >
+                      <Trash2 className="stroke-red-700 stroke-[2.5]"></Trash2>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-red-500 font-bold">
+                    <p>Delete Course</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              <Button>Edit</Button>
+            </div>
+          )}
           {!isUserCourse && (
             <Button onClick={handleEnrollClick}>
               {isEnrolling ? "Enrolling..." : "Enroll"}

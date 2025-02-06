@@ -1,13 +1,13 @@
 import CourseCard from "./CourseCard.tsx";
-import CourseOfferDialog from "./CourseOfferForm";
+import CourseDialog from "./CourseDialog.tsx";
 export default function CourseCardRow({
   courseArray = [],
   isUserCourse,
   refreshCourses,
 }: {
-  courseArray: any;
+  courseArray: [];
   isUserCourse: boolean;
-  refreshCourses: any;
+  refreshCourses: () => void;
 }) {
   return (
     <>
@@ -32,7 +32,7 @@ export default function CourseCardRow({
           })}
           <div className="flex items-center justify-center justify-items-center">
             {/* Pass refreshCourses to OfferCourse */}
-            <CourseOfferDialog
+            <CourseDialog
               refreshCourses={refreshCourses}
               isUserCourse={isUserCourse}
             />
