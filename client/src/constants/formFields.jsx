@@ -1,6 +1,11 @@
-import { CalendarClock, HandCoins, Sprout, UsersRound } from "lucide-react";
-import { Wallet } from "lucide-react";
-import { BookOpenText } from "lucide-react";
+import {
+  BookOpenText,
+  CalendarClock,
+  HandCoins,
+  Sprout,
+  UsersRound,
+  Wallet,
+} from "lucide-react";
 const loginFields = [
   {
     labelText: "Email address",

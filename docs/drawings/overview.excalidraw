@@ -64,11 +64,11 @@
       "locked": false,
       "fontSize": 21.679192641576886,
       "fontFamily": 1,
-      "text": "CourseOfferDialog.tsx",
+      "text": "CourseDialog.tsx",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "CourseOfferDialog.tsx",
+      "originalText": "CourseDialog.tsx",
       "lineHeight": 1.25,
       "baseline": 18
     },
