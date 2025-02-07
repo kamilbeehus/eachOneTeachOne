@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { postCourse } from "../api/postCourse";
 import { format, startOfDay } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -22,31 +21,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-const formSchema = z.object({
-  title: z.string().min(3, {
-    message: "Title must be at least 3 characters.",
-  }),
-  description: z.string().min(3, {
-    message: "Description must be at least 3 characters.",
-  }),
-  skill: z.string().min(3, {
-    message: "Skill must be at least 3 characters.",
-  }),
-  creditsCost: z.number().min(1, {
-    message: "creditsCost must be at least 1 character.",
-  }),
-  maxStudents: z.string().min(1, {
-    message: "Must be at least 1 character.",
-  }),
-  // Updated date to match backend payload - Schedule (date) is an object with nested dates (startDate, endDate)
-  schedule: z.object({
-    startDate: z.date(),
-    endDate: z.date(),
-  }),
-  startTime: z.string(),
-  endTime: z.string(),
-});
+import {
+  courseDialogFormSchema,
+  TCourseDialogFormSchema,
+} from "@/lib/types/courseDialogFormSchema";
 
 export default function CourseDialogForm({
   isUserCourse,
@@ -56,8 +34,8 @@ export default function CourseDialogForm({
   refreshCourses: () => void;
 }) {
   // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<TCourseDialogFormSchema>({
+    resolver: zodResolver(courseDialogFormSchema),
     // To-do: Remove default values
     defaultValues: {
       title: "hello",
@@ -76,7 +54,7 @@ export default function CourseDialogForm({
   });
 
   // 2. Define a submit handler.
-  async function onSubmit(payload: z.infer<typeof formSchema>) {
+  async function onSubmit(payload: TCourseDialogFormSchema) {
     try {
       console.log("onSubmit() - TRY");
       const response = await postCourse(payload);
@@ -183,7 +161,7 @@ export default function CourseDialogForm({
               </FormItem>
             )}
           />
-          {/* --- dateRange --- */}
+          {/* --- DATE RANGE --- */}
           <FormField
             control={form.control}
             name="schedule"
