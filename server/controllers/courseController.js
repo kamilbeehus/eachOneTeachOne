@@ -7,12 +7,39 @@ import {
   getCoursesByInstructorId,
   getEnrolledStudentsService,
   getCoursesByStudentId,
+  updateCourseById,
 } from "../services/courseService.js";
 import {
   CourseNotFoundError,
   InstructorNotFoundError,
   UserNotFoundError,
+  ValidationError,
 } from "../errors/customErrors.js";
+
+/** Update course by ID Controller**/
+export const updateCourseByIdController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id; // Authenticated user ID
+    const updateData = req.body;
+
+    const updatedCourse = await updateCourseById(id, userId, updateData);
+
+    return res.status(200).json({
+      success: true,
+      message: "Course updated successfully",
+      course: updatedCourse,
+    });
+  } catch (error) {
+    if (error instanceof CourseNotFoundError || error instanceof ValidationError) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+    if (error.message === "Unauthorized: You are not the instructor of this course") {
+      return res.status(403).json({ success: false, message: error.message });
+    }
+    next(error);
+  }
+};
 
 /** Fetch courses by student ID Controller */
 export const getCoursesByStudentIdController = async (req, res, next) => {

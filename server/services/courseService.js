@@ -14,6 +14,56 @@ import {
 import { formatCourseResponse } from "../utils/courseUtils.js";
 import { createTransaction } from "../services/transactionService.js";
 
+/** Update the data of a Course by its ID */
+export const updateCourseById = async (courseId, userId, updateData) => {
+  if (!mongoose.Types.ObjectId.isValid(courseId)) {
+    throw new ValidationError("Invalidad course ID");
+  }
+
+  try {
+    // Find the course and ensure the user is the instructor
+    const course = await Course.findById(courseId);
+    if (!course) {
+      throw new CourseNotFoundError(`Course with id ${courseId} not found`);
+    }
+
+    if (!course.instructorId.equals(userId)) {
+      throw new Error("Unauthorized: You are not the instructor of this course");
+    }
+
+    // Update only the fields present in updateData
+    if (updateData.description !== undefined) {
+      course.description = updateData.description;
+    }
+
+    if (updateData.schedule) {
+      const { startDate, endDate } = updateData.schedule;
+      if (startDate && endDate) {
+        if (new Date(endDate) <= new Date(startDate)) {
+          throw new ValidationError("End date must be after start date");
+        }
+        course.schedule = updateData.schedule;
+      } else {
+        throw new ValidationError("Both startDate and endDate are required for schedule");
+      }
+    }
+
+    if (updateData.maxStudents !== undefined) {
+      if (updateData.maxStudents < 1) {
+        throw new ValidationError("maxStudents must be at least 1");
+      }
+      course.maxStudents = updateData.maxStudents;
+    }
+
+    // Save changes to the database
+    await course.save();
+    return course;
+  } catch (error) {
+    console.error("Error updating course:", error);
+    throw error;
+  }
+};
+
 /** Get all courses where the given user is enrolled as a Student */
 export const getCoursesByStudentId = async (userId) => {
   if (!userId) {
