@@ -19,13 +19,11 @@ import {
 import { Pencil, Trash2 } from "lucide-react";
 
 import { postEnroll } from "../api/postEnroll.js";
+import { deleteCourseById } from "../api/deleteCourseById.js";
 import AvatarLogo from "../assets/Avatar.png";
 import { getHumanReadableDate } from "../helpers/getHumanReadableDate.js";
 import { getHumanReadableTime } from "../helpers/getHumanReadableTime.js";
-
-function handleDelete() {
-  console.log("delete");
-}
+import { set } from "date-fns";
 
 export default function CourseCard({
   course,
@@ -37,6 +35,7 @@ export default function CourseCard({
   isUserCourse: boolean;
 }) {
   const [isEnrolling, setIsEnrolling] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState("");
 
   const handleEnrollClick = async () => {
@@ -60,6 +59,27 @@ export default function CourseCard({
       setError("Enrollment failed. Please try again.");
     } finally {
       setIsEnrolling(false);
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    if (isDeleting) return;
+    setIsDeleting(true);
+
+    try {
+      await deleteCourseById(courseId);
+      console.log("Course deleted successfully");
+      //TODO: Replace this toast notification with a shadcn notification
+      // toast.success("Course deleted successfully!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); // Refresh the current page to show the updated list of courses
+    } catch (error) {
+      console.error("Failed to delete course:", error);
+      //TODO: Replace this toast notification with a shadcn notification
+      // toast.error("Failed to delete course. Please try again.");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -105,7 +125,8 @@ export default function CourseCard({
                     <Button
                       variant="outline"
                       className="w-10"
-                      onClick={handleDelete}
+                      onClick={handleDeleteClick}
+                      disabled={isDeleting}
                     >
                       <Trash2 className="stroke-red-700 stroke-[2.5]"></Trash2>
                     </Button>
