@@ -1,4 +1,4 @@
-import { signUpSchema } from "../../client/src/lib/types/signUpSchema.js";
+import { signUpSchema } from "../../client/src/lib/types/signUpSchema.ts";
 import { ValidationError } from "../errors/customErrors.js";
 
 // Validate the Signup data before creating a new User

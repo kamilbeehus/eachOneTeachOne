@@ -1,4 +1,4 @@
-import { courseDialogFormSchema } from "../../client/src/lib/types/courseDialogFormSchema.js";
+import { courseDialogFormSchema } from "../../client/src/lib/types/courseDialogFormSchema.ts";
 import { ValidationError } from "../errors/customErrors.js";
 
 export const validateCourse = (req, res, next) => {

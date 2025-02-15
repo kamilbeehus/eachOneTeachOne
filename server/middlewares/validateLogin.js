@@ -1,4 +1,4 @@
-import { loginSchema } from "../../client/src/lib/types/loginSchema.js";
+import { loginSchema } from "../../client/src/lib/types/loginSchema.ts";
 import { ValidationError } from "../errors/customErrors.js";
 
 // Validate the Login data before authenticating the user
