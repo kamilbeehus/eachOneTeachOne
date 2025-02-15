@@ -8,7 +8,7 @@ export const validateCourse = (req, res, next) => {
     // Proceed to the next middleware/route handler
     next();
   } catch (error) {
-    if (error instanceof z.ZodError) {
+    if (error instanceof Zod.ZodError) {
       // Handle validation errors
       const errorMessages = error.errors.map((err) => err.message).join(", ");
       throw new ValidationError(errorMessages);
