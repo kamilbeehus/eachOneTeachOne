@@ -29,9 +29,7 @@ const formSchema = z.object({
   description: z.string().min(3, {
     message: "Description must be at least 3 characters.",
   }),
-  skill: z.string().min(3, {
-    message: "Skill must be at least 3 characters.",
-  }),
+  skill: z.string().min(3),
   creditsCost: z.number().min(1, {
     message: "creditsCost must be at least 1 character.",
   }),
